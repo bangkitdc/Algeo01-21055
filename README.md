@@ -14,20 +14,20 @@ Membuat program dalam bahasa Java untuk:
 
 ## Menu
 1. Sistem Persamaan Liner (SPL)
-  - Eliminasi Gauss
-  - etc.
+    - Eliminasi Gauss
+    - etc.
 2. Determinan
-  - Ekspansi Kofaktor
-  - etc.
+    - Ekspansi Kofaktor
+    - etc.
 3. Matriks Balikan (Inverse)
-  - Eliminasi Gauss-Jordan
-  - etc.
+    - Eliminasi Gauss-Jordan
+    - etc.
 4. Interpolasi Polinom
-  - etc.
+    - etc.
 5. Interpolasi Bicubic
-  - etc.
+    - etc.
 6. Regresi Linear Berganda
-  - etc.
+    - etc.
 7. Keluar
 
 ## How To Run?
