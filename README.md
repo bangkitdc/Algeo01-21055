@@ -3,8 +3,8 @@ Tugas Besar 1 Aljabar Linear dan Geometri IF21 is a project to ...
 
 ## Anggota Kelompok 'aezakmi'
 1. 13521055/ K1 - Muhammad Bangkit Dwi Cahyono
-2. 13521148/ K2 - Johanes Lee
-3. 13521081/ K1 - Bagas Aryo Seto
+2. 13521081/ K1 - Bagas Aryo Seto
+3. 13521148/ K2 - Johanes Lee
 
 ## Menu
 1. Sistem Persamaan Liner (SPL)
