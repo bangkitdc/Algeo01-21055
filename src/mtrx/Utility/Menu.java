@@ -9,7 +9,7 @@ public class Menu extends Utils{
         int choice = select(1, 7);
         System.out.println(choice);
     }
-
+    
     public static void mainMenu() {
         print("Selamat Datang di Matrix Calculator");
         print("=========== Menu ===========");
