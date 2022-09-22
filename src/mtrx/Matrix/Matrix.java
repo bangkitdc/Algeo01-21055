@@ -7,6 +7,7 @@ public class Matrix{
     private int ROW_EFF;
     private int COL_EFF;
 
+    // KONSTRUKTOR
     public Matrix (int row, int col) {
         this.ROW_EFF = row;
         this.COL_EFF = col;
@@ -41,7 +42,22 @@ public class Matrix{
     public boolean isSquare() {
         return (this.getRow() == this.getCol());
     }
+    
+    public void CopyELMT(Matrix mIn) {
+        // prekondisi : size sama
 
+        // KAMUS LOKAL
+        int i, j;
+
+        // ALGORITMA
+        for (i = 0; i < mIn.getRow(); i++)
+        {
+            for (j = 0; j < mIn.getCol(); j++)
+            {
+                this.setELMT(i, j, mIn.getELMT(i, j));
+            }
+        }
+    }
     public void CopyToSubMatrix(Matrix mIn, int InitRow, int LastRow, int InitCol, int LastCol) {
         // PREKONDISI : (InitRow - LastRow + 1) == mIn.getRow() && (InitCol - LastCol + 1) == mIn.getCol()
         // PREKONDISI : InitRow <= LastRow dan InitCol <= LastCol, semuanya index yang efektif

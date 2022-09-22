@@ -1,6 +1,7 @@
 package mtrx.Methods;
 import mtrx.Matrix.Matrix;
 import mtrx.Methods.Inverse;
+import mtrx.Methods.Solution;
 
 public class SolveSPL {
 
@@ -24,7 +25,7 @@ public class SolveSPL {
 
     public static Matrix InverseSolution (Matrix m) {
         // KAMUS LOKAL
-        Matrix b, inverse;
+        Matrix b, A, inverse;
 
         // ALGORITMA
 
@@ -34,7 +35,8 @@ public class SolveSPL {
         }
 
         b = m.GetSubMatrix(0, m.getLastRow(), m.getLastCol(), m.getLastCol());
-        inverse = Inverse.GetInverse(m);
+        A = m.GetSubMatrix(0, m.getLastRow(), 0, m.getLastCol() - 1);
+        inverse = Inverse.GetInverse(A);
 
         if (inverse == null)
         {
