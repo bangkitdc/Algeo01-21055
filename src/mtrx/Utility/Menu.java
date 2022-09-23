@@ -10,6 +10,29 @@ public class Menu extends Utils{
         mainMenu();
         // Tester
         double test;
+
+        Frac.Type a, b, c,d, e, f;
+
+        a = new Frac.Type(-3, -17);
+        b = new Frac.Type(35, 49);
+
+        c = Frac.multp(a, b);
+        d = Frac.multp(a, -5);
+        e = Frac.add(a, b);
+        f = Frac.add(a, -3);
+        print("a * b : ");
+        print("top frac: " + c.getTop());
+        print("bot frac: " + c.getBot());
+        print("a * -5 : ");
+        print("top frac: " + d.getTop());
+        print("bot frac: " + d.getBot());
+        print("a + b : ");
+        print("top frac: " + e.getTop());
+        print("bot frac: " + e.getBot());
+        print("a -3 : ");
+        print("top frac: " + f.getTop());
+        print("bot frac: " + f.getBot());
+
         Matrix m = new Matrix(3, 3);
         m.setELMT(0, 0, 3);
         m.setELMT(0, 1, 2);
