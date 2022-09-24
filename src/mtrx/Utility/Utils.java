@@ -6,12 +6,22 @@ public class Utils {
     private static InputStreamReader streamReader = new InputStreamReader(System.in);
     private static BufferedReader bufferedReader = new BufferedReader(Utils.streamReader);
 
-    // Print String
-    public static void print(String s) {
-        System.out.println(s);
+    /* Print String (without \n) */
+    public static void print(Object arg0) {
+        System.out.print(arg0);
     }
 
-    // Cek Angka/ Bukan
+    /* Print String (with \n) */
+    public static void println(Object arg0) {
+        System.out.println(arg0);
+    }
+
+    /* Print String (with format -> printf(f:format, a:args)) */
+    public static void printf(String format, Object arg0) {
+        System.out.printf(format, arg0);
+    }
+
+    /* Cek Angka/ Bukan */ 
     public static boolean isInt(String str) {
         try {
             Integer.parseInt(str);
@@ -21,25 +31,43 @@ public class Utils {
         }
     }
 
-    // Input Integer
+    /* Input Integer */ 
     public static int inputInt() throws IOException {
-        System.out.print("> ");
+        print("> ");
         String input = bufferedReader.readLine();
         while (!isInt(input)) {
-            System.out.printf("\"%s\" bukan Integer yang valid.\n", input);
-            System.out.print("> ");
+            printf("\"%s\" bukan Integer yang valid.\n", input);
+            print("> ");
             input = bufferedReader.readLine();
         }
         return Integer.parseInt(input);
     }
 
-    // Input Integer Within Range (min, max)
+    /* Input Integer Within Range (min, max) */ 
     public static int select(int min, int max) throws IOException {
-        int input = inputInt();
+        /* KAMUS LOKAL */
+        int input; 
+
+        /* ALGORITMA */
+        input = inputInt();
         while (input > max || input < min) {
-            System.out.println("Pilihan tidak ada. Silahkan input ulang!");
+            println("Pilihan tidak ada. Silahkan input ulang!");
             input = inputInt();
         }
         return input;
+    }
+
+    // Panjang Angka
+    public static int getLengthELMT(double d) {
+        /* KAMUS LOKAL */
+        String s;
+
+        /* ALGORITMA */
+        if (d == (int) d) {
+            s = String.valueOf((int) d);
+        } else {
+            s = String.valueOf(d);
+        }
+        return s.length();
     }
 }

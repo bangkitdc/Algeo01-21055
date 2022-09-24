@@ -21,26 +21,26 @@ public class Solution {
 
     // SELEKTOR 
 
-    public SolutionType GetType()
+    public SolutionType getType()
     {
         return this.type;
     }
 
-    public void SetType(SolutionType newType)
+    public void setType(SolutionType newType)
     {
         this.type = newType;
     }
 
-    public double GetSolution (int idx)
+    public double getSolution (int idx)
     {
         // prekondisi : this.type != NO_SOLUTION dan i index baris efektif this.matrix 
         return matrix.getELMT(idx, 0);
     }
 
-    public void SetSolution(Matrix m)
+    public void setSolution(Matrix m)
     {
         // prekondisi : m matriks kolom dengan ukuran sama dengan this.matrix
-        this.matrix.CopyELMT(m);
+        this.matrix.copyELMT(m);
     }
 
     public void SetSolution(int idx, double value)
