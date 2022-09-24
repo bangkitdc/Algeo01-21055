@@ -9,7 +9,6 @@ public class Menu extends Utils{
     public static void menuLoop() throws IOException {
         mainMenu();
         // Tester
-        
         Matrix m = new Matrix(3, 4);
         m.setELMT(0, 0, -1);
         m.setELMT(0, 1, 2);
