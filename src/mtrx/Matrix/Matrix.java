@@ -1,4 +1,5 @@
 package mtrx.Matrix;
+import mtrx.Utility.Utils;
 
 public class Matrix{
     public static final int ROW_CAP = 100;
@@ -43,7 +44,7 @@ public class Matrix{
         return (this.getRow() == this.getCol());
     }
     
-    public void CopyELMT(Matrix mIn) {
+    public void copyELMT(Matrix mIn) {
         // prekondisi : size sama
 
         // KAMUS LOKAL
@@ -58,7 +59,7 @@ public class Matrix{
             }
         }
     }
-    public void CopyToSubMatrix(Matrix mIn, int InitRow, int LastRow, int InitCol, int LastCol) {
+    public void copyToSubMatrix(Matrix mIn, int InitRow, int LastRow, int InitCol, int LastCol) {
         // PREKONDISI : (InitRow - LastRow + 1) == mIn.getRow() && (InitCol - LastCol + 1) == mIn.getCol()
         // PREKONDISI : InitRow <= LastRow dan InitCol <= LastCol, semuanya index yang efektif
 
@@ -84,7 +85,7 @@ public class Matrix{
         }
     }
 
-    public void ToIdentity() {
+    public void toIdentity() {
         // prekondisi : this.isSquare()
         // KAMUS LOKAL
         int i, j;
@@ -108,20 +109,20 @@ public class Matrix{
         }
     }
 
-    public static Matrix GetIdentity(int size) {
+    public static Matrix getIdentity(int size) {
         // KAMUS LOKAL
         Matrix mRes;
 
         // ALGORITMA
 
         mRes = new Matrix(size, size);
-        mRes.ToIdentity();
+        mRes.toIdentity();
 
         return mRes;
 
     }
 
-    public Matrix GetSubMatrix(int InitRow, int LastRow, int InitCol, int LastCol) {
+    public Matrix getSubMatrix(int InitRow, int LastRow, int InitCol, int LastCol) {
         // PREKONDISI : InitRow <= LastRow dan InitCol <= LastCol, semuanya index yang efektif
 
         // KAMUS LOKAL
@@ -150,7 +151,7 @@ public class Matrix{
         return mRes;
     }
 
-    public Matrix Multiply (Matrix m) {
+    public Matrix multiply (Matrix m) {
         // Prekondisi : jumlah kolom matrix ini sama dengan jumlah baris matrix m
 
         // KAMUS LOKAL
@@ -177,5 +178,102 @@ public class Matrix{
         }
 
         return mRes;
+    }
+
+    // Display Matrix 2D
+    public static void displayMatrix(Matrix m) {
+        /* KAMUS LOKAL */
+        int i, j;
+        int weight;
+        String s;
+
+        /* ALGORITMA */
+        weight = 0;
+        // Search the biggest weight first
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol(); j++) {
+                if (Utils.getLengthELMT(m.getELMT(i, j)) > weight) {
+                    weight = Utils.getLengthELMT(m.getELMT(i, j));
+                }
+            }
+        }
+        weight ++;
+
+        // Search the biggest weight (first column only)
+        int wLeft = 0;
+        for (i = 0; i < m.getRow(); i ++) {
+            if (Utils.getLengthELMT(m.getELMT(i, 0)) > wLeft) {
+                wLeft = Utils.getLengthELMT(m.getELMT(i, 0));
+            }
+        }
+
+        for (i = 0; i < m.getRow(); i ++) {
+            for (j = 0; j < m.getCol(); j ++) {
+                s = String.format("%d", weight);
+                if (m.getELMT(i, j) == (int) m.getELMT(i, j)) { // int
+                    if (j == 0) {
+                        s = String.format("%d", wLeft);  
+                    }
+                    Utils.printf("%" + s + "d", (int) m.getELMT(i, j));
+                } else { // double
+                    if (j == 0) {
+                        s = String.format("%d", wLeft);
+                    }
+                    Utils.printf("%" + s + "s", String.valueOf(m.getELMT(i, j)));
+                }
+            }
+            Utils.println("");
+        }
+    }
+
+    // Display Matrix Augmented
+    public static void displayMatrixAugmented(Matrix m, int col) {
+        /* KAMUS LOKAL */
+        int i, j;
+        int weight;
+        String s;
+
+        /* ALGORITMA */
+        weight = 0;
+        // Search the biggest weight first
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol(); j++) {
+                if (Utils.getLengthELMT(m.getELMT(i, j)) > weight) {
+                    weight = Utils.getLengthELMT(m.getELMT(i, j));
+                }
+            }
+        }
+        weight++;
+
+        // Search the biggest weight (first column only)
+        int wLeft = 0;
+        for (i = 0; i < m.getRow(); i++) {
+            if (Utils.getLengthELMT(m.getELMT(i, 0)) > wLeft) {
+                wLeft = Utils.getLengthELMT(m.getELMT(i, 0));
+            }
+        }
+
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol(); j++) {
+                s = String.format("%d", weight);
+                if (m.getELMT(i, j) == (int) m.getELMT(i, j)) { // int
+                    if (j == 0) {
+                        s = String.format("%d", wLeft);
+                    }
+                    Utils.printf("%" + s + "d", (int) m.getELMT(i, j));
+                } else { // double
+                    if (j == 0) {
+                        s = String.format("%d", wLeft);
+                    }
+                    Utils.printf("%" + s + "s", String.valueOf(m.getELMT(i, j)));
+                }
+                // Augmented
+                if (j == col) {
+                    String sep = "|";
+                    Utils.printf("%" + s + "s", sep);
+                }
+            }
+            Utils.println("");
+        }
     }
 }

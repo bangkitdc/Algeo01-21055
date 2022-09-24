@@ -4,7 +4,7 @@ import mtrx.Methods.SolveSPL;
 
 public class Inverse {
 
-    public static Matrix GetInverse (Matrix m) {
+    public static Matrix getInverse (Matrix m) {
         // PREKONDISI : m matrix persegi 
 
         // KAMUS LOKAL
@@ -15,17 +15,17 @@ public class Inverse {
         mRes = new Matrix(m.getRow(), m.getCol() * 2);
         mIdentity = new Matrix(m.getRow(), m.getCol());
 
-        mIdentity.ToIdentity();
+        mIdentity.toIdentity();
 
-        mRes.CopyToSubMatrix(m, 0, m.getLastRow(), 0, m.getLastCol());
-        mRes.CopyToSubMatrix(mIdentity, 0, m.getLastRow(), m.getLastCol() + 1, mRes.getLastCol());
+        mRes.copyToSubMatrix(m, 0, m.getLastRow(), 0, m.getLastCol());
+        mRes.copyToSubMatrix(mIdentity, 0, m.getLastRow(), m.getLastCol() + 1, mRes.getLastCol());
 
-        SolveSPL.Gauss(mRes);
+        SolveSPL.gauss(mRes);
 
         if (mRes.getELMT(m.getLastRow(), m.getLastCol()) == 0) {
             return null;
         }
 
-        return mRes.GetSubMatrix(0, mRes.getLastRow(), m.getLastCol() + 1, mRes.getLastCol());
+        return mRes.getSubMatrix(0, mRes.getLastRow(), m.getLastCol() + 1, mRes.getLastCol());
     }
 }

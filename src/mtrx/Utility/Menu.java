@@ -9,36 +9,38 @@ public class Menu extends Utils{
     public static void menuLoop() throws IOException {
         mainMenu();
         // Tester
-        double test;
-        Matrix m = new Matrix(3, 3);
-        m.setELMT(0, 0, 3);
+        
+        Matrix m = new Matrix(3, 4);
+        m.setELMT(0, 0, -1);
         m.setELMT(0, 1, 2);
-        m.setELMT(0, 2, 2);
-        m.setELMT(1, 0, 10);
-        m.setELMT(1, 1, 2);
-        m.setELMT(1, 2, 3);
-        m.setELMT(2, 0, 2);
-        m.setELMT(2, 1, 5);
-        m.setELMT(2, 2, 3);
+        m.setELMT(0, 2, -3);
+        m.setELMT(0, 3, 1);
+        m.setELMT(1, 0, 2);
+        m.setELMT(1, 1, 0);
+        m.setELMT(1, 2, 1);
+        m.setELMT(1, 3, 0);
+        m.setELMT(2, 0, 3);
+        m.setELMT(2, 1, -4);
+        m.setELMT(2, 2, 4);
+        m.setELMT(2, 3, 2);
 
-        test = Determinan.cofactorDet(m);
-        print("determinan: " + test);
+        Cramer.displayCrammer(m);
         
         int choice = select(1, 7);
         System.out.println(choice);
     }
 
     public static void mainMenu() {
-        print("Selamat Datang di Matrix Calculator");
-        print("=========== Menu ===========");
-        print("Aplikasi ini akan menyelesaikan persoalan:");
-        print("[1] Sistem Persamaan Linear (SPL)");
-        print("[2] Determinan");
-        print("[3] Matriks Balikan (Inverse)");
-        print("[4] Interpolasi Polinom");
-        print("[5] Interpolasi Bicubic");
-        print("[6] Regresi Linear Berganda");
-        print("");
-        print("[7] Keluar");
+        println("Selamat Datang di Matrix Calculator");
+        println("=========== Menu ===========");
+        println("Aplikasi ini akan menyelesaikan persoalan:");
+        println("[1] Sistem Persamaan Linear (SPL)");
+        println("[2] Determinan");
+        println("[3] Matriks Balikan (Inverse)");
+        println("[4] Interpolasi Polinom");
+        println("[5] Interpolasi Bicubic");
+        println("[6] Regresi Linear Berganda");
+        println("");
+        println("[7] Keluar");
     }
 }
