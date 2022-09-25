@@ -10,10 +10,10 @@ public class Menu extends Utils{
         mainMenu();
         // Tester
         Matrix m = new Matrix();
-        m.inputMatrix();
+        m.inputSquaredMatrix();
     
-        Cramer.displayCrammer(m);
-        // Determinan.displayCofactorDet(m);
+        // Cramer.displayCrammer(m);
+        Determinan.displayCofactorDet(m);
         
         int choice = select(1, 7);
         System.out.println(choice);

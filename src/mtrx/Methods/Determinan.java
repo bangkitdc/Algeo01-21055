@@ -3,6 +3,7 @@ package mtrx.Methods;
 import mtrx.Utility.*;
 import mtrx.Matrix.*;
 import mtrx.Methods.SolveSPL;
+import java.math.*;
 public class Determinan {
     /* ---------------------- Cofactor Expansion ---------------------- */
     public static double cofactorDet(Matrix m) {
@@ -25,6 +26,7 @@ public class Determinan {
                 res += Math.pow(-1, j) * m.getELMT(0, j) * cofactorDet(smallerMatrix(m, 0, j));
             }
         }
+        res = new BigDecimal(res).round(new MathContext(3, RoundingMode.HALF_UP)).doubleValue();
         return res;
     }
     
@@ -60,7 +62,7 @@ public class Determinan {
         Utils.println("Matrix awal:");
         Matrix.displayMatrix(m);
         Utils.println("");
-        Utils.println("Dengan ekspansi baris pertama, Determinant matrix tersebut adalah " + cofactorDet(m));
+        Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + cofactorDet(m));
     }
 
     /* File */
@@ -110,7 +112,7 @@ public class Determinan {
         Utils.println("Matrix setelah reduksi baris:");
         MatrixNDet res = rowReductionDet(m);
         Matrix.displayMatrix(res.matrix);
-        Utils.println("Determinant matrix tersebut adalah " + res.det);
+        Utils.println("Determinan matrix tersebut adalah " + res.det);
     }
 
     /* File */
