@@ -1,8 +1,7 @@
 package mtrx.Matrix;
 import mtrx.Utility.Utils;
 import java.io.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.math.*;
 
 public class Matrix{
     public static final int ROW_CAP = 100;
@@ -97,8 +96,9 @@ public class Matrix{
     public static void displayMatrix(Matrix m) {
         /* KAMUS LOKAL */
         int i, j;
-        int weight;
+        int weight, wLeft;
         String s;
+        double d;
 
         /* ALGORITMA */
         weight = 0;
@@ -106,17 +106,19 @@ public class Matrix{
         for (i = 0; i < m.getRow(); i++) {
             for (j = 0; j < m.getCol(); j++) {
                 if (Utils.getLengthELMT(m.getELMT(i, j)) > weight) {
-                    weight = Utils.getLengthELMT(m.getELMT(i, j));
+                    d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                    weight = Utils.getLengthELMT(d);
                 }
             }
         }
         weight++;
 
         // Search the biggest weight (first column only)
-        int wLeft = 0;
+        wLeft = 0;
         for (i = 0; i < m.getRow(); i++) {
             if (Utils.getLengthELMT(m.getELMT(i, 0)) > wLeft) {
-                wLeft = Utils.getLengthELMT(m.getELMT(i, 0));
+                d = new BigDecimal(m.getELMT(i, 0)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                wLeft = Utils.getLengthELMT(d);
             }
         }
 
@@ -132,7 +134,8 @@ public class Matrix{
                     if (j == 0) {
                         s = String.format("%d", wLeft);
                     }
-                    Utils.printf("%" + s + "s", String.valueOf(m.getELMT(i, j)));
+                    d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                    Utils.printf("%" + s + "s", String.valueOf(d));
                 }
             }
             Utils.println("");
@@ -143,8 +146,9 @@ public class Matrix{
     public static void displayMatrixAugmented(Matrix m, int col) {
         /* KAMUS LOKAL */
         int i, j;
-        int weight;
+        int weight, wLeft;
         String s;
+        double d;
 
         /* ALGORITMA */
         weight = 0;
@@ -152,17 +156,19 @@ public class Matrix{
         for (i = 0; i < m.getRow(); i++) {
             for (j = 0; j < m.getCol(); j++) {
                 if (Utils.getLengthELMT(m.getELMT(i, j)) > weight) {
-                    weight = Utils.getLengthELMT(m.getELMT(i, j));
+                    d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                    weight = Utils.getLengthELMT(d);
                 }
             }
         }
         weight++;
 
         // Search the biggest weight (first column only)
-        int wLeft = 0;
+        wLeft = 0;
         for (i = 0; i < m.getRow(); i++) {
             if (Utils.getLengthELMT(m.getELMT(i, 0)) > wLeft) {
-                wLeft = Utils.getLengthELMT(m.getELMT(i, 0));
+                d = new BigDecimal(m.getELMT(i, 0)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                wLeft = Utils.getLengthELMT(d);
             }
         }
 
@@ -178,7 +184,8 @@ public class Matrix{
                     if (j == 0) {
                         s = String.format("%d", wLeft);
                     }
-                    Utils.printf("%" + s + "s", String.valueOf(m.getELMT(i, j)));
+                    d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                    Utils.printf("%" + s + "s", String.valueOf(d));
                 }
                 // Augmented
                 if (j == col) {
@@ -346,7 +353,6 @@ public class Matrix{
             element = line.split(" ");
             for (j = 0; j < this.getCol(); j ++) {
                 double d = Utils.eval(element[j]);
-                d = BigDecimal.valueOf(d).setScale(8, RoundingMode.HALF_UP).doubleValue();
                 this.setELMT(i, j, d);
             }
         }

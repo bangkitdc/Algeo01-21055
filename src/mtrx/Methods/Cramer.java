@@ -18,11 +18,11 @@ public class Cramer {
         b = m.getSubMatrix(0, m.getLastRow(), m.getLastCol(), m.getLastCol());
 
         if (a.getCol() != a.getRow()) {
-            Utils.print("Matrix ini tidak memiliki solusi atau tidak bisa diselesaikan dengan Crammer. Silahkan coba pakai cara lain. Rekomendasi: Gauss/Gauss-Jordan");
+            Utils.print("Matrix ini tidak memiliki solusi atau tidak bisa diselesaikan dengan Cramer. Silahkan coba pakai cara lain. Rekomendasi: Gauss/Gauss-Jordan");
         } else {
             detA = Determinan.cofactorDet(a);
             if (detA == 0) {
-                Utils.print("Matrix ini tidak memiliki solusi karena determinant matrix adalah 0");
+                Utils.print("Matrix ini tidak memiliki solusi karena determinan matrix adalah 0");
             } else {
                 Utils.println("Matrix awal:");
                 Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
