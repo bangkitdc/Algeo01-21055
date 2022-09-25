@@ -1,7 +1,7 @@
 package mtrx.Methods;
 
 import mtrx.Utility.*;
-import mtrx.Matrix.Matrix;
+import mtrx.Matrix.*;
 import mtrx.Methods.SolveSPL;
 public class Determinan {
     /* ---------------------- Cofactor Expansion ---------------------- */
@@ -58,7 +58,7 @@ public class Determinan {
     public static void displayCofactorDet(Matrix m) {
         /* ALGORITMA - Output Purpose*/
         Utils.println("Matrix awal:");
-        Matrix.displayMatrix(m);
+        IO.displayMatrix(m);
         Utils.println("");
         Utils.println("Dengan melakukan ekspansi baris pertama, Determinant matrix tersebut adalah " + cofactorDet(m));
     }
@@ -104,12 +104,12 @@ public class Determinan {
     public static void displayRowReductionDet(Matrix m) {
         /* ALGORITMA - Output Purpose */
         Utils.println("Matrix awal:");
-        Matrix.displayMatrix(m);
+        IO.displayMatrix(m);
         Utils.println("");
 
         Utils.println("Matrix setelah reduksi baris:");
         MatrixNDet res = rowReductionDet(m);
-        Matrix.displayMatrix(res.matrix);
+        IO.displayMatrix(res.matrix);
         Utils.println("Determinant matrix tersebut adalah " + res.det);
     }
 
