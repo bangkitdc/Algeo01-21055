@@ -25,7 +25,7 @@ public class Cramer {
                 Utils.print("Matrix ini tidak memiliki solusi karena determinant matrix adalah 0");
             } else {
                 Utils.println("Matrix awal:");
-                IO.displayMatrixAugmented(m, m.getLastCol() - 1);
+                Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
                 Utils.println("");
                 for (i = 0; i < a.getCol(); i ++) {
                     temp = new Matrix(a.getCol(), a.getRow());
