@@ -58,9 +58,9 @@ public class Determinan {
     public static void displayCofactorDet(Matrix m) {
         /* ALGORITMA - Output Purpose*/
         Utils.println("Matrix awal:");
-        IO.displayMatrix(m);
+        Matrix.displayMatrix(m);
         Utils.println("");
-        Utils.println("Dengan melakukan ekspansi baris pertama, Determinant matrix tersebut adalah " + cofactorDet(m));
+        Utils.println("Dengan ekspansi baris pertama, Determinant matrix tersebut adalah " + cofactorDet(m));
     }
 
     /* File */
@@ -104,12 +104,12 @@ public class Determinan {
     public static void displayRowReductionDet(Matrix m) {
         /* ALGORITMA - Output Purpose */
         Utils.println("Matrix awal:");
-        IO.displayMatrix(m);
+        Matrix.displayMatrix(m);
         Utils.println("");
 
         Utils.println("Matrix setelah reduksi baris:");
         MatrixNDet res = rowReductionDet(m);
-        IO.displayMatrix(res.matrix);
+        Matrix.displayMatrix(res.matrix);
         Utils.println("Determinant matrix tersebut adalah " + res.det);
     }
 

@@ -9,21 +9,11 @@ public class Menu extends Utils{
     public static void menuLoop() throws IOException {
         mainMenu();
         // Tester
-        Matrix m = new Matrix(3, 4);
-        m.setELMT(0, 0, -1);
-        m.setELMT(0, 1, 2);
-        m.setELMT(0, 2, -3);
-        m.setELMT(0, 3, 1);
-        m.setELMT(1, 0, 2);
-        m.setELMT(1, 1, 0);
-        m.setELMT(1, 2, 1);
-        m.setELMT(1, 3, 0);
-        m.setELMT(2, 0, 3);
-        m.setELMT(2, 1, -4);
-        m.setELMT(2, 2, 4);
-        m.setELMT(2, 3, 2);
-
+        Matrix m = new Matrix();
+        m.inputMatrix();
+    
         Cramer.displayCrammer(m);
+        // Determinan.displayCofactorDet(m);
         
         int choice = select(1, 7);
         System.out.println(choice);

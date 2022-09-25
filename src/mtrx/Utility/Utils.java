@@ -3,7 +3,7 @@ package mtrx.Utility;
 import java.io.*;
 
 public class Utils {
-    private static InputStreamReader streamReader = new InputStreamReader(System.in);
+    public static InputStreamReader streamReader = new InputStreamReader(System.in);
     private static BufferedReader bufferedReader = new BufferedReader(Utils.streamReader);
 
     /* Print String (without \n) */
@@ -57,7 +57,7 @@ public class Utils {
         return input;
     }
 
-    // Panjang Angka
+    /* Panjang Angka */
     public static int getLengthELMT(double d) {
         /* KAMUS LOKAL */
         String s;
@@ -69,5 +69,14 @@ public class Utils {
             s = String.valueOf(d);
         }
         return s.length();
+    }
+
+    /* Input String (a/b) or double -> double */
+    public static double eval(String s) {
+        if (s.split("/").length == 1) {
+            return Double.parseDouble(s);
+        } else {
+            return Double.parseDouble(s.split("/")[0]) / Double.parseDouble(s.split("/")[1]);
+        }
     }
 }
