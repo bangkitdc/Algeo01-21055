@@ -1,10 +1,11 @@
 package mtrx.Methods;
 
-import mtrx.Matrix.Matrix;
+import mtrx.Matrix.*;
 import mtrx.Utility.Utils;
 
 public class Cramer {
     /* ------------------------- Cramer's Rule ------------------------ */
+    /* Console */
     public static void displayCrammer(Matrix m) {
         /* Algorithm + Display */
         /* KAMUS LOKAL */
@@ -24,7 +25,7 @@ public class Cramer {
                 Utils.print("Matrix ini tidak memiliki solusi karena determinant matrix adalah 0");
             } else {
                 Utils.println("Matrix awal:");
-                Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
+                IO.displayMatrixAugmented(m, m.getLastCol() - 1);
                 Utils.println("");
                 for (i = 0; i < a.getCol(); i ++) {
                     temp = new Matrix(a.getCol(), a.getRow());
@@ -50,5 +51,10 @@ public class Cramer {
             s = String.valueOf(res);
         }
         return s;
+    }
+
+    /* File */
+    public static void fileCrammer(Matrix m) {
+        /* ALGORITMA - Output Purpose */
     }
 }
