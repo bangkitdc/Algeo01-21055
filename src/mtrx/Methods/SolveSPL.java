@@ -54,17 +54,27 @@ public class SolveSPL {
 
     public static Matrix inverseSolution (Matrix m) {
         // KAMUS LOKAL
-        Matrix b, A, inverse;
+        Matrix b, A;
 
         // ALGORITMA
 
-        if (!m.isSquare())
+        b = m.getSubMatrix(0, m.getLastRow(), m.getLastCol(), m.getLastCol());
+        A = m.getSubMatrix(0, m.getLastRow(), 0, m.getLastCol() - 1);
+
+        return inverseSolution(A, b);
+    }
+
+    public static Matrix inverseSolution (Matrix A, Matrix b) {
+        // KAMUS LOKAL
+        Matrix inverse;
+
+        // ALGORITMA
+
+        if (!A.isSquare())
         {
             return null;
         }
 
-        b = m.getSubMatrix(0, m.getLastRow(), m.getLastCol(), m.getLastCol());
-        A = m.getSubMatrix(0, m.getLastRow(), 0, m.getLastCol() - 1);
         inverse = Inverse.getInverse(A);
 
         if (inverse == null)
