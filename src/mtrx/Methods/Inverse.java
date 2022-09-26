@@ -1,6 +1,5 @@
 package mtrx.Methods;
 import mtrx.Matrix.Matrix;
-import mtrx.Methods.SolveSPL;
 
 public class Inverse {
 

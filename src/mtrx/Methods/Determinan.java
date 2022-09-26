@@ -2,7 +2,6 @@ package mtrx.Methods;
 
 import mtrx.Utility.*;
 import mtrx.Matrix.*;
-import mtrx.Methods.SolveSPL;
 import java.math.*;
 public class Determinan {
     /* ---------------------- Cofactor Expansion ---------------------- */
@@ -26,7 +25,6 @@ public class Determinan {
                 res += Math.pow(-1, j) * m.getELMT(0, j) * cofactorDet(smallerMatrix(m, 0, j));
             }
         }
-        res = new BigDecimal(res).round(new MathContext(3, RoundingMode.HALF_UP)).doubleValue();
         return res;
     }
     
@@ -58,11 +56,16 @@ public class Determinan {
 
     /* Console */
     public static void displayCofactorDet(Matrix m) {
+        /* KAMUS LOKAL */
+        double det;
+
         /* ALGORITMA - Output Purpose*/
         Utils.println("Matrix awal:");
         Matrix.displayMatrix(m);
         Utils.println("");
-        Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + cofactorDet(m));
+
+        det = cofactorDet(m);
+        Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + result(det));
     }
 
     /* File */
@@ -92,7 +95,7 @@ public class Determinan {
         
         /* ALGORITMA */
         mRes = new Matrix(m.getLastRow(), m.getLastCol());
-        mRes = SolveSPL.getGauss(m);
+        mRes = GaussJordan.determinantOBE(m);
         
         det = 1;
         for (i = 0; i < mRes.getRow(); i ++) {
@@ -104,6 +107,9 @@ public class Determinan {
 
     /* Console */
     public static void displayRowReductionDet(Matrix m) {
+        /* KAMUS LOKAL */
+        double det;
+
         /* ALGORITMA - Output Purpose */
         Utils.println("Matrix awal:");
         Matrix.displayMatrix(m);
@@ -112,12 +118,29 @@ public class Determinan {
         Utils.println("Matrix setelah reduksi baris:");
         MatrixNDet res = rowReductionDet(m);
         Matrix.displayMatrix(res.matrix);
-        Utils.println("Determinan matrix tersebut adalah " + res.det);
+
+        det = res.det;
+        Utils.println("Determinan matrix tersebut adalah " + result(det));
     }
 
     /* File */
     public static void fileRowReductionDet(Matrix m) {
         /* ALGORITMA - Output Purpose */
 
+    }
+
+    /* Formatting Output */
+    public static String result(double det) {
+        /* KAMUS LOKAL */
+        String s;
+
+        /* ALGORITMA */
+        if (det == (int) det) {
+            s = String.valueOf((int) det);
+        } else {
+            det = new BigDecimal(det).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            s = String.valueOf(det);
+        }
+        return s;
     }
 }
