@@ -11,9 +11,15 @@ public class Menu extends Utils{
         // Tester
         Matrix m = new Matrix();
         m.inputSquaredMatrix();
-    
-        // Cramer.displayCrammer(m);
+
         Determinan.displayCofactorDet(m);
+
+        Determinan.displayRowReductionDet(m);
+        
+        
+        // Matrix m;
+        // m = BicubicInterpolation.Bicubic();
+        // Matrix.displayMatrix(m);
         
         int choice = select(1, 7);
         System.out.println(choice);

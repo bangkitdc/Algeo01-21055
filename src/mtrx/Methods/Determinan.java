@@ -2,7 +2,7 @@ package mtrx.Methods;
 
 import mtrx.Utility.*;
 import mtrx.Matrix.*;
-import mtrx.Methods.SolveSPL;
+import mtrx.Methods.GaussJordan;
 import java.math.*;
 public class Determinan {
     /* ---------------------- Cofactor Expansion ---------------------- */
@@ -58,11 +58,21 @@ public class Determinan {
 
     /* Console */
     public static void displayCofactorDet(Matrix m) {
+        /* KAMUS LOKAL */
+        double det;
+
         /* ALGORITMA - Output Purpose*/
         Utils.println("Matrix awal:");
         Matrix.displayMatrix(m);
         Utils.println("");
-        Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + cofactorDet(m));
+
+        det = cofactorDet(m);
+        if (det == (int) det) { // int
+            Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + (int) det);
+        } else { // double
+            det = new BigDecimal(det).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + det);
+        }
     }
 
     /* File */
@@ -92,7 +102,7 @@ public class Determinan {
         
         /* ALGORITMA */
         mRes = new Matrix(m.getLastRow(), m.getLastCol());
-        mRes = SolveSPL.getGauss(m);
+        mRes = GaussJordan.determinantOBE(m);
         
         det = 1;
         for (i = 0; i < mRes.getRow(); i ++) {
@@ -104,6 +114,9 @@ public class Determinan {
 
     /* Console */
     public static void displayRowReductionDet(Matrix m) {
+        /* KAMUS LOKAL */
+        double det;
+
         /* ALGORITMA - Output Purpose */
         Utils.println("Matrix awal:");
         Matrix.displayMatrix(m);
@@ -112,7 +125,14 @@ public class Determinan {
         Utils.println("Matrix setelah reduksi baris:");
         MatrixNDet res = rowReductionDet(m);
         Matrix.displayMatrix(res.matrix);
-        Utils.println("Determinan matrix tersebut adalah " + res.det);
+
+        det = res.det;
+        if (det == (int) det) { // int
+            Utils.println("Determinan matrix tersebut adalah " + (int) det);
+        } else { // double
+            det = new BigDecimal(det).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            Utils.println("Determinan matrix tersebut adalah " + det);
+        }
     }
 
     /* File */
