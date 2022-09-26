@@ -2,7 +2,6 @@ package mtrx.Methods;
 
 import mtrx.Utility.*;
 import mtrx.Matrix.*;
-import mtrx.Methods.GaussJordan;
 import java.math.*;
 public class Determinan {
     /* ---------------------- Cofactor Expansion ---------------------- */
@@ -26,7 +25,6 @@ public class Determinan {
                 res += Math.pow(-1, j) * m.getELMT(0, j) * cofactorDet(smallerMatrix(m, 0, j));
             }
         }
-        res = new BigDecimal(res).round(new MathContext(3, RoundingMode.HALF_UP)).doubleValue();
         return res;
     }
     
@@ -67,12 +65,7 @@ public class Determinan {
         Utils.println("");
 
         det = cofactorDet(m);
-        if (det == (int) det) { // int
-            Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + (int) det);
-        } else { // double
-            det = new BigDecimal(det).setScale(3, RoundingMode.HALF_UP).doubleValue();
-            Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + det);
-        }
+        Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + result(det));
     }
 
     /* File */
@@ -127,17 +120,27 @@ public class Determinan {
         Matrix.displayMatrix(res.matrix);
 
         det = res.det;
-        if (det == (int) det) { // int
-            Utils.println("Determinan matrix tersebut adalah " + (int) det);
-        } else { // double
-            det = new BigDecimal(det).setScale(3, RoundingMode.HALF_UP).doubleValue();
-            Utils.println("Determinan matrix tersebut adalah " + det);
-        }
+        Utils.println("Determinan matrix tersebut adalah " + result(det));
     }
 
     /* File */
     public static void fileRowReductionDet(Matrix m) {
         /* ALGORITMA - Output Purpose */
 
+    }
+
+    /* Formatting Output */
+    public static String result(double det) {
+        /* KAMUS LOKAL */
+        String s;
+
+        /* ALGORITMA */
+        if (det == (int) det) {
+            s = String.valueOf((int) det);
+        } else {
+            det = new BigDecimal(det).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            s = String.valueOf(det);
+        }
+        return s;
     }
 }
