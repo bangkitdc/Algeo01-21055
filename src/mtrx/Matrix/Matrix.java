@@ -17,6 +17,12 @@ public class Matrix{
         this.mem = new double [row][col];
     }
 
+    public Matrix (Matrix mIn) {
+        this.ROW_EFF = mIn.getRow();
+        this.COL_EFF = mIn.getCol();
+        this.copyELMT(mIn);
+    }
+
     public Matrix () {
         this.ROW_EFF = 0;
         this.COL_EFF = 0;
@@ -357,4 +363,15 @@ public class Matrix{
             }
         }
     }
+
+    public void swapRow(int a, int b) {
+		for (int i=0; i<this.getCol(); i++) {
+			double temp = this.getELMT(b, i);
+			this.setELMT(b, i, this.getELMT(a,i));
+			this.setELMT(a, i, temp);
+		}
+
+	}
+
+    
 }
