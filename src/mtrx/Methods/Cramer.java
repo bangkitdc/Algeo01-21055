@@ -1,5 +1,6 @@
 package mtrx.Methods;
 
+import java.math.*;
 import mtrx.Matrix.*;
 import mtrx.Utility.Utils;
 
@@ -48,6 +49,7 @@ public class Cramer {
         if (res == (int) res) {
             s = String.valueOf((int) res);
         } else {
+            res = new BigDecimal(res).setScale(3, RoundingMode.HALF_UP).doubleValue();
             s = String.valueOf(res);
         }
         return s;
