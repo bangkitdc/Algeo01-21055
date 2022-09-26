@@ -11,14 +11,14 @@ public class Menu extends Utils{
         // Tester
         Matrix m = new Matrix();
        
-        //m.inputSquaredMatrix();
+        m.inputSquaredMatrix();
     
         // Cramer.displayCrammer(m);
-        //Determinan.displayCofactorDet(m);
+        Determinan.displayCofactorDet(m);
 
-        // Matrix m2;
-        // m2 = Inverse.getInverse(m);
-        // Matrix.displayMatrix(m2);
+        Matrix m2;
+        m2 = Inverse.getInverse(m);
+        Matrix.displayMatrix(m2);
 
         int choice = select(1, 7);
         System.out.println(choice);
