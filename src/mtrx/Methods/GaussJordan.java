@@ -2,15 +2,6 @@ package mtrx.Methods;
 import mtrx.Matrix.Matrix;
 
 public class GaussJordan {
-
-	public static Matrix swapRow(Matrix m, int a, int b) {
-		for (int i=0; i<m.getCol(); i++) {
-			double temp = m.getELMT(b, i);
-			m.setELMT(b, i, m.getELMT(a,i));
-			m.setELMT(a, i, temp);
-		}
-		return m;
-	}
 	
 	public static int firstNotZero(Matrix m, int i) {
 		for (int j=0; j<m.getCol(); j++) {
@@ -25,7 +16,7 @@ public class GaussJordan {
 		for (int i=0; i<m.getRow()-1; i++) {
 			for (int j=i+1; j<m.getRow(); j++) {
 				if (firstNotZero(m, j) < firstNotZero(m, i)) {
-					swapRow(m, i, j);
+					m.swapRow( i, j);
 				}
 			}
 		}
