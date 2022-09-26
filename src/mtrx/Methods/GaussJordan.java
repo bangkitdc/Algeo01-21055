@@ -65,6 +65,8 @@ public class GaussJordan {
 	}
 
 	public static Matrix gauss(Matrix m) {
+		// I.S. Matrix non parametrik
+		// F.S. Matrix eselon yg sudah dieliminasi Gauss
 		for (int i=0; i < m.getRow()-1; i++) {
 			m = sortMatrix(m);
 			m = OBE(m,i);
@@ -74,6 +76,8 @@ public class GaussJordan {
 	}
 	
 	public static Matrix gaussJordan(Matrix m) {
+		// I.S. Matrix non parametrik
+		// F.S. Matrix eselon yg sudah dieliminasi Gauss Jordan
 		m = gauss(m);
 		for (int idx=0; idx<m.getRow(); idx++) {
 			for (int i=0; i<idx; i++) {
@@ -86,33 +90,5 @@ public class GaussJordan {
 			}
 		}
 		return m;
-	}
-	
-	public static void display(Matrix m) {
-		for (int i=0; i<m.getRow(); i++) {
-			for (int j=0; j<m.getCol(); j++) {
-				System.out.print(m.getELMT(i,j) + " ");
-			}
-			System.out.println("");
-		}
-	}
-	
-	public static void main(String[] args) {
-		Matrix m;
-		m = new Matrix(4,5);
-		double x[][] = {
-				{1, -1, 2, -1, -1},
-				{2, 1, -2, -2, -2},
-				{-1, 2, -4, 1, 1},
-				{3, 0, 0, -3, -3}};
-		for (int i=0; i<m.getRow(); i++) {
-			for (int j=0; j<m.getCol(); j++) {
-				m.setELMT(i, j, x[i][j]);
-			}
-		}
-		display(m);
-		System.out.println("");
-		m = gaussJordan(m);
-		display(m);
 	}
 }
