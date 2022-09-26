@@ -1,4 +1,6 @@
 package mtrx.Methods;
+
+import mtrx.Utility.*;
 import mtrx.Matrix.Matrix;
 import mtrx.Methods.*;
 
@@ -81,7 +83,7 @@ public class SolveSPL {
         {
             return null;
         }
-
+        
         return inverse.multiply(b);
     }
 }
