@@ -3,8 +3,6 @@ import mtrx.Matrix.Matrix;
 import mtrx.Utility.*;
 import java.io.*;
 
-import javax.rmi.CORBA.Util;
-
 public class Interpolation {
 
     public static class Problem {
@@ -20,9 +18,9 @@ public class Interpolation {
 
         private void solve() {
 
-            Matrix res;
             createAugmented();       
             result = SolveSPL.inverseSolution(m);
+
         }
 
         private void createAugmented(){
@@ -32,14 +30,10 @@ public class Interpolation {
                 {
                     m.setELMT(i, j, Math.pow(getPointAbsis(i), j));
                 }
-
-                m.setELMT(i, n, getPointOrdinat(i));
+            
+                m.setELMT(i, n+1, getPointOrdinat(i));
                 
             }
-        }
-
-        private int getAmmount() {
-            return n;
         }
 
         private double getPointAbsis(int row) {
@@ -48,10 +42,6 @@ public class Interpolation {
 
         private double getPointOrdinat(int row) {
             return points.getELMT(row, 1);
-        }
-
-        private double getX() {
-            return x;
         }
 
         public void InputNewProblem() throws IOException {
@@ -65,7 +55,7 @@ public class Interpolation {
 
             x = Utils.inputDouble();
             
-            solve();
+            solve();       
         }
 
         public Matrix getResult()
@@ -73,12 +63,19 @@ public class Interpolation {
             return new Matrix(result);
         }
 
+        public double interpolate() 
+        {
+            // PREKONDISI : solusi tidak kosong
+            double sum = 0;
+
+            for (int i = 0; i < result.getRow(); i++){
+                sum += result.getELMT(i, 0) * Math.pow(x, i);
+            }
+
+            return sum;
+        }
+
     }
 
-    public static Problem problem;
-
-    public static void Driver () throws  IOException {
-        problem.InputNewProblem();
-    }
-
+    public static Problem problem = new Problem();
 }

@@ -55,7 +55,7 @@ public class Utils {
     public static double inputDouble() throws IOException {
         print("> ");
         String input = bufferedReader.readLine();
-        while (!isInt(input)) {
+        while (!isDouble(input)) {
             printf("\"%s\" bukan Double yang valid.\n", input);
             print("> ");
             input = bufferedReader.readLine();
