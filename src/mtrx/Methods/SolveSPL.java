@@ -1,26 +1,55 @@
 package mtrx.Methods;
 import mtrx.Matrix.Matrix;
-import mtrx.Methods.Inverse;
-import mtrx.Methods.Solution;
+import mtrx.Methods.*;
 
 public class SolveSPL {
 
     public static void gauss (Matrix m) {
         // change m to gauss form
+
+        // I.S. Matrix
+		// F.S. Matrix eselon yg sudah dieliminasi Gauss
+		m = GaussJordan.sortMatrix(m);
+		for (int i=0; i < m.getRow()-1; i++) {
+			m = GaussJordan.makeOne(m);
+			m = GaussJordan.OBE(m,i);
+		}
+		m = GaussJordan.makeOne(m);
     }
 
     public static void gaussJordan (Matrix m) {
         // change m to gaussjordan form
+
+        // I.S. Matrix
+		// F.S. Matrix eselon yg sudah dieliminasi Gauss Jordan
+		m = GaussJordan.gauss(m);
+		for (int idx=0; idx<m.getRow(); idx++) {
+			for (int i=0; i<idx; i++) {
+				int j = GaussJordan.firstNotZero(m, idx);
+				if (j < m.getCol()) {
+					for (int k=m.getCol()-1; k>=j; k--) {
+						m.setELMT(i, k, m.getELMT(i,k) - (m.getELMT(idx,k) * m.getELMT(i,j)));
+					}
+				}
+			}
+		}
     }
 
     public static Matrix getGauss (Matrix m) {
         // return the gauss form of m
-        return null;
+        
+        Matrix res = new Matrix(m);
+
+        gauss(res);
+        return res;
     }
 
     public static Matrix getGaussJordan (Matrix m) {
         // reutrn the gaussjordan form of m
-        return null;
+        Matrix res = new Matrix(m);
+
+        gaussJordan(res);
+        return res;
     }
 
     public static Matrix inverseSolution (Matrix m) {

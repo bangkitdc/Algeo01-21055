@@ -5,12 +5,18 @@ import mtrx.Methods.SolveSPL;
 public class Inverse {
 
     public static Matrix getInverse (Matrix m) {
-        // PREKONDISI : m matrix persegi 
+
 
         // KAMUS LOKAL
         Matrix mRes, mIdentity;
 
         // ALGORITMA
+
+        // Jika bukan matriks persegi
+        if (!m.isSquare())
+        {
+            return null;
+        }
 
         mRes = new Matrix(m.getRow(), m.getCol() * 2);
         mIdentity = new Matrix(m.getRow(), m.getCol());
@@ -20,7 +26,7 @@ public class Inverse {
         mRes.copyToSubMatrix(m, 0, m.getLastRow(), 0, m.getLastCol());
         mRes.copyToSubMatrix(mIdentity, 0, m.getLastRow(), m.getLastCol() + 1, mRes.getLastCol());
 
-        SolveSPL.gauss(mRes);
+        SolveSPL.gaussJordan(mRes);
 
         if (mRes.getELMT(m.getLastRow(), m.getLastCol()) == 0) {
             return null;
