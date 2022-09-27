@@ -411,8 +411,6 @@ public class Matrix{
 
 	}
 
-<<<<<<< HEAD
-=======
     public Matrix transpose() {
         Matrix mRes = new Matrix(this.getCol(), this.getRow());
         for (int i = 0; i < this.getRow(); i++) {
@@ -423,6 +421,4 @@ public class Matrix{
         return mRes;
     }
 
-    
->>>>>>> b6fb949aa5e10198295bf9f9e1519a086a9190fb
 }

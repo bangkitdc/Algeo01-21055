@@ -13,7 +13,6 @@ public class GaussJordan {
 	}
 	
 	public static void sortMatrix(Matrix m) {
-
 		for (int i=0; i<m.getRow()-1; i++) {
 			for (int j=i+1; j<m.getRow(); j++) {
 				if (firstNotZero(m, j) < firstNotZero(m, i)) {
@@ -62,6 +61,7 @@ public class GaussJordan {
 		sortMatrix(m);
 		for (int i=0; i<m.getRow()-1; i++) {
 			OBE(m,i);
+			// Matrix.displayMatrix(m);
 		}
 	}
 }
