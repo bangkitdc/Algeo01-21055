@@ -31,7 +31,6 @@ public class Menu extends Utils{
         //Polinom.driver();
 
         Matrix.displayMatrix(Inverse.getInverse(m,1));
-        Matrix.displayMatrix(Inverse.getInverse(m));
         
         int choice = select(1, 7);
         System.out.println(choice);

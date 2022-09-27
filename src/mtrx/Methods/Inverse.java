@@ -31,7 +31,6 @@ public class Inverse {
             return null;
         }
 
-        
         return mRes.getSubMatrix(0, mRes.getLastRow(), m.getLastCol() + 1, mRes.getLastCol());
     }
 
@@ -52,6 +51,13 @@ public class Inverse {
 
         else {
 
+            det = Determinan.rowReductionDet(m).det;
+
+            if(!m.isSquare() || det == 0)
+            {
+                return null;
+            }
+
             cofactor = new Matrix(m.getRow(), m.getCol()); 
             for (i = 0; i < m.getRow(); i++)
             {
@@ -63,9 +69,8 @@ public class Inverse {
             }
 
             adj = cofactor.transpose();
-            det = Determinan.rowReductionDet(m).det;
 
-            return adj.multiply(det);
+            return adj.multiply(1.0 / det);
             
         }
     }
