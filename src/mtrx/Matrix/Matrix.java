@@ -380,13 +380,4 @@ public class Matrix{
 
 	}
 
-    public static Matrix transpose(Matrix m) {
-        Matrix mRes = new Matrix(m.getCol(), m.getRow());
-        for (int i = 0; i < m.getRow(); i++) {
-            for (int j = 0; j < m.getCol(); j++) {
-                mRes.setELMT(j, i, m.getELMT(i, j));
-            }
-        }
-        return mRes;
-    }
 }

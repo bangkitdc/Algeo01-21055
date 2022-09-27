@@ -12,23 +12,10 @@ public class Menu extends Utils{
         Matrix n = new Matrix();
        
         n.inputSquaredMatrix();
-        
-        Matrix m;
-        m = BicubicInterpolation.Bicubic();
-        m = Inverse.getInverse(m);
-        Matrix y = new Matrix(16, 1);
-        int a = 0;
-        for (int i = 0; i < n.getRow(); i ++) {
-            for (int j = 0; j < n.getCol(); j ++) {
-                y.setELMT(a, 0, n.getELMT(j, i));
-                a ++;
-            }
-        }
 
-        Matrix res;
-        res = m.multiply(y);
+        Determinan.displayCofactorDet(n);
 
-        Matrix.displayMatrix(res);
+        // BicubicInterpolation.displayBicubic(n);
 
         // Matrix m = new Matrix();
        
@@ -47,7 +34,7 @@ public class Menu extends Utils{
         // m2 = Inverse.getInverse(m);
         // Matrix.displayMatrix(m2);
 
-        Polinom.driver();
+        // Polinom.driver();
         
         int choice = select(1, 7);
         System.out.println(choice);

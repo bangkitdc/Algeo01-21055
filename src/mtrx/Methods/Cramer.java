@@ -49,7 +49,7 @@ public class Cramer {
         if (res == (int) res) {
             s = String.valueOf((int) res);
         } else {
-            res = new BigDecimal(res).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            res = new BigDecimal(res).setScale(8, RoundingMode.HALF_UP).doubleValue();
             s = String.valueOf(res);
         }
         return s;

@@ -138,7 +138,7 @@ public class Determinan {
         if (det == (int) det) {
             s = String.valueOf((int) det);
         } else {
-            det = new BigDecimal(det).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            det = new BigDecimal(det).setScale(8, RoundingMode.HALF_UP).doubleValue();
             s = String.valueOf(det);
         }
         return s;

@@ -16,7 +16,7 @@ public class GaussJordan {
 		for (int i=0; i<m.getRow()-1; i++) {
 			for (int j=i+1; j<m.getRow(); j++) {
 				if (firstNotZero(m, j) < firstNotZero(m, i)) {
-					m.swapRow( i, j);
+					m.swapRow(i, j);
 				}
 			}
 		}
