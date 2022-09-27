@@ -13,12 +13,12 @@ public class Menu extends Utils{
        
         n.inputSquaredMatrix();
 
-        // Determinan.displayCofactorDet(n);
-        // Determinan.displayRowReductionDet(n);
+        Determinan.displayCofactorDet(n);
+        Determinan.displayRowReductionDet(n);
         
         // Matrix.displayMatrix(n);
 
-        BicubicInterpolation.displayBicubic(n);
+        // BicubicInterpolation.displayBicubic(n);
 
         // Matrix m = new Matrix();
        
