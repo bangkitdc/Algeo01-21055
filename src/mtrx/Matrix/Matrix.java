@@ -111,19 +111,19 @@ public class Matrix{
         // Search the biggest weight first
         for (i = 0; i < m.getRow(); i++) {
             for (j = 0; j < m.getCol(); j++) {
-                if (Utils.getLengthELMT(m.getELMT(i, j)) > weight) {
-                    d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                if (Utils.getLengthELMT(d) > weight) {
                     weight = Utils.getLengthELMT(d);
                 }
             }
         }
-        weight++;
+        weight ++;
 
         // Search the biggest weight (first column only)
         wLeft = 0;
         for (i = 0; i < m.getRow(); i++) {
-            if (Utils.getLengthELMT(m.getELMT(i, 0)) > wLeft) {
-                d = new BigDecimal(m.getELMT(i, 0)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            d = new BigDecimal(m.getELMT(i, 0)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            if (Utils.getLengthELMT(d) > wLeft) {
                 wLeft = Utils.getLengthELMT(d);
             }
         }
@@ -161,8 +161,8 @@ public class Matrix{
         // Search the biggest weight first
         for (i = 0; i < m.getRow(); i++) {
             for (j = 0; j < m.getCol(); j++) {
-                if (Utils.getLengthELMT(m.getELMT(i, j)) > weight) {
-                    d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                if (Utils.getLengthELMT(d) > weight) {
                     weight = Utils.getLengthELMT(d);
                 }
             }
@@ -177,6 +177,7 @@ public class Matrix{
                 wLeft = Utils.getLengthELMT(d);
             }
         }
+        wLeft++;
 
         for (i = 0; i < m.getRow(); i++) {
             for (j = 0; j < m.getCol(); j++) {
@@ -373,5 +374,13 @@ public class Matrix{
 
 	}
 
-    
+    public static Matrix transpose(Matrix m) {
+        Matrix mRes = new Matrix(m.getCol(), m.getRow());
+        for (int i = 0; i < m.getRow(); i++) {
+            for (int j = 0; j < m.getCol(); j++) {
+                mRes.setELMT(j, i, m.getELMT(i, j));
+            }
+        }
+        return mRes;
+    }
 }

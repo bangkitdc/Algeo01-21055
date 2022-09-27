@@ -2,6 +2,7 @@ package mtrx.Methods;
 
 import mtrx.Matrix.*;
 import mtrx.Utility.Utils;
+import mtrx.Methods.*;
 
 public class BicubicInterpolation {
     public static int function(int x, int y, int i, int j) {

@@ -9,17 +9,27 @@ public class Menu extends Utils{
     public static void menuLoop() throws IOException {
         mainMenu();
         // Tester
-        Matrix m = new Matrix();
+        Matrix n = new Matrix();
        
-        m.inputSquaredMatrix();
-
-        Determinan.displayCofactorDet(m);
-
-        Determinan.displayRowReductionDet(m);
+        n.inputSquaredMatrix();
         
-        
-        // Matrix m;
-        // m = BicubicInterpolation.Bicubic();
+        Matrix m;
+        m = BicubicInterpolation.Bicubic();
+        m = Inverse.getInverse(m);
+        Matrix y = new Matrix(16, 1);
+        int a = 0;
+        for (int i = 0; i < n.getRow(); i ++) {
+            for (int j = 0; j < n.getCol(); j ++) {
+                y.setELMT(a, 0, n.getELMT(j, i));
+                a ++;
+            }
+        }
+
+        Matrix res;
+        res = m.multiply(y);
+
+        Matrix.displayMatrix(res);
+
         // Matrix.displayMatrix(m);
         
         // Matrix m2;
