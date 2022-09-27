@@ -83,10 +83,12 @@ public class Matrix{
 
         Utils.println("Masukkan nilai n: ");
         n = Utils.inputInt();
+        Utils.println("");
 
         this.setMatrix(m, n);
         Utils.println("Silahkan masukkan setiap elemen matrix: ");
         this.createMatrix();
+        Utils.println("");
     }
 
     public void inputSquaredMatrix() throws IOException {
@@ -97,10 +99,12 @@ public class Matrix{
         Utils.println("");
         Utils.println("Akan dibuat matrix berukuran nxn. Masukkan nilai n: ");
         n = Utils.inputInt();
+        Utils.println("");
 
         this.setMatrix(n, n);
         Utils.println("Silahkan masukkan setiap elemen matrix: ");
         this.createMatrix();
+        Utils.println("");
     }
 
     /* ------------------------ Console Output ------------------------ */
@@ -117,19 +121,19 @@ public class Matrix{
         // Search the biggest weight first
         for (i = 0; i < m.getRow(); i++) {
             for (j = 0; j < m.getCol(); j++) {
-                if (Utils.getLengthELMT(m.getELMT(i, j)) > weight) {
-                    d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                if (Utils.getLengthELMT(d) > weight) {
                     weight = Utils.getLengthELMT(d);
                 }
             }
         }
-        weight++;
+        weight ++;
 
         // Search the biggest weight (first column only)
         wLeft = 0;
         for (i = 0; i < m.getRow(); i++) {
-            if (Utils.getLengthELMT(m.getELMT(i, 0)) > wLeft) {
-                d = new BigDecimal(m.getELMT(i, 0)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            d = new BigDecimal(m.getELMT(i, 0)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            if (Utils.getLengthELMT(d) > wLeft) {
                 wLeft = Utils.getLengthELMT(d);
             }
         }
@@ -147,7 +151,11 @@ public class Matrix{
                         s = String.format("%d", wLeft);
                     }
                     d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
-                    Utils.printf("%" + s + "s", String.valueOf(d));
+                    if (d == (int) d) { // 2 times to make sure
+                        Utils.printf("%" + s + "s", String.valueOf((int) d));
+                    } else {
+                        Utils.printf("%" + s + "s", String.valueOf(d));
+                    }
                 }
             }
             Utils.println("");
@@ -167,8 +175,8 @@ public class Matrix{
         // Search the biggest weight first
         for (i = 0; i < m.getRow(); i++) {
             for (j = 0; j < m.getCol(); j++) {
-                if (Utils.getLengthELMT(m.getELMT(i, j)) > weight) {
-                    d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+                if (Utils.getLengthELMT(d) > weight) {
                     weight = Utils.getLengthELMT(d);
                 }
             }
@@ -183,6 +191,7 @@ public class Matrix{
                 wLeft = Utils.getLengthELMT(d);
             }
         }
+        wLeft++;
 
         for (i = 0; i < m.getRow(); i++) {
             for (j = 0; j < m.getCol(); j++) {
@@ -197,7 +206,11 @@ public class Matrix{
                         s = String.format("%d", wLeft);
                     }
                     d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
-                    Utils.printf("%" + s + "s", String.valueOf(d));
+                    if (d == (int) d) { // 2 times to make sure
+                        Utils.printf("%" + s + "s", String.valueOf((int) d));
+                    } else {
+                        Utils.printf("%" + s + "s", String.valueOf(d));
+                    }
                 }
                 // Augmented
                 if (j == col) {
@@ -420,5 +433,4 @@ public class Matrix{
         return mRes;
     }
 
-    
 }

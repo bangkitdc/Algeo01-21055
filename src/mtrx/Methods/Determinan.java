@@ -2,6 +2,8 @@ package mtrx.Methods;
 
 import mtrx.Utility.*;
 import mtrx.Matrix.*;
+import mtrx.Methods.GaussJordan.KDet;
+
 import java.math.*;
 public class Determinan {
     /* ---------------------- Cofactor Expansion ---------------------- */
@@ -58,9 +60,6 @@ public class Determinan {
 
             im ++;
         }
-
-        Matrix.displayMatrix(mRes);
-        Utils.println("y");
         return mRes;
     }
 
@@ -91,9 +90,11 @@ public class Determinan {
     public static class MatrixNDet {
         Matrix matrix;
         double det;
-        MatrixNDet(Matrix m, double d) {
+        int k;
+        MatrixNDet(Matrix m, double d, int count) {
             matrix = m;
             det = d;
+            k = count;
         }
     }
 
@@ -105,14 +106,14 @@ public class Determinan {
         
         /* ALGORITMA */
         mRes = new Matrix(m);
-        GaussJordan.determinantOBE(mRes);
+        KDet res = GaussJordan.determinantOBE(mRes);
         
         det = 1;
-        for (i = 0; i < mRes.getRow(); i ++) {
-            det *= mRes.getELMT(i, i);
+        for (i = 0; i < res.matrix.getRow(); i ++) {
+            det *= res.matrix.getELMT(i, i);
         }
-
-        return new MatrixNDet(mRes, det); 
+        det *= Math.pow(-1, res.k);
+        return new MatrixNDet(mRes, det, res.k); 
     }
 
     /* Console */
@@ -130,7 +131,8 @@ public class Determinan {
         Matrix.displayMatrix(res.matrix);
 
         det = res.det;
-        Utils.println("Determinan matrix tersebut adalah " + result(det));
+        Utils.println("SwapRow count: " + res.k + ", maka perkalian diagonal dikali " + (int) Math.pow(-1, res.k));
+        Utils.println("Maka, determinan matrix tersebut adalah " + result(det));
     }
 
     /* File */
@@ -148,8 +150,12 @@ public class Determinan {
         if (det == (int) det) {
             s = String.valueOf((int) det);
         } else {
-            det = new BigDecimal(det).setScale(3, RoundingMode.HALF_UP).doubleValue();
-            s = String.valueOf(det);
+            det = new BigDecimal(det).setScale(8, RoundingMode.HALF_UP).doubleValue();
+            if (det == (int) det) { // 2x times to make sure
+                s = String.valueOf((int) det);
+            } else {
+                s = String.valueOf(det);
+            }
         }
         return s;
     }
