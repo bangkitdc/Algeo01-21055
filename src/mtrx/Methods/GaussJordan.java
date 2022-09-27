@@ -26,7 +26,7 @@ public class GaussJordan {
 	public static void makeOne(Matrix m) {
 		for (int i=0; i<m.getRow(); i++) {
 			int j = firstNotZero(m,i);
-			if (j < m.getCol()-1) {
+			if (j < m.getCol()) {
 				double divider = m.getELMT(i,j);
 				if (divider != 0) {
 					for (int k=j; k < m.getCol(); k++) {
