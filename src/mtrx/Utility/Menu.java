@@ -9,9 +9,11 @@ public class Menu extends Utils{
     public static void menuLoop() throws IOException {
         mainMenu();
         // Tester
-        // Matrix m = new Matrix();
+         Matrix m = new Matrix();
        
-        // m.inputSquaredMatrix();
+         m.inputSquaredMatrix();
+
+         //Matrix.displayMatrix(Inverse.getInverse(m));
 
         // Determinan.displayCofactorDet(m);
 
@@ -26,7 +28,10 @@ public class Menu extends Utils{
         // m2 = Inverse.getInverse(m);
         // Matrix.displayMatrix(m2);
 
-        Polinom.driver();
+        //Polinom.driver();
+
+        Matrix.displayMatrix(Inverse.getInverse(m,1));
+        Matrix.displayMatrix(Inverse.getInverse(m));
         
         int choice = select(1, 7);
         System.out.println(choice);

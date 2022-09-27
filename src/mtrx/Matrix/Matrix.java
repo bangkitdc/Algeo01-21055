@@ -345,6 +345,37 @@ public class Matrix{
         return mRes;
     }
 
+    public Matrix multiply (double k) {
+        // KAMUS LOKAL
+        Matrix mRes;
+        int i, j;
+        
+        // ALGORITMA
+        mRes = new Matrix(this.getRow(), this.getCol());
+
+        for (i = 0; i < this.getRow(); i++)
+        {
+            for(j = 0; j < this.getCol(); j++)
+            {
+                mRes.setELMT(i, j, this.getELMT(i, j) * k);
+            }
+        }
+
+        return mRes;
+
+    }
+
+    public void multiplyByConst(double k)
+    {
+        // KAMUS LOKAL
+         Matrix mRes;
+
+         // ALGORITMA
+         mRes = this.multiply(k);
+
+         this.copyELMT(mRes);
+    }
+
     public void createMatrix() {
         /* KAMUS LOKAL */
         InputStreamReader streamReader = new InputStreamReader(System.in);
@@ -378,6 +409,16 @@ public class Matrix{
 		}
 
 	}
+
+    public Matrix transpose() {
+        Matrix mRes = new Matrix(this.getCol(), this.getRow());
+        for (int i = 0; i < this.getRow(); i++) {
+            for (int j = 0; j < this.getCol(); j++) {
+                mRes.setELMT(j, i, this.getELMT(i, j));
+            }
+        }
+        return mRes;
+    }
 
     
 }
