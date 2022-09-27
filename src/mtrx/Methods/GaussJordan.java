@@ -74,11 +74,9 @@ public class GaussJordan {
 		// F.S. Matrix eselon yg sudah dieliminasi Gauss
 		m = sortMatrix(m);
 		for (int i=0; i < m.getRow()-1; i++) {
-			m = makeOne(m);
-			m = OBE(m,i);
+			m = OBE(makeOne(m),i);
 		}
-		m = makeOne(m);
-		return m;
+		return sortMatrix(makeOne(m));
 	}
 	
 	public static Matrix gaussJordan(Matrix m) {
