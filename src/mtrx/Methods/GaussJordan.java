@@ -61,7 +61,6 @@ public class GaussJordan {
 		sortMatrix(m);
 		for (int i=0; i<m.getRow()-1; i++) {
 			OBE(m,i);
-			// Matrix.displayMatrix(m);
 		}
 	}
 }

@@ -58,9 +58,6 @@ public class Determinan {
 
             im ++;
         }
-
-        Matrix.displayMatrix(mRes);
-        Utils.println("y");
         return mRes;
     }
 
@@ -149,7 +146,11 @@ public class Determinan {
             s = String.valueOf((int) det);
         } else {
             det = new BigDecimal(det).setScale(8, RoundingMode.HALF_UP).doubleValue();
-            s = String.valueOf(det);
+            if (det == (int) det) { // 2x times to make sure
+                s = String.valueOf((int) det);
+            } else {
+                s = String.valueOf(det);
+            }
         }
         return s;
     }

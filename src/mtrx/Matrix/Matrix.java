@@ -83,10 +83,12 @@ public class Matrix{
 
         Utils.println("Masukkan nilai n: ");
         n = Utils.inputInt();
+        Utils.println("");
 
         this.setMatrix(m, n);
         Utils.println("Silahkan masukkan setiap elemen matrix: ");
         this.createMatrix();
+        Utils.println("");
     }
 
     public void inputSquaredMatrix() throws IOException {
@@ -97,10 +99,12 @@ public class Matrix{
         Utils.println("");
         Utils.println("Akan dibuat matrix berukuran nxn. Masukkan nilai n: ");
         n = Utils.inputInt();
+        Utils.println("");
 
         this.setMatrix(n, n);
         Utils.println("Silahkan masukkan setiap elemen matrix: ");
         this.createMatrix();
+        Utils.println("");
     }
 
     /* ------------------------ Console Output ------------------------ */
@@ -147,7 +151,11 @@ public class Matrix{
                         s = String.format("%d", wLeft);
                     }
                     d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
-                    Utils.printf("%" + s + "s", String.valueOf(d));
+                    if (d == (int) d) { // 2 times to make sure
+                        Utils.printf("%" + s + "s", String.valueOf((int) d));
+                    } else {
+                        Utils.printf("%" + s + "s", String.valueOf(d));
+                    }
                 }
             }
             Utils.println("");
@@ -198,7 +206,11 @@ public class Matrix{
                         s = String.format("%d", wLeft);
                     }
                     d = new BigDecimal(m.getELMT(i, j)).setScale(3, RoundingMode.HALF_UP).doubleValue();
-                    Utils.printf("%" + s + "s", String.valueOf(d));
+                    if (d == (int) d) { // 2 times to make sure
+                        Utils.printf("%" + s + "s", String.valueOf((int) d));
+                    } else {
+                        Utils.printf("%" + s + "s", String.valueOf(d));
+                    }
                 }
                 // Augmented
                 if (j == col) {
