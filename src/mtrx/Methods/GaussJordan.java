@@ -38,13 +38,20 @@ public class GaussJordan {
 		return m;
 	}
 	
+	public static double roundOff(double x) {
+		if (x >= -0.00000000000001 && x < 0) {
+			return 0;
+		}
+		return x;
+	}
+	
 	public static Matrix OBE(Matrix m, int idx) {
 		int j = firstNotZero(m, idx);
 		if (j < m.getCol()) {
 			for (int i=idx+1; i < m.getRow(); i++) {
 				double multiplier = m.getELMT(i,j)/m.getELMT(idx, j); 
 				for (int k=j; k < m.getCol(); k++) {
-					m.setELMT(i, k, m.getELMT(i,k)-m.getELMT(idx,k)*multiplier);
+					m.setELMT(i, k, roundOff(m.getELMT(i,k)- m.getELMT(idx,k)*multiplier));
 				}
 			}
 		}
@@ -67,11 +74,9 @@ public class GaussJordan {
 		// F.S. Matrix eselon yg sudah dieliminasi Gauss
 		m = sortMatrix(m);
 		for (int i=0; i < m.getRow()-1; i++) {
-			m = makeOne(m);
-			m = OBE(m,i);
+			m = OBE(makeOne(m),i);
 		}
-		m = makeOne(m);
-		return m;
+		return sortMatrix(makeOne(m));
 	}
 	
 	public static Matrix gaussJordan(Matrix m) {
