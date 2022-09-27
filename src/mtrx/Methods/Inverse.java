@@ -33,4 +33,45 @@ public class Inverse {
 
         return mRes.getSubMatrix(0, mRes.getLastRow(), m.getLastCol() + 1, mRes.getLastCol());
     }
+
+    public static Matrix getInverse (Matrix m, int method) {
+
+        // method == 0 menandakan getInverse akan menggunakan methode OBE, sedangkan nilai method lainnya menandakan
+        // getInverse menggunakan metode matriks adjoin
+
+        // KAMUS LOKAL
+        Matrix adj;
+        Matrix cofactor;
+        int i, j;
+        double det;
+
+        if(method == 0) {
+            return getInverse(m);
+        }
+
+        else {
+
+            det = Determinan.rowReductionDet(m).det;
+
+            if(!m.isSquare() || det == 0)
+            {
+                return null;
+            }
+
+            cofactor = new Matrix(m.getRow(), m.getCol()); 
+            for (i = 0; i < m.getRow(); i++)
+            {
+                for (j = 0; j < m.getCol(); j++)
+                {
+                    cofactor.setELMT(i, j, 
+                    Determinan.rowReductionDet(Determinan.smallerMatrix(m, i, j)).det * ((i + j) % 2 == 1 ? -1 : 1));
+                }
+            }
+
+            adj = cofactor.transpose();
+
+            return adj.multiply(1.0 / det);
+            
+        }
+    }
 }

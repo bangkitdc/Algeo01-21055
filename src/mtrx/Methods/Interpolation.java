@@ -9,7 +9,6 @@ public class Interpolation {
         private int n;
         private Matrix points;
         private Matrix m;
-        private double x;
         private Matrix result;
 
         private void inputPoints() {
@@ -46,14 +45,14 @@ public class Interpolation {
 
         public void InputNewProblem() throws IOException {
 
+            Utils.println("Masukan derajat polinomial interpolasi : ");
             n = Utils.inputInt();
 
+            Utils.println("Masukkan semua titik (x y) : ");
             points = new Matrix(n+1, 2);
             m = new Matrix(n+1, n+2);
 
             problem.inputPoints();
-
-            x = Utils.inputDouble();
             
             solve();       
         }
@@ -63,7 +62,7 @@ public class Interpolation {
             return new Matrix(result);
         }
 
-        public double interpolate() 
+        public double interpolate(double x) 
         {
             // PREKONDISI : solusi tidak kosong
             double sum = 0;
@@ -78,4 +77,6 @@ public class Interpolation {
     }
 
     public static Problem problem = new Problem();
+
+    
 }

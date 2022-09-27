@@ -39,18 +39,28 @@ public class Determinan {
         /* ALGORITMA */
         mRes = new Matrix(m.getRow() - 1, m.getCol() - 1);
         
-        im = 1;
+        im = 0;
         for (i = 0; i < mRes.getRow(); i ++) {
+            if (im == row) {
+                im++;
+            }
+
             jm = 0;
+
             for (j = 0; j < mRes.getCol(); j ++) {
                 if (jm == col) {
                     jm ++;
                 }
+
                 mRes.setELMT(i, j, m.getELMT(im, jm));
                 jm ++;
             }
+
             im ++;
         }
+
+        Matrix.displayMatrix(mRes);
+        Utils.println("y");
         return mRes;
     }
 
@@ -94,8 +104,8 @@ public class Determinan {
         double det;
         
         /* ALGORITMA */
-        mRes = new Matrix(m.getLastRow(), m.getLastCol());
-        mRes = GaussJordan.determinantOBE(m);
+        mRes = new Matrix(m);
+        GaussJordan.determinantOBE(mRes);
         
         det = 1;
         for (i = 0; i < mRes.getRow(); i ++) {

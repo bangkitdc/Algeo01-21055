@@ -12,7 +12,8 @@ public class GaussJordan {
 		return m.getCol();
 	}
 	
-	public static Matrix sortMatrix(Matrix m) {
+	public static void sortMatrix(Matrix m) {
+
 		for (int i=0; i<m.getRow()-1; i++) {
 			for (int j=i+1; j<m.getRow(); j++) {
 				if (firstNotZero(m, j) < firstNotZero(m, i)) {
@@ -20,10 +21,9 @@ public class GaussJordan {
 				}
 			}
 		}
-		return m;
 	}
 
-	public static Matrix makeOne(Matrix m) {
+	public static void makeOne(Matrix m) {
 		for (int i=0; i<m.getRow(); i++) {
 			int j = firstNotZero(m,i);
 			if (j < m.getCol()-1) {
@@ -35,17 +35,16 @@ public class GaussJordan {
 				}
 			}
 		}
-		return m;
 	}
 	
 	public static double roundOff(double x) {
-		if (x >= -0.00000000000001 && x < 0) {
+		if (x >= -1e-14 && x < 0) {
 			return 0;
 		}
 		return x;
 	}
 	
-	public static Matrix OBE(Matrix m, int idx) {
+	public static void OBE(Matrix m, int idx) {
 		int j = firstNotZero(m, idx);
 		if (j < m.getCol()) {
 			for (int i=idx+1; i < m.getRow(); i++) {
@@ -55,44 +54,14 @@ public class GaussJordan {
 				}
 			}
 		}
-		return m;
 	}
 	
-	public static Matrix determinantOBE(Matrix m) {
+	public static void determinantOBE(Matrix m) {
 		// I.S. Matrix
 		// F.S. Matrix di OBE tp diagonal gk dibuat 1
-		m = sortMatrix(m);
+		sortMatrix(m);
 		for (int i=0; i<m.getRow()-1; i++) {
-			m = OBE(m,i);
+			OBE(m,i);
 		}
-		return m;
-	}
-	
-
-	public static Matrix gauss(Matrix m) {
-		// I.S. Matrix
-		// F.S. Matrix eselon yg sudah dieliminasi Gauss
-		m = sortMatrix(m);
-		for (int i=0; i < m.getRow()-1; i++) {
-			m = OBE(makeOne(m),i);
-		}
-		return sortMatrix(makeOne(m));
-	}
-	
-	public static Matrix gaussJordan(Matrix m) {
-		// I.S. Matrix
-		// F.S. Matrix eselon yg sudah dieliminasi Gauss Jordan
-		m = gauss(m);
-		for (int idx=0; idx<m.getRow(); idx++) {
-			for (int i=0; i<idx; i++) {
-				int j = firstNotZero(m, idx);
-				if (j < m.getCol()) {
-					for (int k=m.getCol()-1; k>=j; k--) {
-						m.setELMT(i, k, m.getELMT(i,k) - (m.getELMT(idx,k) * m.getELMT(i,j)));
-					}
-				}
-			}
-		}
-		return m;
 	}
 }

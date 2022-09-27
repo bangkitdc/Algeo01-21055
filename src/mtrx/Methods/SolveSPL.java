@@ -1,8 +1,6 @@
 package mtrx.Methods;
 
-import mtrx.Utility.*;
 import mtrx.Matrix.Matrix;
-import mtrx.Methods.*;
 
 public class SolveSPL {
 
@@ -11,12 +9,13 @@ public class SolveSPL {
 
         // I.S. Matrix
 		// F.S. Matrix eselon yg sudah dieliminasi Gauss
-		m = GaussJordan.sortMatrix(m);
+		GaussJordan.sortMatrix(m);
 		for (int i=0; i < m.getRow()-1; i++) {
-			m = GaussJordan.makeOne(m);
-			m = GaussJordan.OBE(m,i);
+			GaussJordan.makeOne(m);
+			GaussJordan.OBE(m,i);
 		}
-		m = GaussJordan.makeOne(m);
+		GaussJordan.makeOne(m);
+        GaussJordan.sortMatrix(m);
     }
 
     public static void gaussJordan (Matrix m) {
@@ -24,7 +23,7 @@ public class SolveSPL {
 
         // I.S. Matrix
 		// F.S. Matrix eselon yg sudah dieliminasi Gauss Jordan
-		m = GaussJordan.gauss(m);
+		gauss(m);
 		for (int idx=0; idx<m.getRow(); idx++) {
 			for (int i=0; i<idx; i++) {
 				int j = GaussJordan.firstNotZero(m, idx);
