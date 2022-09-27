@@ -14,21 +14,27 @@ public class Matrix{
     public Matrix (int row, int col) {
         this.ROW_EFF = row;
         this.COL_EFF = col;
-        this.mem = new double [row][col];
+        InitializeMatrix();
     }
 
     public Matrix (Matrix mIn) {
         this.ROW_EFF = mIn.getRow();
         this.COL_EFF = mIn.getCol();
+        InitializeMatrix();
         this.copyELMT(mIn);
     }
 
     public Matrix () {
         this.ROW_EFF = 0;
         this.COL_EFF = 0;
+        InitializeMatrix();
     }
 
-    public void setMatrix (int row, int col) {
+    private void InitializeMatrix() {
+        this.mem = new double [this.getRow()][this.getCol()];
+    }
+    
+     public void setMatrix (int row, int col) {
         this.ROW_EFF = row;
         this.COL_EFF = col;
         this.mem = new double[row][col];

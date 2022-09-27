@@ -30,12 +30,25 @@ public class Menu extends Utils{
 
         Matrix.displayMatrix(res);
 
+        // Matrix m = new Matrix();
+       
+        // m.inputSquaredMatrix();
+
+        // Determinan.displayCofactorDet(m);
+
+        // Determinan.displayRowReductionDet(m);
+        
+        
+        // Matrix m;
+        // m = BicubicInterpolation.Bicubic();
         // Matrix.displayMatrix(m);
         
         // Matrix m2;
         // m2 = Inverse.getInverse(m);
         // Matrix.displayMatrix(m2);
 
+        Polinom.driver();
+        
         int choice = select(1, 7);
         System.out.println(choice);
     }

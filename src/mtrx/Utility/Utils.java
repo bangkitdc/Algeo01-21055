@@ -31,6 +31,15 @@ public class Utils {
         }
     }
 
+    public static boolean isDouble(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     /* Input Integer */ 
     public static int inputInt() throws IOException {
         print("> ");
@@ -41,6 +50,17 @@ public class Utils {
             input = bufferedReader.readLine();
         }
         return Integer.parseInt(input);
+    }
+
+    public static double inputDouble() throws IOException {
+        print("> ");
+        String input = bufferedReader.readLine();
+        while (!isDouble(input)) {
+            printf("\"%s\" bukan Double yang valid.\n", input);
+            print("> ");
+            input = bufferedReader.readLine();
+        }
+        return Double.parseDouble(input);
     }
 
     /* Input Integer Within Range (min, max) */ 
