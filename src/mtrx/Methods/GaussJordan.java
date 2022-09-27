@@ -37,8 +37,8 @@ public class GaussJordan {
 		}
 	}
 	
-	public static double roundOff(double x) {
-		if (x >= -1e-14 && x < 0) {
+	public static double gataugajelasbiargaerror(double x) {
+		if (x >= -0.00000000000001 && x <= 0.00000000000001) {
 			return 0;
 		}
 		return x;
@@ -50,7 +50,7 @@ public class GaussJordan {
 			for (int i=idx+1; i < m.getRow(); i++) {
 				double multiplier = m.getELMT(i,j)/m.getELMT(idx, j); 
 				for (int k=j; k < m.getCol(); k++) {
-					m.setELMT(i, k, roundOff(m.getELMT(i,k)- m.getELMT(idx,k)*multiplier));
+					m.setELMT(i, k, gataugajelasbiargaerror(m.getELMT(i,k)- m.getELMT(idx,k)*multiplier));
 				}
 			}
 		}
