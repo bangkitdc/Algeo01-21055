@@ -12,6 +12,7 @@ public class GaussJordan {
 		return m.getCol();
 	}
 	
+<<<<<<< HEAD
 	public static void sortMatrix(Matrix m) {
 		for (int i=0; i<m.getRow()-1; i++) {
 			for (int j=i+1; j<m.getRow(); j++) {
@@ -21,6 +22,8 @@ public class GaussJordan {
 			}
 		}
 	}
+=======
+>>>>>>> 9399a6fcca3d82b86bdc0ee2b235c7e5b78f746a
 
 	public static void makeOne(Matrix m) {
 		for (int i=0; i<m.getRow(); i++) {
@@ -55,9 +58,23 @@ public class GaussJordan {
 		}
 	}
 	
+	public static int swapCount;
+	
+	public static void sortMatrix(Matrix m) {
+		for (int i=0; i<m.getRow()-1; i++) {
+			for (int j=i+1; j<m.getRow(); j++) {
+				if (firstNotZero(m, j) < firstNotZero(m, i)) {
+					m.swapRow( i, j);
+					swapCount++;
+				}
+			}
+		}
+	}
+	
 	public static void determinantOBE(Matrix m) {
 		// I.S. Matrix
 		// F.S. Matrix di OBE tp diagonal gk dibuat 1
+		swapCount = 0;
 		sortMatrix(m);
 		for (int i=0; i<m.getRow()-1; i++) {
 			OBE(m,i);
