@@ -9,12 +9,12 @@ public class Menu extends Utils{
     public static void menuLoop() throws IOException {
         mainMenu();
         // Tester
-        Matrix n = new Matrix();
+        // Matrix n = new Matrix();
        
-        n.inputSquaredMatrix();
+        // n.inputSquaredMatrix();
 
-        Determinan.displayCofactorDet(n);
-        Determinan.displayRowReductionDet(n);
+        // Determinan.displayCofactorDet(n);
+        // Determinan.displayRowReductionDet(n);
         
         // Matrix.displayMatrix(n);
 
