@@ -2,7 +2,6 @@ package mtrx.Utility;
 
 import java.io.*;
 
-import javafx.scene.image.Image;
 import mtrx.Matrix.*;
 import mtrx.Methods.*;
 
@@ -11,9 +10,8 @@ public class Menu extends Utils{
     public static void menuLoop() throws IOException {
         mainMenu();
         // Tester
-        Matrix n = new Matrix();
+        // Matrix n = new Matrix();
        
-        n.inputMatrix();
 
         // Determinan.displayCofactorDet(n);
         // Determinan.displayRowReductionDet(n);
@@ -39,8 +37,6 @@ public class Menu extends Utils{
         // Matrix m2;
         // m2 = Inverse.getInverse(m);
         // Matrix.displayMatrix(m2);
-
-        Matrix.displayMatrix(ImageScaler.DoubleScale(n));
         
         int choice = select(1, 7);
         System.out.println(choice);
