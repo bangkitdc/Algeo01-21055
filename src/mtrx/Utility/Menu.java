@@ -1,6 +1,7 @@
 package mtrx.Utility;
 
 import java.io.*;
+
 import mtrx.Matrix.*;
 import mtrx.Methods.*;
 
@@ -11,7 +12,6 @@ public class Menu extends Utils{
         // Tester
         // Matrix n = new Matrix();
        
-        // n.inputSquaredMatrix();
 
         // Determinan.displayCofactorDet(n);
         // Determinan.displayRowReductionDet(n);
