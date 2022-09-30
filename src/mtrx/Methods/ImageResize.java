@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import mtrx.Matrix.*;
+import mtrx.Utility.Utils;
 
 public class ImageResize {
     public static BufferedImage scale(BufferedImage src, int w, int h) {
@@ -27,7 +29,9 @@ public class ImageResize {
 
     public static void main(String args[]) throws IOException {
         // Reading the image
-        File file = new File("../test/butterfly.png");
+
+        File file = new File("D:/JavaProject/Tubes Algeo/Algeo01-21055/src/mtrx/test/test2x.png");
+        
         BufferedImage img = ImageIO.read(file);
 
         int[][] red = new int[img.getWidth()][img.getHeight()];
@@ -47,9 +51,21 @@ public class ImageResize {
                 blue[x][y] = color.getBlue();
             }
         }
-        img = scale(img, 2 * img.getWidth(), 2 * img.getHeight());
 
         /* Fungsi Bicubic Untuk red[][] green[][] blue[][] */
+        Matrix mRed = new Matrix(img.getWidth(), img.getHeight());
+        Matrix mGreen = new Matrix(img.getWidth(), img.getHeight());
+        Matrix mBlue = new Matrix(img.getWidth(), img.getHeight());
+
+        mRed.copyELMT(red);
+        mGreen.copyELMT(green);
+        mBlue.copyELMT(blue);
+
+        int[][] newRed = ImageScaler.DoubleScale(mRed).getIntMatrix(0, 255);
+        int[][] newGreen = ImageScaler.DoubleScale(mGreen).getIntMatrix(0, 255);
+        int[][] newBlue = ImageScaler.DoubleScale(mBlue).getIntMatrix(0, 255);
+
+        img = scale(img, 2 * img.getWidth(), 2 * img.getHeight());
 
         // Matrix -> RGB (Udah 2x scaled)
         for (int y = 0; y < img.getHeight(); y++) {
@@ -59,9 +75,9 @@ public class ImageResize {
                 // Creating a Color object from pixel value
                 Color color = new Color(pixel, true);
                 // Retrieving the R G B values
-                int r = red[x][y];
-                int g = green[x][y];
-                int b = blue[x][y];
+                int r = newRed[x][y];
+                int g = newGreen[x][y];
+                int b = newBlue[x][y];
 
                 // Creating new Color object
                 color = new Color(r, g, b);
@@ -71,7 +87,7 @@ public class ImageResize {
             }
         }
         // Saving the modified image
-        file = new File("../test/butterfly2X.png");
+        file = new File("D:/JavaProject/Tubes Algeo/Algeo01-21055/src/mtrx/test/test2x.png");
         ImageIO.write(img, "png", file);
         System.out.println("Done...");
     }
