@@ -8,6 +8,7 @@ import mtrx.Methods.*;
 public class Menu extends Utils{
     
     public static void menuLoop() throws IOException {
+        Polinom.interpolationDriver();
         mainMenu();
         // Tester
         // Matrix n = new Matrix();
