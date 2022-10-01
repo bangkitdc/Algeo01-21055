@@ -53,7 +53,7 @@ public class SolveSPL {
     }
 
     public static Matrix getGaussJordan (Matrix m) {
-        // reutrn the gaussjordan form of m
+        // return the gaussjordan form of m
         Matrix res = new Matrix(m);
 
         gaussJordan(res);
@@ -94,16 +94,17 @@ public class SolveSPL {
     }
 	
     
-    public static void gaussJordanShowSolution(Matrix m) {
+    public static String gaussJordanOutputSolution(Matrix m) {
     	// I.S. Matrix m sudah dieliminasi Gauss-Jordan
-    	// F.S. Menampilkan solusi SPL dari matrix m
+    	// F.S. return String solusi 
     	
+    	String solution = "\n";
     	
     	// Mengecek apakah Matrix memiliki solusi SPL
     	for (int i=0; i<m.getRow(); i++) {
     		if (GaussJordan.firstNotZero(m, i) == m.getCol()-1) {
-    			 Utils.println("SPL tidak memiliki solusi.");
-    			 return;
+    			solution = "SPL tidak memiliki solusi.";
+    			return solution;
     		}
     	}
     	
@@ -127,25 +128,28 @@ public class SolveSPL {
     	}
     	
     	
-    	// Output hasil SPL 
+    	// Output hasil SPL
+    	solution += "Solusi SPL:\n";
     	i = 0; j = 0;
     	while (j < m.getCol() - 1) {
     		
     		// xj merupakan variabel bebas
     		if (j != GaussJordan.firstNotZero(m, i)) {
-    			System.out.printf("x%d = t%d", j+1, freePosition[j]);
+    			solution += String.format("x%d = t%d", j+1, freePosition[j]);
     		}
     		
     		// xj bukan variabel bebas
     		if (j == GaussJordan.firstNotZero(m, i)) {
-    			System.out.printf("x%d =", j+1);
+    			solution += String.format("x%d =", j+1);
+    			//System.out.printf("x%d =", j+1);
         		double cons = m.getELMT(i, m.getCol()-1);
         		// constanta persamaan 
         		boolean isNull = true;
         		// apakah persamaan sudah terisi
         		
         		if (cons != 0) {
-        			System.out.printf(" " + Determinan.result(cons));
+        			solution += " " + Determinan.result(cons);
+        			//System.out.printf(" " + Determinan.result(cons));
         			isNull = false;
         		}
         		
@@ -155,24 +159,29 @@ public class SolveSPL {
         			
         			// output operator
         	    	if (coef > 0) {
-        	    		Utils.print(" -");
+        	    		solution += " -";
         	    	} else if (coef < 0 && !isNull) {
-        	    		Utils.print(" +");
+        	    		solution += " +";
         	    	}
         	    	 
         	    	// jika koefisien bernilai -1 or 1 maka koef tidak ditulis di persamaan
         	    	// hrs pake ini krn java jelek gbs handle double
         	    	if (Math.abs(coef) - 1 <= 0.00000000000001 && Math.abs(coef)  -1 >= 0) {
-        	    		System.out.printf(" t%d", freePosition[k]);
+        	    		solution += String.format(" t%d", freePosition[k]);
         	    		isNull = false;
         	    	} else if (coef != 0) {
-        	    		System.out.print(" " + Determinan.result(Math.abs(coef)));
-        	    		System.out.printf("t%d", freePosition[k]);
+        	    		solution += String.format(" " + Determinan.result(Math.abs(coef)) + "t%d", freePosition[k]);
         	    		isNull = false;
         	    	}
         		}
+        		
+        		// jika persamaan masih kosong berarti var = 0
+        		if (isNull) {
+        			solution += " 0";
+        		}
+        		
     		}
-    		Utils.println("");
+    		solution += "\n";
     		
     		// ubah indeks
     		if (j == GaussJordan.firstNotZero(m, i) && i < m.getRow()-1) {
@@ -183,30 +192,45 @@ public class SolveSPL {
     	
     	// menulis keterangan jika terdapat variabel bebas
     	if (freeVarCount > 0) {
-    		System.out.print("Dengan");
+    		solution += "Dengan";
         	for (int k=1; k<=freeVarCount; k++) {
-        		System.out.printf(" t%d", k);
+        		solution += String.format(" t%d", k);
         		if (k < freeVarCount - 1) {
-        			System.out.print(",");
+        			solution += ",";
         		} else if (k == freeVarCount - 1) {
-        			System.out.print(" dan");
+        			solution += " dan";
         		}
         	}
-        	System.out.println(" merupakan variabel bebas.");
+        	solution += " merupakan variabel bebas.\n";
     	}
- 
+    	return solution;
     }
 
-    public static void gaussShowSolution(Matrix m) {
+    public static String gaussOutputSolution(Matrix m) {
     	// blm sempet buat penyuluhan mundur hehe
     	gaussJordan(m);
-    	gaussJordanShowSolution(m);
+    	return gaussJordanOutputSolution(m);
+    }
+    
+    public static String inverseOutputSolution(Matrix m) {
+    	String solution = "";
+    	if (m == null) {
+    		solution = "\nSPL tidak memiliki solusi atau tidak bisa diselesaikan dengan Metode Matrix Inverse.\n";
+    				return solution;
+    	}
+    	
+    	solution += "\nSolusi:";
+    	for (int i=0; i<m.getRow(); i++) {
+    		solution += String.format("x%d = %s\n", i+1, Determinan.result(m.getELMT(i,0)));
+    	}
+    	return solution;
     }
     
     public static void sistemPersamaanLinear() throws IOException {  	
     	// KAMUS
     	int op = 0;
     	Matrix m = new Matrix();
+    	String solution;
     	
     	// MENU SPL
     	Utils.println("SISTEM PERSAMAAN LINEAR\n");
@@ -239,28 +263,47 @@ public class SolveSPL {
     		Utils.println("\nMatrix awal:");
     		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
     		gauss(m);
-    		Utils.println("\n\nMatrix hasil eliminasi Gauss:");
+    		Utils.println("\nMatrix hasil eliminasi Gauss:");
     		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
-    		Utils.println("\n\nSolusi SPL:");
-    		gaussShowSolution(m);
+    		solution = gaussOutputSolution(m);
+    		Utils.print(solution);
     	}
     	else if (op == 2) {
     		Utils.println("\nMatrix awal:");
     		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
     		gaussJordan(m);
-    		Utils.println("\n\nMatrix hasil eliminasi Gauss-Jordan:");
+    		Utils.println("\nMatrix hasil eliminasi Gauss-Jordan:");
     		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
-    		Utils.println("\n\nSolusi SPL:");
-    		gaussJordanShowSolution(m);
+    		solution = gaussJordanOutputSolution(m);
+    		Utils.print(solution);
     	}
     	else if (op == 3) {
-    		// blm fix
+    		Utils.println("\nMatrix awal:");
+    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
     		m = inverseSolution(m);
+    		solution = inverseOutputSolution(m);
+    		Utils.print(solution);
+    		
     	}
     	else {
-    		// blm fix
-    		Cramer.displayCrammer(m);
+    		Utils.println("\nMatrix awal:");
+    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
+    		solution = Cramer.displayCramer(m);
+    		Utils.print(solution);
     	}
     	
-    }
+    	// OPSI SIMPAN KE FILE
+    	Utils.println("\nSimpan solusi kedalam file?");
+    	Utils.println("1. Ya");
+    	Utils.println("2. Tidak");
+    	
+    	op = Utils.select(1,2);
+    	
+    	/*
+    	 if (op == 1) {
+    	 	saveToFileorsmthn(solution);
+    	 }
+    	 */	
+    }    
+    
 }
