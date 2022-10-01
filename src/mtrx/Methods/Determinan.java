@@ -82,7 +82,7 @@ public class Determinan {
     /* File */
     public static void fileCofactorDet(Matrix m, String fileName) {
         /* ALGORITMA - Output Purpose */
-        IO.writeFileString(fileName, Utils.result(cofactorDet(m)));
+        IO.writeFileString(fileName, "Determinan Matrix: " + Utils.result(cofactorDet(m)));
     }
 
     /* ------------------------- Row Reduction ------------------------ */
@@ -140,7 +140,7 @@ public class Determinan {
     /* File */
     public static void fileRowReductionDet(Matrix m, String fileName) {
         /* ALGORITMA - Output Purpose */
-        IO.writeFileString(fileName, Utils.result(rowReductionDet(m).det));
+        IO.writeFileString(fileName, "Determinan Matrix: " + Utils.result(rowReductionDet(m).det));
     }
 
     /* -------------------------- Input ------------------------- */
@@ -178,11 +178,11 @@ public class Determinan {
         switch (input) {
             case 1:
                 Determinan.fileCofactorDet(m, outputFile);
-                Utils.println("Berhasil menuliskan file ヽ(・∀・)ﾉ");
+                Utils.println("Berhasil menuliskan file :)");
                 break;
             case 2:
                 Determinan.fileRowReductionDet(m, outputFile);
-                Utils.println("Berhasil menuliskan file ヽ(・∀・)ﾉ");
+                Utils.println("Berhasil menuliskan file :)");
                 break;
             default:
                 break;
