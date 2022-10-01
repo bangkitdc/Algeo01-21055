@@ -91,6 +91,17 @@ public class Matrix{
         Utils.println("");
     }
 
+    public void inputSquaredMatrix(int method) throws IOException {
+        if(method == 1)
+        {
+            this.inputFileSquaredMatrix();
+        }
+
+        else if (method == 2) {
+            this.inputSquaredMatrix();
+        }
+    }
+
     public void inputSquaredMatrix() throws IOException {
         /* KAMUS LOKAL */
         int n;

@@ -7,11 +7,12 @@ public class Interpolation {
 
     public static class Problem {
         private int n;
-        private Matrix points;
-        private Matrix m;
-        private Matrix result;
+        private Matrix points, m, result;
+        private double x;
 
         private void inputPoints() {
+            Utils.println("Masukkan semua titik (x y) : ");
+
             points.createMatrix();
         }
 
@@ -48,13 +49,14 @@ public class Interpolation {
             Utils.println("Masukan derajat polinomial interpolasi : ");
             n = Utils.inputInt();
 
-            Utils.println("Masukkan semua titik (x y) : ");
             points = new Matrix(n+1, 2);
             m = new Matrix(n+1, n+2);
-
             problem.inputPoints();
+
+            Utils.println("Masukan nilai x untuk memperoleh nilai f(x) hasil interpolasi : ");
+            x = Utils.inputDouble();
             
-            solve();       
+            solve(); 
         }
 
         public Matrix getResult()
@@ -72,6 +74,39 @@ public class Interpolation {
             }
 
             return sum;
+        }
+
+        public void displayInterpolation() throws  IOException {  
+
+            displayPolinom(Interpolation.problem.getResult());
+
+            Utils.println("nilai f(x) hasil interpolasi dengan x = " + Double.toString(x) + " : ");
+            Utils.println(Interpolation.problem.interpolate(x));
+
+        }
+
+        public void displayPolinom(Matrix result) throws  IOException {
+
+            // PREKONDISI : result tidak kosong
+            // KAMUS LOKAL
+            String polinom;
+            Utils.println("Solusi polinomial : ");
+    
+            polinom = "f(x) = ";
+            
+            for (int i = result.getLastRow(); i > 0; i--) {
+                
+                polinom += result.getELMT(i,0) == 0? 
+                    "" : Double.toString(result.getELMT(i,0)) + "x" + (i > 1? (Integer.toString(i)) : "");
+    
+                if(result.getELMT(i, 0) != 0)
+                {
+                    polinom += ((result.getELMT(i - 1,0) < 0) || (i == 1 && result.getELMT(0, 0) == 0)) ? "" : "+";
+                }
+            }
+    
+            polinom += result.getELMT(0,0) == 0? "" : Double.toString(result.getELMT(0,0));
+            Utils.println(polinom);
         }
 
     }
