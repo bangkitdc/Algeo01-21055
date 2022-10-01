@@ -239,7 +239,7 @@ public class SolveSPL {
     	Utils.println("2. Keyboard");
     	
     	// INPUT MATRIX
-    	op = Utils.select(1,3);
+    	op = Utils.select(1,2);
     	
     	if (op == 1) {
     		Utils.println("blom bisa banh awokwokwok.");
