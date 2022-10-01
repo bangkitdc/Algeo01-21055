@@ -191,6 +191,7 @@ public class Matrix{
                 wLeft = Utils.getLengthELMT(d);
             }
         }
+
         wLeft++;
 
         for (i = 0; i < m.getRow(); i++) {
