@@ -108,7 +108,8 @@ public class Matrix{
     /* --------------------------- File Input ------------------------- */
     public void inputFileSquaredMatrix() throws IOException {
         Utils.println("");
-        Utils.println("Pilih file yang hendak dibaca: ");
+        Utils.println("============ Pilih File ===========");
+
         IO.outputListDir();
 
         File[] listFiles = IO.getListDir();

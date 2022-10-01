@@ -5,7 +5,7 @@ javac -sourcepath ./src/ -d ./bin ./src/mtrx/Main.java
 
 echo Running Program...
 echo:
-echo ============================
+echo ===================================
 cd bin
 java mtrx.Main
-echo ============================
+echo ===================================

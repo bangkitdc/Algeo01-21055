@@ -31,7 +31,6 @@ public class ImageResize {
     public static void processImage(File file, String outputName) throws IOException {
         // Reading the image
     
-        
         BufferedImage img = ImageIO.read(file);
 
         int[][] red = new int[img.getWidth()][img.getHeight()];
@@ -95,7 +94,7 @@ public class ImageResize {
             }
         }
         // Saving the modified image
-        file = new File(System.getProperty("user.dir") + "/src/mtrx/test/" + outputName);
+        file = new File(System.getProperty("user.dir") + "/src/mtrx/test/img/" + outputName);
         ImageIO.write(img, "png", file);
         System.out.println("Done...");
     }
@@ -118,7 +117,7 @@ public class ImageResize {
                 e.printStackTrace();
             }
 
-            file = new File(System.getProperty("user.dir") + "/src/mtrx/test/" + fileName);
+            file = new File(System.getProperty("user.dir") + "/src/mtrx/test/img/" + fileName);
 
             if (!(file.exists() && !file.isDirectory()))
             {
@@ -137,7 +136,7 @@ public class ImageResize {
                 e.printStackTrace();
             }
 
-            outFile = new File(System.getProperty("user.dir") + "/src/mtrx/test/" + outputName);
+            outFile = new File(System.getProperty("user.dir") + "/src/mtrx/test/img/" + outputName);
 
             if ((outFile.exists() && !outFile.isDirectory()))
             {
