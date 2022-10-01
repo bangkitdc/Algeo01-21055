@@ -46,14 +46,25 @@ public class Menu extends Utils{
         /* Input */
         switch (menu) {
             case 1: // SPL
-                
+                inputFileConsole();
+                input = select(1, 2);
+                switch (input) {
+                    case 1:
+                        m.inputFileMatrix();
+                        break;
+                    case 2:
+                        m.inputMatrix();
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 2: // Determinan
                 inputFileConsole();
                 input = select(1, 2);
                 switch (input) {
                     case 1:
-                        m.inputFileSquaredMatrix();
+                        m.inputFileMatrix();
                         break;
                     case 2:
                         m.inputSquaredMatrix();
@@ -89,6 +100,16 @@ public class Menu extends Utils{
             case 1: // SPL
                 outputFileConsole();
                 output = select(1, 2);
+                switch (output) {
+                    case 1:
+                        SolveSPL.splFile(m);
+                        break;
+                    case 2:
+                        SolveSPL.splConsole(m);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 2: // Determinan
                 outputFileConsole();
@@ -162,7 +183,7 @@ public class Menu extends Utils{
     }
 
     public static void exit() {
-        println("\nTerima kasih telah menggunakan Matrix Calculator (´^ω^)ノ");
+        println("\nTerima kasih telah menggunakan Matrix Calculator :)");
         System.exit(0);
     }
 }
