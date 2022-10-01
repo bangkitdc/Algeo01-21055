@@ -10,34 +10,7 @@ public class Menu extends Utils{
     public static void menuLoop() throws IOException {
         Polinom.interpolationDriver();
         mainMenu();
-        // Tester
-        // Matrix n = new Matrix();
-       
-
-        // Determinan.displayCofactorDet(n);
-        // Determinan.displayRowReductionDet(n);
         
-        // Matrix.displayMatrix(n);
-
-        // BicubicInterpolation.displayBicubic(n);
-
-        // Matrix m = new Matrix();
-       
-
-        //Matrix.displayMatrix(Inverse.getInverse(m));
-
-        // Determinan.displayCofactorDet(m);
-
-        // Determinan.displayRowReductionDet(m);
-        
-        
-        // Matrix m;
-        // m = BicubicInterpolation.Bicubic();
-        // Matrix.displayMatrix(m);
-        
-        // Matrix m2;
-        // m2 = Inverse.getInverse(m);
-        // Matrix.displayMatrix(m2);
         
         int choice = select(1, 7);
         System.out.println(choice);

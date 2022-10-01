@@ -1,6 +1,5 @@
 package mtrx.Methods;
 
-import java.math.*;
 import mtrx.Matrix.*;
 import mtrx.Utility.Utils;
 
@@ -32,28 +31,11 @@ public class Cramer {
                     temp.copyELMT(a);
                     temp.copyToSubMatrix(b, 0, a.getLastRow(), i, i);
                     detTemp = Determinan.cofactorDet(temp);
-                    solution += String.format("x%d = %s\n", i + 1, result(detTemp, detA));
+                    solution += String.format("x%d = %s\n", i + 1, Utils.result(detTemp / detA));
                 }
             }
         }
         return solution;
-    }
-
-
-    /* Formatting Output */
-    public static String result (double det1, double det2) {
-        /* KAMUS LOKAL */
-        double res = det1 / det2;
-        String s;
-
-        /* ALGORITMA */
-        if (res == (int) res) {
-            s = String.valueOf((int) res);
-        } else {
-            res = new BigDecimal(res).setScale(8, RoundingMode.HALF_UP).doubleValue();
-            s = String.valueOf(res);
-        }
-        return s;
     }
 
     /* File */

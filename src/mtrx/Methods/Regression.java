@@ -79,9 +79,9 @@ public class Regression {
 		// output hasil
 		solution += "\nMaka untuk input:\n";
 		for (int i=0; i<x.getCol(); i++) {
-			solution += String.format("x%d = %s\n", i+1, Determinan.result(x.getELMT(0, i)));
+			solution += String.format("x%d = %s\n", i+1, Utils.result(x.getELMT(0, i)));
 		}
-		solution += "Didapatkan f(x) = " + Determinan.result(answer) + "\n";
+		solution += "Didapatkan f(x) = " + Utils.result(answer) + "\n";
 		
 		return solution;
 	}
@@ -102,7 +102,7 @@ public class Regression {
 			solution += "1 ";
 			isNull = false;
 		} else if (m.getELMT(0, idx) != 0) {
-			solution += Determinan.result(m.getELMT(0, idx)) + " ";
+			solution += Utils.result(m.getELMT(0, idx)) + " ";
 			isNull = false;
 		}
 		
@@ -124,7 +124,7 @@ public class Regression {
 				solution += String.format("x%d ", i);
 				isNull = false;
 			} else if (m.getELMT(i, idx) != 0) {
-				solution += String.format("%sx%d ", Determinan.result(m.getELMT(i,idx)), i);
+				solution += String.format("%sx%d ", Utils.result(m.getELMT(i,idx)), i);
 				isNull = false;
 			}
 		}

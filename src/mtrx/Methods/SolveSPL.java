@@ -148,7 +148,7 @@ public class SolveSPL {
         		// apakah persamaan sudah terisi
         		
         		if (cons != 0) {
-        			solution += " " + Determinan.result(cons);
+        			solution += " " + Utils.result(cons);
         			//System.out.printf(" " + Determinan.result(cons));
         			isNull = false;
         		}
@@ -170,7 +170,7 @@ public class SolveSPL {
         	    		solution += String.format(" t%d", freePosition[k]);
         	    		isNull = false;
         	    	} else if (coef != 0) {
-        	    		solution += String.format(" " + Determinan.result(Math.abs(coef)) + "t%d", freePosition[k]);
+        	    		solution += String.format(" " + Utils.result(Math.abs(coef)) + "t%d", freePosition[k]);
         	    		isNull = false;
         	    	}
         		}
@@ -221,7 +221,7 @@ public class SolveSPL {
     	
     	solution += "\nSolusi:";
     	for (int i=0; i<m.getRow(); i++) {
-    		solution += String.format("x%d = %s\n", i+1, Determinan.result(m.getELMT(i,0)));
+    		solution += String.format("x%d = %s\n", i+1, Utils.result(m.getELMT(i,0)));
     	}
     	return solution;
     }
