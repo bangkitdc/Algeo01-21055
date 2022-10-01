@@ -16,8 +16,8 @@ public class Menu extends Utils{
         char Y = '\0';
         do {
             mainMenu();
-            Utils.println("");
-            Utils.println("Apakah ingin melanjutkan? [Y/N]: ");
+            println("");
+            println("Apakah ingin melanjutkan? [Y/N]: ");
             try {
                 Y = inputYN();
             } catch (Exception e) {
@@ -39,16 +39,17 @@ public class Menu extends Utils{
         println("[6] Regresi Linear Berganda");
         println("[7] Image Resizer");
         println("[8] Keluar");
-
+        println("");
         println("Masukkan pilihan: ");
         int input = select(1, 8);
         
+        /* Input */
         switch (input) {
             case 1: // SPL
                 
                 break;
             case 2: // Determinan
-                inputFileKeyboard();
+                inputFileConsole();
                 input = select(1, 2);
                 switch (input) {
                     case 1:
@@ -82,13 +83,80 @@ public class Menu extends Utils{
             default:
                 break;
         }
+
+        int output = select(1, 2);
+        /* Output */
+        switch (input) {
+            case 1: // SPL
+
+                break;
+            case 2: // Determinan
+                outputFileConsole();
+                switch (output) {
+                    case 1:
+                        Determinan.detFile(m);
+                        break;
+                    case 2:
+                        Determinan.detConsole(m);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5: // Interpolasi Bicubic
+
+                break;
+            case 6:
+
+                break;
+            case 7:
+
+                break;
+            case 8:
+                exit();
+                break;
+            default:
+                break;
+        }
     }
 
-    public static void inputFileKeyboard() {
+    public static void inputFileConsole() {
         println("");
         println("====== Pilih Jenis Input ======");
         println("[1] File");
-        println("[2] Keyboard");
+        println("[2] Console");
+        println("Masukkan pilihan: ");
+    }
+
+    public static String outputFile() {
+        InputStreamReader streamReader = new InputStreamReader(System.in);
+        BufferedReader bufferedReader = new BufferedReader(streamReader);
+
+        println("");
+        println("Masukkan name file output: ");
+        print("> ");
+
+        fileName = new String();
+
+        try {
+            fileName = bufferedReader.readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileName;
+    }
+
+    public static void outputFileConsole() {
+        println("");
+        println("====== Pilih Jenis Output ======");
+        println("[1] File");
+        println("[2] Console");
         println("Masukkan pilihan: ");
     }
 

@@ -1,6 +1,9 @@
 package mtrx.Methods;
 
 import mtrx.Utility.*;
+
+import java.io.IOException;
+
 import mtrx.Matrix.*;
 import mtrx.Methods.GaussJordan.KDet;
 
@@ -138,5 +141,49 @@ public class Determinan {
     public static void fileRowReductionDet(Matrix m, String fileName) {
         /* ALGORITMA - Output Purpose */
         IO.writeFileString(fileName, Utils.result(rowReductionDet(m).det));
+    }
+
+    /* -------------------------- Input ------------------------- */
+    /* Console */
+    public static void detConsole(Matrix m) throws IOException {
+        Utils.println("");
+        Utils.println("========= Pilih Metode ========");
+        Utils.println("[1] Metode Ekspansi Kofaktor");
+        Utils.println("[2] Metode Reduksi Baris");
+        Utils.println("Masukkan pilihan: ");
+
+        int input = Utils.select(1, 2);
+        switch (input) {
+            case 1:
+                displayCofactorDet(m);
+                break;
+            case 2:
+                displayRowReductionDet(m);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /* File */
+    public static void detFile(Matrix m) throws IOException {
+        String outputFile = Menu.outputFile();
+        Utils.println("");
+        Utils.println("========= Pilih Metode ========");
+        Utils.println("[1] Metode Ekspansi Kofaktor");
+        Utils.println("[2] Metode Reduksi Baris");
+        Utils.println("Masukkan pilihan: ");
+
+        int input = Utils.select(1, 2);
+        switch (input) {
+            case 1:
+                Determinan.fileCofactorDet(m, outputFile);;
+                break;
+            case 2:
+               Determinan.fileRowReductionDet(m, outputFile);
+                break;
+            default:
+                break;
+        }
     }
 }
