@@ -41,6 +41,17 @@ public class Utils {
         }
     }
 
+    public static char inputYN() throws IOException {
+        print("> ");
+        char input = bufferedReader.readLine().charAt(0);
+        while (input != 'Y' || input != 'y' || input != 'N' || input != 'n') {
+            printf("\"%s\" bukan pilihan yang tepat, pilih Y atau N.\n", input);
+            print("> ");
+            input = bufferedReader.readLine().charAt(0);
+        }
+        return input;
+    }
+
     /* Input Integer */ 
     public static int inputInt() throws IOException {
         print("> ");
@@ -53,6 +64,7 @@ public class Utils {
         return Integer.parseInt(input);
     }
 
+    /* Input Double */
     public static double inputDouble() throws IOException {
         print("> ");
         String input = bufferedReader.readLine();
