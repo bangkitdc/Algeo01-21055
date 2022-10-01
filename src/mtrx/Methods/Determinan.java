@@ -4,7 +4,6 @@ import mtrx.Utility.*;
 import mtrx.Matrix.*;
 import mtrx.Methods.GaussJordan.KDet;
 
-import java.math.*;
 public class Determinan {
     /* ---------------------- Cofactor Expansion ---------------------- */
     public static double cofactorDet(Matrix m) {
@@ -74,13 +73,13 @@ public class Determinan {
         Utils.println("");
 
         det = cofactorDet(m);
-        Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + result(det));
+        Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + Utils.result(det));
     }
 
     /* File */
-    public static void fileCofactorDet(Matrix m) {
+    public static void fileCofactorDet(Matrix m, String fileName) {
         /* ALGORITMA - Output Purpose */
-
+        IO.writeFileString(fileName, Utils.result(cofactorDet(m)));
     }
 
     /* ------------------------- Row Reduction ------------------------ */
@@ -132,31 +131,12 @@ public class Determinan {
 
         det = res.det;
         Utils.println("SwapRow count: " + res.k + ", maka perkalian diagonal dikali " + (int) Math.pow(-1, res.k));
-        Utils.println("Maka, determinan matrix tersebut adalah " + result(det));
+        Utils.println("Maka, determinan matrix tersebut adalah " + Utils.result(det));
     }
 
     /* File */
-    public static void fileRowReductionDet(Matrix m) {
+    public static void fileRowReductionDet(Matrix m, String fileName) {
         /* ALGORITMA - Output Purpose */
-
-    }
-
-    /* Formatting Output */
-    public static String result(double det) {
-        /* KAMUS LOKAL */
-        String s;
-
-        /* ALGORITMA */
-        if (det == (int) det) {
-            s = String.valueOf((int) det);
-        } else {
-            det = new BigDecimal(det).setScale(8, RoundingMode.HALF_UP).doubleValue();
-            if (det == (int) det) { // 2x times to make sure
-                s = String.valueOf((int) det);
-            } else {
-                s = String.valueOf(det);
-            }
-        }
-        return s;
+        IO.writeFileString(fileName, Utils.result(rowReductionDet(m).det));
     }
 }

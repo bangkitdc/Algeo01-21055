@@ -1,6 +1,7 @@
 package mtrx.Utility;
 
 import java.io.*;
+import java.math.*;
 
 public class Utils {
     public static InputStreamReader streamReader = new InputStreamReader(System.in);
@@ -40,6 +41,17 @@ public class Utils {
         }
     }
 
+    public static char inputYN() throws IOException {
+        print("> ");
+        char input = bufferedReader.readLine().charAt(0);
+        while (input != 'Y' || input != 'y' || input != 'N' || input != 'n') {
+            printf("\"%s\" bukan pilihan yang tepat, pilih Y atau N.\n", input);
+            print("> ");
+            input = bufferedReader.readLine().charAt(0);
+        }
+        return input;
+    }
+
     /* Input Integer */ 
     public static int inputInt() throws IOException {
         print("> ");
@@ -52,6 +64,7 @@ public class Utils {
         return Integer.parseInt(input);
     }
 
+    /* Input Double */
     public static double inputDouble() throws IOException {
         print("> ");
         String input = bufferedReader.readLine();
@@ -98,5 +111,24 @@ public class Utils {
         } else {
             return Double.parseDouble(s.split("/")[0]) / Double.parseDouble(s.split("/")[1]);
         }
+    }
+
+    /* Formatting Output */
+    public static String result(double det) {
+        /* KAMUS LOKAL */
+        String s;
+
+        /* ALGORITMA */
+        if (det == (int) det) {
+            s = String.valueOf((int) det);
+        } else {
+            det = new BigDecimal(det).setScale(8, RoundingMode.HALF_UP).doubleValue();
+            if (det == (int) det) { // 2x times to make sure
+                s = String.valueOf((int) det);
+            } else {
+                s = String.valueOf(det);
+            }
+        }
+        return s;
     }
 }

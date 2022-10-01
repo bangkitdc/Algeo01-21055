@@ -106,6 +106,21 @@ public class Matrix{
         this.createMatrix();
         Utils.println("");
     }
+    /* --------------------------- File Input ------------------------- */
+    public void inputFileSquaredMatrix() throws IOException {
+        Utils.println("");
+        Utils.println("Pilih file yang hendak dibaca: ");
+        IO.outputListDir();
+
+        File[] listFiles = IO.getListDir();
+        Utils.println("Masukkan pilihan: ");
+        int input = Utils.select(1, listFiles.length);
+
+        Matrix mRes = new Matrix();
+        mRes = IO.readMatrix(listFiles[input - 1].getName());
+        this.setMatrix(mRes.getRow(), mRes.getCol());
+        this.copyELMT(mRes);
+    }
 
     /* ------------------------ Console Output ------------------------ */
     /* Display Matrix 2D */
