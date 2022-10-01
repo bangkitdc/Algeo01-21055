@@ -237,6 +237,60 @@ public class Matrix{
             }
         }
     }
+
+    public void copyELMT(int[][] mIn)
+    {
+        // Prekondisi : size sama
+
+        // KAMUS LOKAL
+        int i, j;
+
+        // ALGORITMA
+        for (i = 0; i < this.getRow(); i++)
+        {
+            for (j = 0; j < this.getCol(); j++)
+            {
+                this.setELMT(i, j,mIn[i][j]);
+            }
+        }
+
+    }
+
+    public int[][] getIntMatrix(int min, int max)
+    {
+        
+        // KAMUS LOKAL
+        int i, j, elmt;
+        int[][] mRes;
+
+        // ALGORITMA
+
+        mRes = new int[this.getRow()][this.getCol()];
+
+        for (i = 0; i < this.getRow(); i++)
+        {
+            for (j = 0; j < this.getCol(); j++)
+            {
+                if ((int)this.getELMT(i, j) < min)
+                {
+                    elmt = min;
+                }
+
+                else if ((int)this.getELMT(i, j) > max)
+                {
+                    elmt = max;
+                }
+
+                else {
+                    elmt = (int)this.getELMT(i, j);
+                }
+                
+                mRes[i][j] = elmt;
+            }
+        }
+        return mRes;
+
+    }
     public void copyToSubMatrix(Matrix mIn, int InitRow, int LastRow, int InitCol, int LastCol) {
         // PREKONDISI : (InitRow - LastRow + 1) == mIn.getRow() && (InitCol - LastCol + 1) == mIn.getCol()
         // PREKONDISI : InitRow <= LastRow dan InitCol <= LastCol, semuanya index yang efektif
