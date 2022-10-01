@@ -104,7 +104,6 @@ public class Matrix{
         this.setMatrix(n, n);
         Utils.println("Silahkan masukkan setiap elemen matrix: ");
         this.createMatrix();
-        Utils.println("");
     }
     /* --------------------------- File Input ------------------------- */
     public void inputFileSquaredMatrix() throws IOException {
