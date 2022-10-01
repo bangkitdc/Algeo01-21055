@@ -1,6 +1,7 @@
 package mtrx.Utility;
 
 import java.io.*;
+import java.math.*;
 
 public class Utils {
     public static InputStreamReader streamReader = new InputStreamReader(System.in);
@@ -98,5 +99,24 @@ public class Utils {
         } else {
             return Double.parseDouble(s.split("/")[0]) / Double.parseDouble(s.split("/")[1]);
         }
+    }
+
+    /* Formatting Output */
+    public static String result(double det) {
+        /* KAMUS LOKAL */
+        String s;
+
+        /* ALGORITMA */
+        if (det == (int) det) {
+            s = String.valueOf((int) det);
+        } else {
+            det = new BigDecimal(det).setScale(8, RoundingMode.HALF_UP).doubleValue();
+            if (det == (int) det) { // 2x times to make sure
+                s = String.valueOf((int) det);
+            } else {
+                s = String.valueOf(det);
+            }
+        }
+        return s;
     }
 }
