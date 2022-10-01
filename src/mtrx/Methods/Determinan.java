@@ -147,7 +147,7 @@ public class Determinan {
     /* Console */
     public static void detConsole(Matrix m) throws IOException {
         Utils.println("");
-        Utils.println("========= Pilih Metode ========");
+        Utils.println("=========== Pilih Metode ==========");
         Utils.println("[1] Metode Ekspansi Kofaktor");
         Utils.println("[2] Metode Reduksi Baris");
         Utils.println("Masukkan pilihan: ");
@@ -169,7 +169,7 @@ public class Determinan {
     public static void detFile(Matrix m) throws IOException {
         String outputFile = Menu.outputFile();
         Utils.println("");
-        Utils.println("========= Pilih Metode ========");
+        Utils.println("=========== Pilih Metode ==========");
         Utils.println("[1] Metode Ekspansi Kofaktor");
         Utils.println("[2] Metode Reduksi Baris");
         Utils.println("Masukkan pilihan: ");
@@ -177,10 +177,12 @@ public class Determinan {
         int input = Utils.select(1, 2);
         switch (input) {
             case 1:
-                Determinan.fileCofactorDet(m, outputFile);;
+                Determinan.fileCofactorDet(m, outputFile);
+                Utils.println("Berhasil menuliskan file ヽ(・∀・)ﾉ");
                 break;
             case 2:
-               Determinan.fileRowReductionDet(m, outputFile);
+                Determinan.fileRowReductionDet(m, outputFile);
+                Utils.println("Berhasil menuliskan file ヽ(・∀・)ﾉ");
                 break;
             default:
                 break;

@@ -29,7 +29,7 @@ public class Menu extends Utils{
 
     public static void mainMenu() throws IOException {
         println("Selamat Datang di Matrix Calculator");
-        println("=========== Menu ===========");
+        println("=============== Menu ==============");
         println("Aplikasi ini akan menyelesaikan persoalan:");
         println("[1] Sistem Persamaan Linear (SPL)");
         println("[2] Determinan");
@@ -39,12 +39,12 @@ public class Menu extends Utils{
         println("[6] Regresi Linear Berganda");
         println("[7] Image Resizer");
         println("[8] Keluar");
-        println("");
         println("Masukkan pilihan: ");
-        int input = select(1, 8);
+        int menu = select(1, 8);
+        int input, output;
         
         /* Input */
-        switch (input) {
+        switch (menu) {
             case 1: // SPL
                 
                 break;
@@ -83,15 +83,16 @@ public class Menu extends Utils{
             default:
                 break;
         }
-
-        int output = select(1, 2);
+        
         /* Output */
-        switch (input) {
+        switch (menu) {
             case 1: // SPL
-
+                outputFileConsole();
+                output = select(1, 2);
                 break;
             case 2: // Determinan
                 outputFileConsole();
+                output = select(1, 2);
                 switch (output) {
                     case 1:
                         Determinan.detFile(m);
@@ -128,7 +129,7 @@ public class Menu extends Utils{
 
     public static void inputFileConsole() {
         println("");
-        println("====== Pilih Jenis Input ======");
+        println("======== Pilih Jenis Input ========");
         println("[1] File");
         println("[2] Console");
         println("Masukkan pilihan: ");
@@ -154,14 +155,14 @@ public class Menu extends Utils{
 
     public static void outputFileConsole() {
         println("");
-        println("====== Pilih Jenis Output ======");
+        println("======= Pilih Jenis Output ========");
         println("[1] File");
         println("[2] Console");
         println("Masukkan pilihan: ");
     }
 
     public static void exit() {
-        println("\nTerima kasih telat menggunakan aplikasi matrix :D");
+        println("\nTerima kasih telah menggunakan Matrix Calculator (´^ω^)ノ");
         System.exit(0);
     }
 }
