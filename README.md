@@ -34,6 +34,7 @@ Tugas Besar 1 Aljabar Linear dan Geometri IF21 is a project to build matrice cal
 4. Run the program by typing `java mtrx.Main`
 5. `test` folder is used to store input and output `.txt`/ `.png` / `img file`
 6. You can also run the jar file using java -jar <jar-file.jar>
+7. Enjoy (＾▽＾)
 
 ### Run Using Windows Batch File
 
@@ -47,6 +48,6 @@ Windows :
 Linux/MacOS: Please run manually ¯\_(ツ)_/¯
 
 ## Note
-Make sure you inputed the matrices right, because we use buffered reader so the number of element in the row or column must be precise
+Make sure you inputed the matrices right, because we use buffered reader so the number of element in the row or column must be precise.
 
 ## Thank You (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
