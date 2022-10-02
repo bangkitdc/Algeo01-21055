@@ -82,7 +82,7 @@ public class Determinan {
     /* File */
     public static void fileCofactorDet(Matrix m, String fileName) {
         /* ALGORITMA - Output Purpose */
-        IO.writeFileString(fileName, Utils.result(cofactorDet(m)));
+        IO.writeFileString(fileName, "Determinan Matrix: " + Utils.result(cofactorDet(m)));
     }
 
     /* ------------------------- Row Reduction ------------------------ */
@@ -140,14 +140,14 @@ public class Determinan {
     /* File */
     public static void fileRowReductionDet(Matrix m, String fileName) {
         /* ALGORITMA - Output Purpose */
-        IO.writeFileString(fileName, Utils.result(rowReductionDet(m).det));
+        IO.writeFileString(fileName, "Determinan Matrix: " + Utils.result(rowReductionDet(m).det));
     }
 
     /* -------------------------- Input ------------------------- */
     /* Console */
     public static void detConsole(Matrix m) throws IOException {
         Utils.println("");
-        Utils.println("========= Pilih Metode ========");
+        Utils.println("=========== Pilih Metode ==========");
         Utils.println("[1] Metode Ekspansi Kofaktor");
         Utils.println("[2] Metode Reduksi Baris");
         Utils.println("Masukkan pilihan: ");
@@ -169,7 +169,7 @@ public class Determinan {
     public static void detFile(Matrix m) throws IOException {
         String outputFile = Menu.outputFile();
         Utils.println("");
-        Utils.println("========= Pilih Metode ========");
+        Utils.println("=========== Pilih Metode ==========");
         Utils.println("[1] Metode Ekspansi Kofaktor");
         Utils.println("[2] Metode Reduksi Baris");
         Utils.println("Masukkan pilihan: ");
@@ -177,10 +177,12 @@ public class Determinan {
         int input = Utils.select(1, 2);
         switch (input) {
             case 1:
-                Determinan.fileCofactorDet(m, outputFile);;
+                Determinan.fileCofactorDet(m, outputFile);
+                Utils.println("Berhasil menuliskan file :)");
                 break;
             case 2:
-               Determinan.fileRowReductionDet(m, outputFile);
+                Determinan.fileRowReductionDet(m, outputFile);
+                Utils.println("Berhasil menuliskan file :)");
                 break;
             default:
                 break;

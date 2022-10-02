@@ -8,7 +8,7 @@ public class IO {
     /* List All Files Di "../test" */
     public static File[] getListDir() {
         /* ALGORITMA */
-        File curDir = new File("../test");
+        File curDir = new File("../test/txt");
         File[] listFiles = curDir.listFiles();
         return listFiles;
     }
@@ -32,7 +32,7 @@ public class IO {
 
         /* ALGORITMA */
         try {
-            FileReader reader = new FileReader(String.format("../test/%s", fileName));
+            FileReader reader = new FileReader(String.format("../test/txt/%s", fileName));
             BufferedReader bufferReader = new BufferedReader(reader);
 
             while(bufferReader.readLine() != null) {
@@ -53,7 +53,7 @@ public class IO {
 
         /* ALGORITMA */
         try {
-            FileReader reader = new FileReader(String.format("../test/%s", fileName));
+            FileReader reader = new FileReader(String.format("../test/txt/%s", fileName));
             BufferedReader bufferReader = new BufferedReader(reader);
 
             String line = bufferReader.readLine();
@@ -75,7 +75,9 @@ public class IO {
 
         /* ALGORITMA */
         try {
-            FileReader reader = new FileReader(String.format("../test/%s", fileName));
+        // file = new File(System.getProperty("user.dir") + "/src/mtrx/test/" + outputName);
+
+            FileReader reader = new FileReader(String.format("../test/txt/%s", fileName));
             BufferedReader bufferReader = new BufferedReader(reader);
 
             String line;
@@ -105,7 +107,7 @@ public class IO {
 
         /* ALGORITMA */
         try {
-            FileWriter writer = new FileWriter(String.format("../test%s", fileName));
+            FileWriter writer = new FileWriter(String.format("../test/txt/%s", fileName));
 
             for (i = 0; i < m.getRow(); i ++) {
                 for (j = 0; j < m.getCol(); j ++) {
@@ -124,7 +126,7 @@ public class IO {
 
     public static void writeFileString(String fileNameOutput, String s) {
         try {
-            FileWriter writer = new FileWriter(String.format("../test/%s.txt", fileNameOutput));
+            FileWriter writer = new FileWriter(String.format("../test/txt/%s.txt", fileNameOutput));
             writer.write(s);
             writer.close();
         } catch (Exception e) {

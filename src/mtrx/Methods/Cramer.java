@@ -6,8 +6,7 @@ import mtrx.Utility.Utils;
 public class Cramer {
     /* ------------------------- Cramer's Rule ------------------------ */
     /* Console */
-        public static String displayCramer(Matrix m) {
-        /* Algorithm + Display */
+        public static String cramer(Matrix m) {
         /* KAMUS LOKAL */
         Matrix a, b, temp;
         double detA, detTemp;
@@ -31,15 +30,25 @@ public class Cramer {
                     temp.copyELMT(a);
                     temp.copyToSubMatrix(b, 0, a.getLastRow(), i, i);
                     detTemp = Determinan.cofactorDet(temp);
-                    solution += String.format("x%d = %s\n", i + 1, Utils.result(detTemp / detA));
+                    solution += String.format("x%d = %s", i + 1, Utils.result(detTemp / detA));
+                    if (i != a.getCol() - 1) {
+                        solution += "\n";
+                    }
                 }
             }
         }
         return solution;
     }
+    public static void displayCramer(Matrix m) {
+        Utils.println("Matrix awal:");
+        Matrix.displayMatrix(m);
+
+        Utils.println(cramer(m));
+    }
 
     /* File */
-    public static void fileCrammer(Matrix m) {
+    public static void fileCramer(Matrix m, String fileName) {
         /* ALGORITMA - Output Purpose */
+        IO.writeFileString(fileName, cramer(m));
     }
 }

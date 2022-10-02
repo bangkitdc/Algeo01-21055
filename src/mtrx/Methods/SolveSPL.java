@@ -1,6 +1,7 @@
 package mtrx.Methods;
 
 import mtrx.Matrix.Matrix;
+import mtrx.Utility.Menu;
 import mtrx.Utility.Utils;
 import java.io.*;
 import java.lang.Math;
@@ -288,7 +289,7 @@ public class SolveSPL {
     	else {
     		Utils.println("\nMatrix awal:");
     		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
-    		solution = Cramer.displayCramer(m);
+    		solution = Cramer.cramer(m);
     		Utils.print(solution);
     	}
     	
@@ -306,4 +307,64 @@ public class SolveSPL {
     	 */	
     }    
     
+	/* -------------------------- Input ------------------------- */
+	/* Console */
+	public static void splConsole(Matrix m) throws IOException{
+		Utils.println("");
+		Utils.println("=========== Pilih Metode ==========");
+		Utils.println("[1] Metode Eliminasi Gauss");
+		Utils.println("[2] Metode Eliminasi Gauss-Jordan");
+		Utils.println("[3] Metode Matrix Balikan");
+		Utils.println("[4] Kaidah Cramer");
+		Utils.println("Masukkan pilihan: ");
+
+		int input = Utils.select(1, 4);
+		switch (input) {
+			case 1: // Gauss
+				
+				break;
+			case 2: // Gauss-Jordan
+				
+				break;
+			case 3: // Inverse
+				
+				break;
+			case 4: // Cramer
+				Cramer.displayCramer(m);
+				break;
+			default:
+				break;
+		}
+	}
+
+	/* File */
+	public static void splFile(Matrix m) throws IOException{
+		String outputFile = Menu.outputFile();
+		Utils.println("");
+		Utils.println("=========== Pilih Metode ==========");
+		Utils.println("[1] Metode Eliminasi Gauss");
+		Utils.println("[2] Metode Eliminasi Gauss-Jordan");
+		Utils.println("[3] Metode Matrix Balikan");
+		Utils.println("[4] Kaidah Cramer");
+		Utils.println("Masukkan pilihan: ");
+
+		int input = Utils.select(1, 4);
+		switch (input) {
+			case 1: // Gauss
+				Utils.println("Berhasil menuliskan file :)");
+				break;
+			case 2: // Gauss-Jordan
+				Utils.println("Berhasil menuliskan file :)");
+				break;
+			case 3: // Inverse
+				Utils.println("Berhasil menuliskan file :)");
+				break;
+			case 4: // Cramer
+				Cramer.fileCramer(m, outputFile);
+				Utils.println("Berhasil menuliskan file :)");
+				break;
+			default:
+				break;
+		}
+	}
 }

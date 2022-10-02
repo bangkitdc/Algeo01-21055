@@ -26,7 +26,7 @@ public class Menu extends Utils{
 
     public static void mainMenu() throws IOException {
         println("Selamat Datang di Matrix Calculator");
-        println("=========== Menu ===========");
+        println("=============== Menu ==============");
         println("Aplikasi ini akan menyelesaikan persoalan:");
         println("[1] Sistem Persamaan Linear (SPL)");
         println("[2] Determinan");
@@ -36,24 +36,35 @@ public class Menu extends Utils{
         println("[6] Regresi Linear Berganda");
         println("[7] Image Resizer");
         println("[8] Keluar");
-        println("");
         println("Masukkan pilihan: ");
-        int input = select(1, 8);
-        int selection;
 
         Matrix m = new Matrix();
+
+        int menu = select(1, 8);
+        int input, output;
         
         /* Input */
-        switch (input) {
+        switch (menu) {
             case 1: // SPL
-                
+                inputFileConsole();
+                input = select(1, 2);
+                switch (input) {
+                    case 1:
+                        m.inputFileMatrix();
+                        break;
+                    case 2:
+                        m.inputMatrix();
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 2: // Determinan
                 inputFileConsole();
-                selection = select(1, 2);
-                switch (selection) {
+                input = select(1, 2);
+                switch (input) {
                     case 1:
-                        m.inputFileSquaredMatrix();
+                        m.inputFileMatrix();
                         break;
                     case 2:
                         m.inputSquaredMatrix();
@@ -65,8 +76,8 @@ public class Menu extends Utils{
             case 3: // Inverse
                 
                 inputFileConsole();
-                selection = select(1, 2);
-                switch (selection) {
+                input = select(1, 2);
+                switch (input) {
                     case (1):
                         m.inputSquaredMatrix(1);
                         break;
@@ -81,8 +92,8 @@ public class Menu extends Utils{
             case 4: // Interpolasi
 
                 inputFileConsole();
-                selection = select(1, 2);
-                switch (selection) {
+                input = select(1, 2);
+                switch (input) {
                     case (1):
                         
                         break;
@@ -111,14 +122,26 @@ public class Menu extends Utils{
         }
 
         /* Output */
-        switch (input) {
+        switch (menu) {
             case 1: // SPL
-
+                outputFileConsole();
+                output = select(1, 2);
+                switch (output) {
+                    case 1:
+                        SolveSPL.splFile(m);
+                        break;
+                    case 2:
+                        SolveSPL.splConsole(m);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 2: // Determinan
                 outputFileConsole();
-                selection = select(1, 2);
-                switch (selection) {
+
+                output = select(1, 2);
+                switch (output) {
                     case 1:
                         Determinan.detFile(m);
                         break;
@@ -131,9 +154,9 @@ public class Menu extends Utils{
                 break;
             case 3:
                 outputFileConsole();
-                selection = select(1, 2);
+                output = select(1, 2);
 
-                switch (selection) {
+                switch (output) {
                     case 1:
                     
                         break;
@@ -147,9 +170,9 @@ public class Menu extends Utils{
                 break;
             case 4:
                 outputFileConsole();
-                selection = select(1, 2);
+                output = select(1, 2);
 
-                switch (selection) {
+                switch (output) {
                     case 1:
                     
                         break;
@@ -181,7 +204,7 @@ public class Menu extends Utils{
 
     public static void inputFileConsole() {
         println("");
-        println("====== Pilih Jenis Input ======");
+        println("======== Pilih Jenis Input ========");
         println("[1] File");
         println("[2] Console");
         println("Masukkan pilihan: ");
@@ -207,7 +230,7 @@ public class Menu extends Utils{
 
     public static void outputFileConsole() {
         println("");
-        println("====== Pilih Jenis Output ======");
+        println("======= Pilih Jenis Output ========");
         println("[1] File");
         println("[2] Console");
         println("Masukkan pilihan: ");
@@ -226,7 +249,7 @@ public class Menu extends Utils{
     }
 
     public static void exit() {
-        println("\nTerima kasih telat menggunakan aplikasi matrix :D");
+        println("\nTerima kasih telah menggunakan Matrix Calculator :)");
         System.exit(0);
     }
 }
