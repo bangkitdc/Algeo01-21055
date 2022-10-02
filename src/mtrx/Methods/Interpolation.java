@@ -90,13 +90,13 @@ public class Interpolation {
         }
 
         public void inputProblemFile(String relativePath) throws IOException {
-            Matrix problem = new Matrix();
+            Matrix problemMat = new Matrix();
 
-            problem.inputFileMatrix(relativePath);
+            problemMat.inputFileMatrix(relativePath);
 
-            n = (int) problem.getELMT(0, 0);
+            n = (int) problemMat.getELMT(0, 0);
             m = new Matrix(n+1, n+2);
-            points = problem.getSubMatrix(1, problem.getLastRow(), 0, 1);
+            points = problemMat.getSubMatrix(1, problemMat.getLastRow(), 0, 1);
         }
 
         public Matrix getResult()
@@ -154,7 +154,7 @@ public class Interpolation {
 
             } while (Utils.isDouble(input));
 
-            Utils.println("Operasi interpolasi selesai :)");
+            Utils.println("Operasi interpolasi selesai :)\n");
         }
 
         public void createOutputFile(String relativePath) throws  IOException {
@@ -205,18 +205,57 @@ public class Interpolation {
     
             polinom = "f(x) = ";
             
-            for (int i = result.getLastRow(); i > 0; i--) {
+            for (int i = result.getLastRow(); i >= 0; i--) {
                 
-                polinom += result.getELMT(i,0) == 0? 
-                    "" : Utils.doubleToString(result.getELMT(i,0), 4) + "x" + (i > 1? (Integer.toString(i)) + " ": " ");
-    
-                if(result.getELMT(i, 0) != 0)
+                double res = result.getELMT(i,0);
+                String coef = "";
+
+                if (Math.abs(res) - 1 > 1e-9)
                 {
-                    polinom += ((result.getELMT(i - 1,0) < 0) || (i == 1 && result.getELMT(0, 0) == 0)) ? "" : "+ ";
+                    // jika res mendekati 0
+                    if (Math.abs(res) < 1e-9)
+                    {
+                        coef = "";
+                    }
+
+                    else {
+                        coef = Utils.doubleToString(Math.abs(res), 4);
+
+                        if (res < 0)
+                        {
+                            coef = "- " + coef;
+                        }
+
+                        else if (i < result.getLastRow()) {
+                            coef = "+ " + coef;
+                        }
+                    }
+                }
+
+                else {
+
+                    // res mendekati -1
+                    if (res < 0)
+                    {
+                        coef = "- ";
+                    }
+                    // else res mendekati 1
+                    else if (i == 0)
+                    {
+                        coef = "+ 1";
+                    }
+                }
+
+                if (i > 0)
+                {
+                    polinom += result.getELMT(i,0) == 0? 
+                    "" : coef + "x" + (i > 1? (Integer.toString(i)) + " ": " ");
+                }
+
+                else {
+                    polinom += coef;
                 }
             }
-    
-            polinom += result.getELMT(0,0) == 0? "" : Utils.doubleToString(result.getELMT(0,0), 4);
 
             return polinom;
         }

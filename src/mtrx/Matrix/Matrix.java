@@ -129,7 +129,6 @@ public class Matrix{
         // int input = Utils.select(1, listFiles.length);
 
         Matrix mRes = new Matrix();
-        // mRes = IO.readMatrix(listFiles[input - 1].getName());
         mRes = IO.readMatrix(IO.getFile(relativePath, ".txt").getName(), relativePath);
         this.setMatrix(mRes.getRow(), mRes.getCol());
         this.copyELMT(mRes);
