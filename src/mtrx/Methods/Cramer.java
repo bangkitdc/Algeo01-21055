@@ -30,7 +30,7 @@ public class Cramer {
                     temp.copyELMT(a);
                     temp.copyToSubMatrix(b, 0, a.getLastRow(), i, i);
                     detTemp = Determinan.cofactorDet(temp);
-                    solution += String.format("x%d = %s", i + 1, Utils.result(detTemp / detA));
+                    solution += String.format("x%d = %s", i + 1, Utils.doubleToString(detTemp / detA));
                     if (i != a.getCol() - 1) {
                         solution += "\n";
                     }
@@ -47,8 +47,8 @@ public class Cramer {
     }
 
     /* File */
-    public static void fileCramer(Matrix m, String fileName) {
+    public static void fileCramer(Matrix m, String fileName, String relativePath) {
         /* ALGORITMA - Output Purpose */
-        IO.writeFileString(fileName, cramer(m));
+        IO.writeFileString(cramer(m), fileName, relativePath);
     }
 }

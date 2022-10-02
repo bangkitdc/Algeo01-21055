@@ -81,9 +81,9 @@ public class Regression {
 		// output hasil
 		solution += "\nMaka untuk input:\n";
 		for (int i=0; i<x.getCol(); i++) {
-			solution += String.format("x%d = %s\n", i+1, Utils.result(x.getELMT(0, i)));
+			solution += String.format("x%d = %s\n", i+1, Utils.doubleToString(x.getELMT(0, i)));
 		}
-		solution += "Didapatkan f(x) = " + Utils.result(answer) + "\n";
+		solution += "Didapatkan f(x) = " + Utils.doubleToString(answer) + "\n";
 		
 		return solution;
 	}
@@ -101,7 +101,7 @@ public class Regression {
 		
 		// handle konstanta
 		if (m.getELMT(0, idx) != 0) {
-			solution += Utils.result(m.getELMT(0, idx)) + " ";
+			solution += Utils.doubleToString(m.getELMT(0, idx)) + " ";
 			isNull = false;
 		}
 		
@@ -124,7 +124,7 @@ public class Regression {
 				solution += String.format("x%d ", i);
 				isNull = false;
 			} else if (m.getELMT(i, idx) != 0) {
-				solution += String.format("%sx%d ", Utils.result(coef), i);
+				solution += String.format("%sx%d ", Utils.doubleToString(coef), i);
 				isNull = false;
 			}
 		}
@@ -166,9 +166,9 @@ public class Regression {
 		Utils.print("\n" + solution);
 	}
 	
-	public static void regFile(Matrix inputMatrix) throws IOException {
+	public static void regFile(Matrix inputMatrix, String relativePath) throws IOException {
 		// DEKLARASI VARIABEL
-		String outputFile = Menu.outputFile();
+		String outputFile = IO.inputNewFileName(relativePath, ".txt");
 		String solution;
 
     	// INPUT NILAI Xi YANG AKAN DITAKSIR HASILNYA
@@ -188,7 +188,7 @@ public class Regression {
 		// Membuat solusi regresi
 		solution = equationOutput(regM);		
 		solution += regressionFunction(regM, x);
-		IO.writeFileString(outputFile, solution);
+		IO.writeFileString(solution, outputFile, relativePath);
 		Utils.println("Berhasil menuliskan file :)");
 	}    
 }

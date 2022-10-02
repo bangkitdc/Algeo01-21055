@@ -80,35 +80,31 @@ public class Inverse {
         return null;
     }
 
-    public static void outputInverse(Matrix m, int outputMethod) throws IOException {
+    public static void outputInverse(Matrix m) throws IOException {
         // Matrix m adalah matriks yang ingin dicari inversenya
-   
-        String outputFile;;
 
-        Utils.println("");
-        Utils.println("=========== Pilih Metode ==========");
-        Utils.println("[1] Metode Ekspansi Kofaktor");
-        Utils.println("[2] Metode Reduksi Baris");
-        Utils.println("Masukkan pilihan: ");
+
+        Menu.showChoice("Metode", new String[] {"Metode Reduksi Baris", "Metode Matriks Adjoint"}, 2);
 
         int input = Utils.select(1, 2);
-        
-        switch (outputMethod) {
-            case 1:
-                outputFile = Menu.outputFile();
-                createOutputFile(outputFile, getInverse(m, input));
-                break;
-            case 2:
-                Utils.println("Hasil inverse : ");
-                Matrix.displayMatrix(getInverse(m, input));
-                break;
-            default:
-                break;
-        }
+        Utils.println("Hasil inverse : ");
+        Matrix.displayMatrix(getInverse(m, input));
+          
     }
 
-    public static void createOutputFile(String filename, Matrix mOut) {
-        IO.writeFileMatrix(filename, mOut);
+    public static void outputInverse(Matrix m, String relativePath) throws IOException {
+
+        String outputFile = new String();
+        outputFile = IO.inputNewFileName(relativePath, ".txt");
+
+        Menu.showChoice("Metode", new String[] {"Metode Reduksi Baris", "Metode Matriks Adjoint"}, 2);
+
+        int input = Utils.select(1, 2);
+        createOutputFile(outputFile, relativePath, getInverse(m, input));
+
+    }
+    public static void createOutputFile(String filename, String relativePath, Matrix mOut) {
+        IO.writeFileMatrix(mOut, filename, relativePath);
         Utils.println("Berhasil menuliskan file :)");
     }
 }
