@@ -8,9 +8,6 @@ import mtrx.Methods.*;
 public class Menu extends Utils{
     static InputStreamReader streamReader = new InputStreamReader(System.in);
     BufferedReader bufferedReader = new BufferedReader(Menu.streamReader);
-    
-    static Matrix m = new Matrix();
-    static String fileName;
 
     public static void menuLoop() throws IOException {
         char Y = '\0';
@@ -40,6 +37,9 @@ public class Menu extends Utils{
         println("[7] Image Resizer");
         println("[8] Keluar");
         println("Masukkan pilihan: ");
+
+        Matrix m = new Matrix();
+
         int menu = select(1, 8);
         int input, output;
         
@@ -73,10 +73,36 @@ public class Menu extends Utils{
                         break;
                 }
                 break;
-            case 3:
+            case 3: // Inverse
+                
+                inputFileConsole();
+                input = select(1, 2);
+                switch (input) {
+                    case (1):
+                        m.inputSquaredMatrix(1);
+                        break;
+                    case 2:
+                        m.inputSquaredMatrix(2);
+                        break;
+                    default:
+                        break;
+                }
 
                 break;
-            case 4:
+            case 4: // Interpolasi
+
+                inputFileConsole();
+                input = select(1, 2);
+                switch (input) {
+                    case (1):
+                        
+                        break;
+                    case 2:
+                        Interpolation.problem.InputNewProblem();
+                        break;
+                    default:
+                        break;
+                }
 
                 break;
             case 5: // Interpolasi Bicubic
@@ -93,8 +119,19 @@ public class Menu extends Utils{
                         break;
                 }
                 break;
-            case 6:
-
+            case 6: // Regresi
+            	inputFileConsole();
+                input = select(1, 2);
+                switch (input) {
+                case 1:
+                    m.inputFileMatrix();
+                    break;
+                case 2:
+                    m = Regression.regressionInput();
+                    break;
+                default:
+                    break;
+                }
                 break;
             case 7:
 
@@ -105,7 +142,7 @@ public class Menu extends Utils{
             default:
                 break;
         }
-        
+
         /* Output */
         switch (menu) {
             case 1: // SPL
@@ -124,6 +161,7 @@ public class Menu extends Utils{
                 break;
             case 2: // Determinan
                 outputFileConsole();
+
                 output = select(1, 2);
                 switch (output) {
                     case 1:
@@ -137,9 +175,36 @@ public class Menu extends Utils{
                 }
                 break;
             case 3:
+                outputFileConsole();
+                output = select(1, 2);
+
+                switch (output) {
+                    case 1:
+                    
+                        break;
+                    case 2:
+             
+                        break;
+                    default:
+                        break;
+                }
 
                 break;
             case 4:
+                outputFileConsole();
+                output = select(1, 2);
+
+                switch (output) {
+                    case 1:
+                    
+                        break;
+                    case 2:
+                        Interpolation.problem.displayInterpolation();
+                        break;
+
+                    default:
+                        break;
+                }
 
                 break;
             case 5: // Interpolasi Bicubic
@@ -156,8 +221,19 @@ public class Menu extends Utils{
                         break;
                 }
                 break;
-            case 6:
-
+            case 6: // Regresi
+            	outputFileConsole();
+                output = select(1, 2);
+                switch (output) {
+                    case 1:
+                        Regression.regFile(m);
+                        break;
+                    case 2:
+                        Regression.regConsole(m);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 7:
 
@@ -186,7 +262,7 @@ public class Menu extends Utils{
         println("Masukkan name file output: ");
         print("> ");
 
-        fileName = new String();
+        String fileName = new String();
 
         try {
             fileName = bufferedReader.readLine();
@@ -201,6 +277,18 @@ public class Menu extends Utils{
         println("======= Pilih Jenis Output ========");
         println("[1] File");
         println("[2] Console");
+        println("Masukkan pilihan: ");
+    }
+
+    public static void showChoice(String title, String[] methods, int length) {
+        println("");
+        println("====== Pilih Jenis" + title + " ======");
+        
+        for (int i = 0; i < length; i++)
+        {
+            println("[" + Integer.toString(i + 1) + "] " + methods[i]);
+        }
+
         println("Masukkan pilihan: ");
     }
 
