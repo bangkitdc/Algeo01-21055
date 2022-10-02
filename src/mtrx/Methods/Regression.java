@@ -5,7 +5,7 @@ import java.io.*;
 import java.lang.Math;
 
 public class Regression {
-	
+
 	public static Matrix regressionInput() throws IOException {
 		// I.S. -
 		// F.S. return matrix berisi input untuk regresi
@@ -16,19 +16,21 @@ public class Regression {
 		Utils.print("Masukkan banyaknya sampel variabel\n");
 		int k = Utils.inputInt();
 		Utils.println("");
-		
-		Matrix m = new Matrix(n+1, k);
+
+		Matrix m = new Matrix(k, n+1);
 		
 		// input nilai x dan y setiap persamaan
 		for (int i=0; i<k; i++) {
 			Utils.printf("\nPersamaan %d\n", i+1);
 			for (int j=0; j<n; j++) {
 				Utils.printf("Masukkan nilai variabel x%d\n", j+1);
-				m.setELMT(j, i, Utils.inputDouble());
+				m.setELMT(i, j, Utils.inputDouble());
 			}
 			Utils.print("Masukkan nilai variabel y\n");
-			m.setELMT(n, i, Utils.inputDouble());
+			m.setELMT(i, n, Utils.inputDouble());
 		}
+		
+		Matrix.displayMatrix(m);
 		return m;
 	}
 	
@@ -36,26 +38,26 @@ public class Regression {
 		// I.S. matrix berisi input regresi
 		// F.S. matrix SPL yg merupakan matrix input yg sudah diproses
 		
-		Matrix mOut = new Matrix(mIn.getRow(), mIn.getRow()+1);
+		Matrix mOut = new Matrix(mIn.getCol(), mIn.getCol()+1);
 		
 		// set m[0][0]
-		mOut.setELMT(0, 0, mIn.getCol());
+		mOut.setELMT(0, 0, mIn.getRow());
 		
 		// set baris paling atas dan kolom paling kiri
-		for (int i=0; i<mIn.getCol(); i++) {
-			for (int j=1; j<=mIn.getRow(); j++) {
-				mOut.setELMT(0, j, mOut.getELMT(0, j) + mIn.getELMT(j-1, i));
-				if (j<mIn.getRow()) {
+		for (int i=0; i<mIn.getRow(); i++) {
+			for (int j=1; j<=mIn.getCol(); j++) {
+				mOut.setELMT(0, j, mOut.getELMT(0, j) + mIn.getELMT(i, j-1));
+				if (j<mIn.getCol()) {
 					mOut.setELMT(j, 0, mOut.getELMT(0, j));	
 				}
 			}
 		}
 		
 		// set sisa matrix yg kosong
-		for (int i=1; i<mIn.getRow(); i++) {
-			for (int j=1; j<=mIn.getRow(); j++) {
-				for (int k=0; k<mIn.getCol(); k++) {
-					mOut.setELMT(i, j, mOut.getELMT(i, j) + mIn.getELMT(j-1, k)*mIn.getELMT(i-1, k));
+		for (int i=1; i<mIn.getCol(); i++) {
+			for (int j=1; j<=mIn.getCol(); j++) {
+				for (int k=0; k<mIn.getRow(); k++) {
+					mOut.setELMT(i, j, mOut.getELMT(i, j) + mIn.getELMT(k, j-1)*mIn.getELMT(k, i-1));
 				}
 			}
 		}
@@ -117,11 +119,12 @@ public class Regression {
 			}
 			
 			// handle koefisien
-			if (Math.abs(m.getELMT(i, idx)) == 1) {
+			double coef = Math.abs(m.getELMT(i,idx));
+			if (coef == 1) {
 				solution += String.format("x%d ", i);
 				isNull = false;
 			} else if (m.getELMT(i, idx) != 0) {
-				solution += String.format("%sx%d ", Utils.result(m.getELMT(i,idx)), i);
+				solution += String.format("%sx%d ", Utils.result(coef), i);
 				isNull = false;
 			}
 		}
@@ -140,7 +143,7 @@ public class Regression {
 		String solution;
 		
     	// INPUT NILAI Xi YANG AKAN DITAKSIR HASILNYA
-		Matrix x = new Matrix(1,inputMatrix.getRow()-1);
+		Matrix x = new Matrix(1,inputMatrix.getCol()-1);
 		Utils.println("\nMasukkan nilai-nilai x yang akan ditaksir nilai fungsinya.");
 		for (int i=0; i<x.getCol(); i++) {
 			Utils.printf("Masukkan nilai variabel x%d\n", i+1);
@@ -169,7 +172,7 @@ public class Regression {
 		String solution;
 
     	// INPUT NILAI Xi YANG AKAN DITAKSIR HASILNYA
-		Matrix x = new Matrix(1,inputMatrix.getRow()-1);
+		Matrix x = new Matrix(1,inputMatrix.getCol()-1);
 		Utils.println("\nMasukkan nilai-nilai x yang akan ditaksir nilai fungsinya.");
 		for (int i=0; i<x.getCol(); i++) {
 			Utils.printf("Masukkan nilai variabel x%d\n", i+1);
