@@ -3,6 +3,7 @@ package mtrx.Methods;
 import mtrx.Matrix.Matrix;
 import mtrx.Utility.Menu;
 import mtrx.Utility.Utils;
+import mtrx.Matrix.IO;
 import java.io.*;
 import java.lang.Math;
 
@@ -94,12 +95,11 @@ public class SolveSPL {
         return inverse.multiply(b);
     }
 	
-    
     public static String gaussJordanOutputSolution(Matrix m) {
     	// I.S. Matrix m sudah dieliminasi Gauss-Jordan
     	// F.S. return String solusi 
     	
-    	String solution = "\n";
+    	String solution = "";
     	
     	// Mengecek apakah Matrix memiliki solusi SPL
     	for (int i=0; i<m.getRow(); i++) {
@@ -216,96 +216,17 @@ public class SolveSPL {
     public static String inverseOutputSolution(Matrix m) {
     	String solution = "";
     	if (m == null) {
-    		solution = "\nSPL tidak memiliki solusi atau tidak bisa diselesaikan dengan Metode Matrix Inverse.\n";
+    		solution = "SPL tidak memiliki solusi atau tidak bisa diselesaikan dengan Metode Matrix Inverse.\n";
     				return solution;
     	}
     	
-    	solution += "\nSolusi:";
+    	solution += "Solusi:\n";
     	for (int i=0; i<m.getRow(); i++) {
     		solution += String.format("x%d = %s\n", i+1, Utils.result(m.getELMT(i,0)));
     	}
     	return solution;
     }
     
-    public static void sistemPersamaanLinear() throws IOException {  	
-    	// KAMUS
-    	int op = 0;
-    	Matrix m = new Matrix();
-    	String solution;
-    	
-    	// MENU SPL
-    	Utils.println("SISTEM PERSAMAAN LINEAR\n");
-    	Utils.println("Pilih metode pembacaan Matriks:");
-    	Utils.println("1. File");
-    	Utils.println("2. Keyboard");
-    	
-    	// INPUT MATRIX
-    	op = Utils.select(1,2);
-    	
-    	if (op == 1) {
-    		Utils.println("blom bisa banh awokwokwok.");
-    		return;
-    	} 
-    	else {
-    		m.inputMatrix();
-    	}
-    	
-    	// MENU METODE
-    	Utils.println("Pilih metode pembacaan Matriks SPL:");
-    	Utils.println("1. Metode Eliminasi Gauss");
-    	Utils.println("2. Metode Eliminasi Gauss-Jordan");
-    	Utils.println("3. Metode Matrix Inverse");
-    	Utils.println("4. Metode Cramer");
-    	  	
-    	op = Utils.select(1,4); 
-    	
-    	// proses sesuai metode yg dipilih
-    	if (op == 1) {
-    		Utils.println("\nMatrix awal:");
-    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
-    		gauss(m);
-    		Utils.println("\nMatrix hasil eliminasi Gauss:");
-    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
-    		solution = gaussOutputSolution(m);
-    		Utils.print(solution);
-    	}
-    	else if (op == 2) {
-    		Utils.println("\nMatrix awal:");
-    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
-    		gaussJordan(m);
-    		Utils.println("\nMatrix hasil eliminasi Gauss-Jordan:");
-    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
-    		solution = gaussJordanOutputSolution(m);
-    		Utils.print(solution);
-    	}
-    	else if (op == 3) {
-    		Utils.println("\nMatrix awal:");
-    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
-    		m = inverseSolution(m);
-    		solution = inverseOutputSolution(m);
-    		Utils.print(solution);
-    		
-    	}
-    	else {
-    		Utils.println("\nMatrix awal:");
-    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
-    		solution = Cramer.cramer(m);
-    		Utils.print(solution);
-    	}
-    	
-    	// OPSI SIMPAN KE FILE
-    	Utils.println("\nSimpan solusi kedalam file?");
-    	Utils.println("1. Ya");
-    	Utils.println("2. Tidak");
-    	
-    	op = Utils.select(1,2);
-    	
-    	/*
-    	 if (op == 1) {
-    	 	saveToFileorsmthn(solution);
-    	 }
-    	 */	
-    }    
     
 	/* -------------------------- Input ------------------------- */
 	/* Console */
@@ -321,13 +242,26 @@ public class SolveSPL {
 		int input = Utils.select(1, 4);
 		switch (input) {
 			case 1: // Gauss
-				
+				Utils.println("\nMatrix awal:");
+	    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
+	    		gauss(m);
+	    		Utils.println("\nMatrix hasil eliminasi Gauss:");
+	    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
+	    		Utils.print("\n" + gaussOutputSolution(m));
 				break;
 			case 2: // Gauss-Jordan
-				
+				Utils.println("\nMatrix awal:");
+	    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
+	    		gaussJordan(m);
+	    		Utils.println("\nMatrix hasil eliminasi Gauss-Jordan:");
+	    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
+	    		Utils.print("\n" + gaussJordanOutputSolution(m));
 				break;
 			case 3: // Inverse
-				
+	    		Utils.println("\nMatrix awal:");
+	    		Matrix.displayMatrixAugmented(m, m.getLastCol() - 1);
+	    		m = inverseSolution(m);
+	    		Utils.print("\n" + inverseOutputSolution(m));
 				break;
 			case 4: // Cramer
 				Cramer.displayCramer(m);
@@ -351,12 +285,18 @@ public class SolveSPL {
 		int input = Utils.select(1, 4);
 		switch (input) {
 			case 1: // Gauss
+				gauss(m);
+	    		IO.writeFileString(outputFile, gaussOutputSolution(m));
 				Utils.println("Berhasil menuliskan file :)");
 				break;
 			case 2: // Gauss-Jordan
+				gaussJordan(m);
+	    		IO.writeFileString(outputFile, gaussJordanOutputSolution(m));
 				Utils.println("Berhasil menuliskan file :)");
 				break;
 			case 3: // Inverse
+				m = inverseSolution(m);
+	    		IO.writeFileString(outputFile, inverseOutputSolution(m));
 				Utils.println("Berhasil menuliskan file :)");
 				break;
 			case 4: // Cramer
