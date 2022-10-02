@@ -75,9 +75,11 @@ public class IO {
 
         /* ALGORITMA */
         try {
+
         // file = new File(System.getProperty("user.dir") + "/src/mtrx/test/" + outputName);
 
             FileReader reader = new FileReader(relativePath + fileName);
+
             BufferedReader bufferReader = new BufferedReader(reader);
 
             String line;
