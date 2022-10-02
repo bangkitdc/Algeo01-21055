@@ -177,12 +177,12 @@ public class Determinan {
         int input = Utils.select(1, 2);
         switch (input) {
             case 1:
-                Determinan.fileCofactorDet(m, outputFile);
-                Utils.println("Berhasil menuliskan file :)");
+                fileCofactorDet(m, outputFile);
+                Utils.println("\nBerhasil menuliskan file :)");
                 break;
             case 2:
-                Determinan.fileRowReductionDet(m, outputFile);
-                Utils.println("Berhasil menuliskan file :)");
+                fileRowReductionDet(m, outputFile);
+                Utils.println("\nBerhasil menuliskan file :)");
                 break;
             default:
                 break;

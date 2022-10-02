@@ -115,6 +115,19 @@ public class Matrix{
         Utils.println("Silahkan masukkan setiap elemen matrix: ");
         this.createMatrix();
     }
+
+    public void input4x4Matrix() throws IOException {
+        /* KAMUS LOKAL */
+        int n;
+
+        /* ALGORITMA */
+        Utils.println("");
+        Utils.println("Akan dibuat matrix berukuran 4x4.");
+
+        this.setMatrix(4, 4);
+        Utils.println("Silahkan masukkan setiap elemen matrix: ");
+        this.createMatrix();
+    }
     /* --------------------------- File Input ------------------------- */
     public void inputFileMatrix() throws IOException {
         /* Include Squared Matrix */

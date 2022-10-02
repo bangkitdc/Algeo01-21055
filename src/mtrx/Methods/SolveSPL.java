@@ -1,9 +1,7 @@
 package mtrx.Methods;
 
-import mtrx.Matrix.Matrix;
-import mtrx.Utility.Menu;
-import mtrx.Utility.Utils;
-import mtrx.Matrix.IO;
+import mtrx.Matrix.*;
+import mtrx.Utility.*;
 import java.io.*;
 import java.lang.Math;
 
@@ -286,22 +284,22 @@ public class SolveSPL {
 		switch (input) {
 			case 1: // Gauss
 				gauss(m);
-	    			IO.writeFileString(outputFile, gaussOutputSolution(m));
-				Utils.println("Berhasil menuliskan file :)");
+	    		IO.writeFileString(outputFile, gaussOutputSolution(m));
+				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			case 2: // Gauss-Jordan
 				gaussJordan(m);
-	    			IO.writeFileString(outputFile, gaussJordanOutputSolution(m));
-				Utils.println("Berhasil menuliskan file :)");
+	    		IO.writeFileString(outputFile, gaussJordanOutputSolution(m));
+				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			case 3: // Inverse
 				m = inverseSolution(m);
-	    			IO.writeFileString(outputFile, inverseOutputSolution(m));
-				Utils.println("Berhasil menuliskan file :)");
+	    		IO.writeFileString(outputFile, inverseOutputSolution(m));
+				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			case 4: // Cramer
 				Cramer.fileCramer(m, outputFile);
-				Utils.println("Berhasil menuliskan file :)");
+				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			default:
 				break;
