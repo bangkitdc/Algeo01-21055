@@ -1,6 +1,6 @@
 package mtrx.Methods;
-import mtrx.Matrix.Matrix;
-import mtrx.Utility.Utils;
+import mtrx.Matrix.*;
+import mtrx.Utility.*;
 import java.io.*;
 import java.lang.Math;
 
@@ -94,23 +94,20 @@ public class Regression {
 		// KAMUS
 		int idx = m.getCol() - 1;
 		boolean isNull = true;
-		String solution = "\nPersamaan regresi yang terbentuk:\nf(x) = ";
+		String solution = "Persamaan regresi yang terbentuk:\nf(x) = ";
 		
 		
 		// handle konstanta
-		if (m.getELMT(0, idx) == 1) {
-			solution += "1 ";
-			isNull = false;
-		} else if (m.getELMT(0, idx) != 0) {
+		if (m.getELMT(0, idx) != 0) {
 			solution += Utils.result(m.getELMT(0, idx)) + " ";
 			isNull = false;
 		}
 		
 		// handle variabel x
-		for (int i=1; i<m.getRow()-1; i++) {
+		for (int i=1; i<m.getRow(); i++) {
 			
 			// handle operator
-			if (!isNull && i != m.getRow()-1 && m.getELMT(i, idx) != 0) {
+			if (!isNull && m.getELMT(i, idx) != 0) {
 				if (m.getELMT(i,idx) > 0) {
 					solution += "+ ";
 				}
@@ -138,28 +135,9 @@ public class Regression {
 		return solution;
 	}
 	
-	public static void multipleLinearRegression() throws IOException {
+	public static void regConsole(Matrix inputMatrix) throws IOException {
 		// DEKLARASI VARIABEL
 		String solution;
-		int op;
-		Matrix inputMatrix = new Matrix();
-		
-		// OUTPUT MENU
-		Utils.println("REGRESI LINEAR BERGANDA\n");
-    	Utils.println("Pilih metode pembacaan Matriks:");
-    	Utils.println("1. File");
-    	Utils.println("2. Keyboard");
-    	
-    	// INPUT MATRIX
-    	op = Utils.select(1,2);
-    	
-    	if (op == 1) {
-    		Utils.println("blom bisa banh awokwokwok.");
-    		return;
-    	} 
-    	else {
-    		inputMatrix = regressionInput();
-    	}
 		
     	// INPUT NILAI Xi YANG AKAN DITAKSIR HASILNYA
 		Matrix x = new Matrix(1,inputMatrix.getRow()-1);
@@ -181,25 +159,34 @@ public class Regression {
 		
 		// Membuat solusi regresi
 		solution = equationOutput(regM);		
-		
 		solution += regressionFunction(regM, x);
-		
-		Utils.print(solution);
-		
-    	// OPSI SIMPAN KE FILE
-    	Utils.println("\nSimpan solusi kedalam file?");
-    	Utils.println("1. Ya");
-    	Utils.println("2. Tidak");
-    	
-    	op = Utils.select(1,2);
-    	
-    	/*
-    	 if (op == 1) {
-    	 	saveToFileorsmthn(solution);
-    	 }
-    	 */	
+		Utils.print("\n" + solution);
 	}
+	
+	public static void regFile(Matrix inputMatrix) throws IOException {
+		// DEKLARASI VARIABEL
+		String outputFile = Menu.outputFile();
+		String solution;
 
-    
+    	// INPUT NILAI Xi YANG AKAN DITAKSIR HASILNYA
+		Matrix x = new Matrix(1,inputMatrix.getRow()-1);
+		Utils.println("\nMasukkan nilai-nilai x yang akan ditaksir nilai fungsinya.");
+		for (int i=0; i<x.getCol(); i++) {
+			Utils.printf("Masukkan nilai variabel x%d\n", i+1);
+			x.setELMT(0, i, Utils.inputDouble());
+		}
+		
+		// Membentuk Matrix SPL dari input
+		Matrix regM = regressionMatrix(inputMatrix);
+		
+		// Mengeliminasi Matrix SPL
+		SolveSPL.gaussJordan(regM);
+		
+		// Membuat solusi regresi
+		solution = equationOutput(regM);		
+		solution += regressionFunction(regM, x);
+		IO.writeFileString(outputFile, solution);
+		Utils.println("Berhasil menuliskan file :)");
+	}    
 }
 	
