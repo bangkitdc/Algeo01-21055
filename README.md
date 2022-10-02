@@ -1,5 +1,5 @@
 # Algeo01-21055 - aezakmi
-Tugas Besar 1 Aljabar Linear dan Geometri IF21 is a project to ...
+Tugas Besar 1 Aljabar Linear dan Geometri IF21 is a project to build matrice calculator which calculates Linear Equation System, Determinant, Inverse Matrice, Polynomial Interpolation, Bicubic Interpolation, Multiple Linear Regression, and Image Resizer.
 
 ## Anggota Kelompok 'aezakmi'
 1. 13521055/ K1 - Muhammad Bangkit Dwi Cahyono
