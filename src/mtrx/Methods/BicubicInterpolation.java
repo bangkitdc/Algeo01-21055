@@ -3,6 +3,7 @@ package mtrx.Methods;
 import java.io.*;
 import mtrx.Matrix.*;
 import mtrx.Utility.Utils;
+import java.math.*;
 
 public class BicubicInterpolation {
     public static int function(int x, int y, int i, int j) {

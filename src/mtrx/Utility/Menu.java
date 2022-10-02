@@ -209,7 +209,7 @@ public class Menu extends Utils{
 
                 break;
             case 4:
-
+    
                 outputFileConsole();
                 output = select(1, 2);
                 switch (output) {
@@ -222,6 +222,7 @@ public class Menu extends Utils{
                     default:
                         break;
                 }
+                break;
 
             case 5: // Interpolasi Bicubic
                 outputFileConsole();
