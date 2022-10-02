@@ -8,19 +8,12 @@ public class Interpolation {
     public static class Problem {
         private int n;
         private Matrix points, m, result;
-        private double x;
+        private Double minBound, maxBound;
 
         private void inputPoints() {
             Utils.println("Masukkan semua titik (x y) : ");
 
             points.createMatrix();
-        }
-
-        private void solve() {
-
-            createAugmented();       
-            result = SolveSPL.inverseSolution(m);
-
         }
 
         private void createAugmented(){
@@ -36,12 +29,63 @@ public class Interpolation {
             }
         }
 
+        private void getBound() {
+
+            Double min, max;
+
+            min = getPointAbsis(0);
+            max = getPointAbsis(0);
+            for(int i = 1; i<= n; i++)
+            {
+                if (min > getPointAbsis(i))
+                {
+                    min = getPointAbsis(i);
+                }
+
+                if (max < getPointAbsis(i))
+                {
+                    max = getPointAbsis(i);
+                }
+                
+            }
+
+            minBound = min;
+            maxBound = max;
+        }
+
+        private void solve() {
+
+            createAugmented();       
+            result = SolveSPL.inverseSolution(m);
+            getBound();
+
+        }
+
         private double getPointAbsis(int row) {
             return points.getELMT(row, 0);
         }
 
         private double getPointOrdinat(int row) {
             return points.getELMT(row, 1);
+        }
+
+        public void InputNewProblem(int inputMethod) throws IOException {
+
+            switch (inputMethod) {
+                case 1:
+                 
+                    break;
+                case 2:
+                    InputNewProblem();
+                    break;
+                default:
+                    break;
+            }
+
+            solve();
+
+            displayInterpolation();
+            
         }
 
         public void InputNewProblem() throws IOException {
@@ -52,11 +96,10 @@ public class Interpolation {
             points = new Matrix(n+1, 2);
             m = new Matrix(n+1, n+2);
             problem.inputPoints();
+        }
 
-            Utils.println("Masukan nilai x untuk memperoleh nilai f(x) hasil interpolasi : ");
-            x = Utils.inputDouble();
+        public void InputAbsis() throws IOException {
             
-            solve(); 
         }
 
         public Matrix getResult()
@@ -78,10 +121,46 @@ public class Interpolation {
 
         public void displayInterpolation() throws  IOException {  
 
+            double x;
+            String input;
+            BufferedReader bufferedReader = new BufferedReader(Utils.streamReader);
+
             displayPolinom(Interpolation.problem.getResult());
 
-            Utils.println("nilai f(x) hasil interpolasi dengan x = " + Double.toString(x) + " : ");
-            Utils.println(Interpolation.problem.interpolate(x));
+            do {
+
+                Utils.println("Masukkan nilai x [" 
+                    + Utils.doubleToString(minBound, 4) 
+                    + ", " 
+                    + Utils.doubleToString(maxBound, 4)
+                    + "] (inklusif) untuk interpolasi.");
+
+                Utils.println("(input bukan bilangan akan memberhentikan proses ini)");
+                Utils.print("> ");
+        
+                input = bufferedReader.readLine();
+
+                if (Utils.isDouble(input))
+                {
+                    x = Double.parseDouble(input);
+
+                    if (x < minBound || x > maxBound)
+                    {
+                        Utils.println("Mohon masukkan input x sesuai rentang interpolasi.");
+                    }
+
+                    else {
+                        Utils.print("f(" +input + ") = ");
+                        Utils.println(Utils.result(Interpolation.problem.interpolate(x)));
+                    }
+                }
+
+            } while (Utils.isDouble(input));
+
+            Utils.println("Operasi interpolasi selesai :)");
+        }
+
+        public void createOutputFile() throws  IOException {
 
         }
 
@@ -97,15 +176,16 @@ public class Interpolation {
             for (int i = result.getLastRow(); i > 0; i--) {
                 
                 polinom += result.getELMT(i,0) == 0? 
-                    "" : Double.toString(result.getELMT(i,0)) + "x" + (i > 1? (Integer.toString(i)) : "");
+                    "" : Utils.doubleToString(result.getELMT(i,0), 4) + "x" + (i > 1? (Integer.toString(i)) + " ": " ");
     
                 if(result.getELMT(i, 0) != 0)
                 {
-                    polinom += ((result.getELMT(i - 1,0) < 0) || (i == 1 && result.getELMT(0, 0) == 0)) ? "" : "+";
+                    polinom += ((result.getELMT(i - 1,0) < 0) || (i == 1 && result.getELMT(0, 0) == 0)) ? "" : "+ ";
                 }
             }
     
-            polinom += result.getELMT(0,0) == 0? "" : Double.toString(result.getELMT(0,0));
+            polinom += result.getELMT(0,0) == 0? "" : Utils.doubleToString(result.getELMT(0,0), 4);
+
             Utils.println(polinom);
         }
 

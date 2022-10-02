@@ -3,6 +3,7 @@ package mtrx.Matrix;
 import java.io.*;
 import mtrx.Utility.Utils;
 
+
 public class IO {
     /* --------------------------- File Input ------------------------- */
     /* List All Files Di "../test" */
@@ -98,6 +99,37 @@ public class IO {
         return mRes;
     }
 
+    public static File getFile(String relativePath) {
+        String fileName = new String();
+        InputStreamReader streamReader = new InputStreamReader(System.in);
+        BufferedReader readInput = new BufferedReader(streamReader);
+
+        File file;
+
+        do
+        {
+            Utils.println("Masukkan nama file yang ingin diproses : ");
+            try {
+                fileName = readInput.readLine();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            file = new File(relativePath + fileName);
+
+            if (!(file.exists() && !file.isDirectory()))
+            {
+                Utils.println("File yang ingin diproses tidak ada. Mohon masukkan nama file yang benar.");
+            }
+        }
+
+        while(!(file.exists() && !file.isDirectory()));
+
+        return file;
+    }
+
+
+
     /* -------------------------- File Output ------------------------- */
     
     /* Menulis Matrix Ke File */
@@ -132,5 +164,43 @@ public class IO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // check file output
+    public static String inputNewFileName(String relativePath) throws IOException{
+
+        String outputName = new String();
+        InputStreamReader streamReader = new InputStreamReader(System.in);
+        BufferedReader readInput = new BufferedReader(streamReader);
+
+        File outFile;
+        boolean ignore = false;
+        do
+        {
+            Utils.println("Masukkan nama file keluaran : ");
+            try {
+                outputName = readInput.readLine();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            outFile = new File(relativePath + outputName);
+
+            if ((outFile.exists() && !outFile.isDirectory()))
+            {
+                Utils.println("Nama file sudah ada pada folder tujuan. Apakah Anda ingin mengganti file tersebut?");
+                Utils.println("(0 : tidak, 1 : ya)");
+
+                int selectInput = Utils.select(0, 1);
+                
+                if (selectInput == 1)
+                {
+                    ignore = true;
+                }
+            }
+        }
+        while((outFile.exists() && !outFile.isDirectory()) && !ignore);
+
+        return outputName;
     }
 }

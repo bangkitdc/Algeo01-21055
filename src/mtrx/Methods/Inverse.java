@@ -1,7 +1,8 @@
 package mtrx.Methods;
 
-import mtrx.Matrix.Matrix;
-import mtrx.Utility.Utils;
+import mtrx.Matrix.*;
+import mtrx.Utility.*;
+import java.io.*;
 
 public class Inverse {
 
@@ -79,18 +80,35 @@ public class Inverse {
         return null;
     }
 
-    public static void outputInverse(Matrix m, int method) {
+    public static void outputInverse(Matrix m, int outputMethod) throws IOException {
         // Matrix m adalah matriks yang ingin dicari inversenya
+   
+        String outputFile;;
 
-        if (method == 1)
-        {
+        Utils.println("");
+        Utils.println("=========== Pilih Metode ==========");
+        Utils.println("[1] Metode Ekspansi Kofaktor");
+        Utils.println("[2] Metode Reduksi Baris");
+        Utils.println("Masukkan pilihan: ");
 
+        int input = Utils.select(1, 2);
+        
+        switch (outputMethod) {
+            case 1:
+                outputFile = Menu.outputFile();
+                createOutputFile(outputFile, getInverse(m, input));
+                break;
+            case 2:
+                Utils.println("Hasil inverse : ");
+                Matrix.displayMatrix(getInverse(m, input));
+                break;
+            default:
+                break;
         }
+    }
 
-        else if (method == 2)
-        {
-            Utils.println("Hasil inverse : ");
-            Matrix.displayMatrix(getInverse(m));
-        }
+    public static void createOutputFile(String filename, Matrix mOut) {
+        IO.writeFileMatrix(filename, mOut);
+        Utils.println("Berhasil menuliskan file :)");
     }
 }

@@ -1,9 +1,7 @@
 package mtrx.Methods;
 
 import mtrx.Utility.*;
-
 import java.io.IOException;
-
 import mtrx.Matrix.*;
 import mtrx.Methods.GaussJordan.KDet;
 
