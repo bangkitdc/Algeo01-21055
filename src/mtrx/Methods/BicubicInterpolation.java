@@ -1,9 +1,7 @@
 package mtrx.Methods;
 
 import java.io.*;
-import java.math.*;
 import mtrx.Matrix.*;
-import mtrx.Utility.Menu;
 import mtrx.Utility.Utils;
 
 public class BicubicInterpolation {
@@ -98,8 +96,10 @@ public class BicubicInterpolation {
         Matrix xyTemp = m.getSubMatrix(4, 4, 0, 1);
 
         temp = Bicubic(temp);
+
         String res = resultBicubic(getBicubicInterpolation(temp, xyTemp.getELMT(0, 0), xyTemp.getELMT(0, 1)));
         String resRes = String.format("f(%s, %s) = %s", resultBicubic(xyTemp.getELMT(0, 0)), resultBicubic(xyTemp.getELMT(0, 1)), res);
+
         return resRes;
     }
 
@@ -134,8 +134,10 @@ public class BicubicInterpolation {
                 double d = Utils.eval(element[p]);
                 xy.setELMT(0, p, d);
             }
+
             String res = resultBicubic(getBicubicInterpolation(n, xy.getELMT(0, 0), xy.getELMT(0, 1)));
             resRes += String.format("f(%s, %s) = %s", resultBicubic(xy.getELMT(0, 0)), resultBicubic(xy.getELMT(0, 1)), res);
+
             if (k != N - 1) {
                 resRes += "\n";
             }
@@ -155,17 +157,15 @@ public class BicubicInterpolation {
     }
 
     /* File */
-    public static void fileBicubic(Matrix m, String fileName) throws IOException {
-        InputStreamReader streamReader = new InputStreamReader(System.in);
-        BufferedReader readInput = new BufferedReader(streamReader);
-
+    public static void fileBicubic(Matrix m, String fileName, String relativePath) throws IOException {
+        
         /* ALGORITMA - Output Purpose */
         if (m.getRow() == 5) { // Handle from file
             String res = fileHandle(m);
-            IO.writeFileString(fileName, res);
+            IO.writeFileString(res, fileName, relativePath);
         } else { // Handle from console
             String res = consoleHandle(m);
-            IO.writeFileString(fileName, res);
+            IO.writeFileString(res, fileName, relativePath);
         }
     }
 
@@ -177,10 +177,10 @@ public class BicubicInterpolation {
     }
 
     /* File */
-    public static void bicubicFile(Matrix m) throws IOException {
-        String outputFile = Menu.outputFile();
+    public static void bicubicFile(Matrix m, String relativePath) throws IOException {
+        String outputFile = IO.inputNewFileName(relativePath, ".txt");
         try {
-            fileBicubic(m, outputFile);
+            fileBicubic(m, outputFile, relativePath);
             Utils.println("\nBerhasil menuliskan file :)");
         } catch (Exception e) {
            e.printStackTrace();
