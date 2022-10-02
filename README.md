@@ -32,7 +32,7 @@ Tugas Besar 1 Aljabar Linear dan Geometri IF21 is a project to build matrice cal
 2. Go to the folder `cd Algeo01-21055`
 3. Go to bin folder `cd bin` (compiled files)
 4. Run the program by typing `java mtrx.Main`
-5. `test` folder is used to store input and output `.txt`/ `.png` / `img` file
+5. `test` folder is used to store input and output `.txt`/ `.png` / `img file`
 6. You can also run the jar file using java -jar <jar-file.jar>
 
 ### Run Using Windows Batch File
@@ -41,7 +41,7 @@ Windows :
 1. Clone folder with `git clone https://github.com/bangkitdc/Algeo01-21055.git` or download the zip file from the github
 2. Go to the folder `cd Algeo01-21055`
 3. Type `start.bat` or `./start.bat` on the terminal, you can also click the icon (it will automatically compile all `.java` files)
-4. `test` folder is used to store input and output `.txt`/ `.png` / `img` file
+4. `test` folder is used to store input and output `.txt`/ `.png` / `img file`
 5. Enjoy (＾▽＾)
 
 Linux/MacOS: Please run manually ¯\_(ツ)_/¯
