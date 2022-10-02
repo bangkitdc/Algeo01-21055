@@ -93,11 +93,11 @@ public class Matrix{
     public void inputSquaredMatrix(int method) throws IOException {
         if(method == 1)
         {
-            this.inputFileSquaredMatrix();
+            this.inputSquaredMatrix(1);
         }
 
         else if (method == 2) {
-            this.inputSquaredMatrix();
+            this.inputSquaredMatrix(2);
         }
     }
 
