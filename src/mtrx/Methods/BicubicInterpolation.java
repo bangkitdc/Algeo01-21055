@@ -3,6 +3,7 @@ package mtrx.Methods;
 import java.io.*;
 import java.math.*;
 import mtrx.Matrix.*;
+import mtrx.Utility.Menu;
 import mtrx.Utility.Utils;
 
 public class BicubicInterpolation {
@@ -91,21 +92,34 @@ public class BicubicInterpolation {
         return res;
     }
 
-    public static void displayBicubic(Matrix m) throws IOException {
+    /* Handle File */
+    public static String fileHandle(Matrix m) {
+        Matrix temp = m.getSubMatrix(0, 3, 0, 3);
+        Matrix xyTemp = m.getSubMatrix(4, 4, 0, 1);
+
+        temp = Bicubic(temp);
+        String res = Utils.result(getBicubicInterpolation(temp, xyTemp.getELMT(0, 0), xyTemp.getELMT(0, 1)));
+        String resRes = String.format("f(%s, %s) = %s", Utils.result(xyTemp.getELMT(0, 0)), Utils.result(xyTemp.getELMT(0, 1)), res);
+        return resRes;
+    }
+
+    /* Handle Console */
+    public static String consoleHandle(Matrix m) throws IOException{
         InputStreamReader streamReader = new InputStreamReader(System.in);
         BufferedReader readInput = new BufferedReader(streamReader);
 
         Matrix n;
         n = Bicubic(m);
-        
+
         // driver
         Utils.println("Akan dihitung f(x, y) sebanyak N, masukkan N: ");
         int N = Utils.inputInt();
+        String resRes = "";
         Utils.println("");
-        for (int k = 0; k < N; k ++) {
+        for (int k = 0; k < N; k++) {
             Utils.println("Masukkan x dan y (dipisah spasi): ");
             Matrix xy = new Matrix(1, 2);
-            
+
             String[] element;
             String line = new String();
 
@@ -118,30 +132,71 @@ public class BicubicInterpolation {
             element = line.split(" ");
             for (int p = 0; p < 2; p++) {
                 double d = Utils.eval(element[p]);
-                xy.setELMT(0, p, d);       
+                xy.setELMT(0, p, d);
             }
-            String res = result(getBicubicInterpolation(n, xy.getELMT(0, 0), xy.getELMT(0, 1)));
-            Utils.println(String.format("f(%s, %s) = %s", result(xy.getELMT(0, 0)), result(xy.getELMT(0, 1)), res));
-            Utils.println("");
+            String res = Utils.result(getBicubicInterpolation(n, xy.getELMT(0, 0), xy.getELMT(0, 1)));
+            resRes += String.format("f(%s, %s) = %s", Utils.result(xy.getELMT(0, 0)), Utils.result(xy.getELMT(0, 1)), res);
+            if (k != N - 1) {
+                resRes += "\n";
+            }
         }
+        return resRes;
+    }
+
+    public static void displayBicubic(Matrix m) throws IOException {
+        if (m.getRow() == 5) { // Handle From File
+            String res = fileHandle(m);
+            Utils.println(res);
+        } else {
+            String res = consoleHandle(m);
+            Utils.println(res);
+        }
+    }
+
+    /* File */
+    public static void fileBicubic(Matrix m, String fileName) throws IOException {
+        InputStreamReader streamReader = new InputStreamReader(System.in);
+        BufferedReader readInput = new BufferedReader(streamReader);
+
+        /* ALGORITMA - Output Purpose */
+        if (m.getRow() == 5) { // Handle from file
+            String res = fileHandle(m);
+            IO.writeFileString(fileName, res);
+        } else { // Handle from console
+            String res = consoleHandle(m);
+            IO.writeFileString(fileName, res);
+        }
+    }
+
+    /* -------------------------- Input ------------------------- */
+    /* Console */
+    public static void bicubicConsole(Matrix m) throws IOException {
+        Utils.println("");
+        displayBicubic(m);
+    }
+
+    /* File */
+    public static void bicubicFile(Matrix m) throws IOException {
+        String outputFile = Menu.outputFile();
+        try {
+            fileBicubic(m, outputFile);
+            Utils.println("\nBerhasil menuliskan file :)");
+        } catch (Exception e) {
+           e.printStackTrace();
+        } 
     }
     
-    public static String result(double d) {
-        /* KAMUS LOKAL */
-        String s;
+    // public static String result(double d) {
+    //     /* KAMUS LOKAL */
+    //     String s;
 
-        /* ALGORITMA */
-        if (d == (int) d) {
-            s = String.valueOf((int) d);
-        } else {
-            d = new BigDecimal(d).setScale(13, RoundingMode.HALF_UP).doubleValue();
-            s = String.valueOf(d);
-        }
-        return s;
-    }
+    //     /* ALGORITMA */
+    //     if (d == (int) d) {
+    //         s = String.valueOf((int) d);
+    //     } else {
+    //         d = new BigDecimal(d).setScale(13, RoundingMode.HALF_UP).doubleValue();
+    //         s = String.valueOf(d);
+    //     }
+    //     return s;
+    // }
 }
-
-// 153 59 210 96
-// 125 161 72 81
-// 98 101 42 12
-// 21 51 0 16

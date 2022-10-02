@@ -57,7 +57,7 @@ public class Menu extends Utils{
                     default:
                         break;
                 }
-                break;
+                break;  
             case 2: // Determinan
                 inputFileConsole();
                 input = select(1, 2);
@@ -105,10 +105,32 @@ public class Menu extends Utils{
 
                 break;
             case 5: // Interpolasi Bicubic
-
+                inputFileConsole();
+                input = select(1, 2);
+                switch (input) {
+                    case 1:
+                        m.inputFileMatrix();
+                        break;
+                    case 2:
+                        m.input4x4Matrix();
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case 6:
-
+            case 6: // Regresi
+            	inputFileConsole();
+                input = select(1, 2);
+                switch (input) {
+                case 1:
+                    m.inputFileMatrix();
+                    break;
+                case 2:
+                    m = Regression.regressionInput();
+                    break;
+                default:
+                    break;
+                }
                 break;
             case 7: // Image Resizer
                 ImageResize.inputImage();
@@ -171,10 +193,32 @@ public class Menu extends Utils{
 
                 break;
             case 5: // Interpolasi Bicubic
-
+                outputFileConsole();
+                output = select(1, 2);
+                switch (output) {
+                    case 1:
+                        BicubicInterpolation.bicubicFile(m);
+                        break;
+                    case 2:
+                        BicubicInterpolation.bicubicConsole(m);
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case 6:
-
+            case 6: // Regresi
+            	outputFileConsole();
+                output = select(1, 2);
+                switch (output) {
+                    case 1:
+                        Regression.regFile(m);
+                        break;
+                    case 2:
+                        Regression.regConsole(m);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 7:
                 
