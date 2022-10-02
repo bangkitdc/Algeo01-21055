@@ -99,8 +99,8 @@ public class BicubicInterpolation {
         Matrix xyTemp = m.getSubMatrix(4, 4, 0, 1);
 
         temp = Bicubic(temp);
-        String res = Utils.result(getBicubicInterpolation(temp, xyTemp.getELMT(0, 0), xyTemp.getELMT(0, 1)));
-        String resRes = String.format("f(%s, %s) = %s", Utils.result(xyTemp.getELMT(0, 0)), Utils.result(xyTemp.getELMT(0, 1)), res);
+        String res = resultBicubic(getBicubicInterpolation(temp, xyTemp.getELMT(0, 0), xyTemp.getELMT(0, 1)));
+        String resRes = String.format("f(%s, %s) = %s", resultBicubic(xyTemp.getELMT(0, 0)), resultBicubic(xyTemp.getELMT(0, 1)), res);
         return resRes;
     }
 
@@ -135,8 +135,8 @@ public class BicubicInterpolation {
                 double d = Utils.eval(element[p]);
                 xy.setELMT(0, p, d);
             }
-            String res = Utils.result(getBicubicInterpolation(n, xy.getELMT(0, 0), xy.getELMT(0, 1)));
-            resRes += String.format("f(%s, %s) = %s", Utils.result(xy.getELMT(0, 0)), Utils.result(xy.getELMT(0, 1)), res);
+            String res = resultBicubic(getBicubicInterpolation(n, xy.getELMT(0, 0), xy.getELMT(0, 1)));
+            resRes += String.format("f(%s, %s) = %s", resultBicubic(xy.getELMT(0, 0)), resultBicubic(xy.getELMT(0, 1)), res);
             if (k != N - 1) {
                 resRes += "\n";
             }
@@ -150,6 +150,7 @@ public class BicubicInterpolation {
             Utils.println(res);
         } else {
             String res = consoleHandle(m);
+            Utils.println("");
             Utils.println(res);
         }
     }
@@ -187,17 +188,17 @@ public class BicubicInterpolation {
         } 
     }
     
-    // public static String result(double d) {
-    //     /* KAMUS LOKAL */
-    //     String s;
+    public static String resultBicubic(double d) {
+        /* KAMUS LOKAL */
+        String s;
 
-    //     /* ALGORITMA */
-    //     if (d == (int) d) {
-    //         s = String.valueOf((int) d);
-    //     } else {
-    //         d = new BigDecimal(d).setScale(13, RoundingMode.HALF_UP).doubleValue();
-    //         s = String.valueOf(d);
-    //     }
-    //     return s;
-    // }
+        /* ALGORITMA */
+        if (d == (int) d) {
+            s = String.valueOf((int) d);
+        } else {
+            d = new BigDecimal(d).setScale(13, RoundingMode.HALF_UP).doubleValue();
+            s = String.valueOf(d);
+        }
+        return s;
+    }
 }
