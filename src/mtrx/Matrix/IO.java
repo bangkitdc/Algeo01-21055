@@ -57,14 +57,16 @@ public class IO {
             FileReader reader = new FileReader(relativePath + fileName);
             BufferedReader bufferReader = new BufferedReader(reader);
 
-            while (bufferReader.readLine() != null) {
-                String line = bufferReader.readLine();
+            String line = bufferReader.readLine();
+
+            while (line != null) {
                 String[] lines = line.split(" ");
                 count = lines.length;
 
                 if (count > maxCol) {
                     maxCol = count;
                 }
+                line = bufferReader.readLine();
             }  
             
             reader.close();
