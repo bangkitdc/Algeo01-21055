@@ -50,21 +50,28 @@ public class IO {
     public static int readCol(String fileName, String relativePath) {
         /* KAMUS LOKAL */
         int count = 0;
+        int maxCol = 0;
 
         /* ALGORITMA */
         try {
             FileReader reader = new FileReader(relativePath + fileName);
             BufferedReader bufferReader = new BufferedReader(reader);
 
-            String line = bufferReader.readLine();
-            String[] lines = line.split(" ");
-            count = lines.length;
+            while (bufferReader.readLine() != null) {
+                String line = bufferReader.readLine();
+                String[] lines = line.split(" ");
+                count = lines.length;
+
+                if (count > maxCol) {
+                    maxCol = count;
+                }
+            }  
             
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return count;
+        return maxCol;
     }
 
     /* Membaca Matrix Keseluruhan Dalam File */
