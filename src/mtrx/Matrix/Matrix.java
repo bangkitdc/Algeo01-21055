@@ -90,6 +90,17 @@ public class Matrix{
         this.createMatrix();
     }
 
+    public void inputSquaredMatrix(int method) throws IOException {
+        if(method == 1)
+        {
+            this.inputSquaredMatrix(1);
+        }
+
+        else if (method == 2) {
+            this.inputSquaredMatrix(2);
+        }
+    }
+
     public void inputSquaredMatrix() throws IOException {
         /* KAMUS LOKAL */
         int n;

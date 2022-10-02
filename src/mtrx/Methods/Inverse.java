@@ -1,5 +1,7 @@
 package mtrx.Methods;
+
 import mtrx.Matrix.Matrix;
+import mtrx.Utility.Utils;
 
 public class Inverse {
 
@@ -45,11 +47,11 @@ public class Inverse {
         int i, j;
         double det;
 
-        if(method == 0) {
+        if(method == 1) {
             return getInverse(m);
         }
 
-        else {
+        else if (method == 2) {
 
             det = Determinan.rowReductionDet(m).det;
 
@@ -72,6 +74,23 @@ public class Inverse {
 
             return adj.multiply(1.0 / det);
             
+        }
+
+        return null;
+    }
+
+    public static void outputInverse(Matrix m, int method) {
+        // Matrix m adalah matriks yang ingin dicari inversenya
+
+        if (method == 1)
+        {
+
+        }
+
+        else if (method == 2)
+        {
+            Utils.println("Hasil inverse : ");
+            Matrix.displayMatrix(getInverse(m));
         }
     }
 }

@@ -1,7 +1,6 @@
 package mtrx.Methods;
 
 import mtrx.Matrix.*;
-import mtrx.Utility.*;
 
 public class ImageScaler {
 
