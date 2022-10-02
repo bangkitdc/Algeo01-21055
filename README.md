@@ -49,4 +49,4 @@ Linux/MacOS: Please run manually ¯\_(ツ)_/¯
 ## Note
 Make sure you inputed the matrices right, because we use buffered reader so the number of element in the row or column must be precise
 
-Thank You (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+## Thank You (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
