@@ -137,7 +137,7 @@ public class BicubicInterpolation {
             }
             String res = Utils.result(getBicubicInterpolation(n, xy.getELMT(0, 0), xy.getELMT(0, 1)));
             resRes += String.format("f(%s, %s) = %s", Utils.result(xy.getELMT(0, 0)), Utils.result(xy.getELMT(0, 1)), res);
-            if (k - 1 == N) {
+            if (k != N - 1) {
                 resRes += "\n";
             }
         }
