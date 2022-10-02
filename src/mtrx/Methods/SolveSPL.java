@@ -351,17 +351,17 @@ public class SolveSPL {
 		int input = Utils.select(1, 4);
 		switch (input) {
 			case 1: // Gauss
-				Utils.println("Berhasil menuliskan file :)");
+				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			case 2: // Gauss-Jordan
-				Utils.println("Berhasil menuliskan file :)");
+				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			case 3: // Inverse
-				Utils.println("Berhasil menuliskan file :)");
+				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			case 4: // Cramer
 				Cramer.fileCramer(m, outputFile);
-				Utils.println("Berhasil menuliskan file :)");
+				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			default:
 				break;
