@@ -108,8 +108,19 @@ public class Menu extends Utils{
             case 5: // Interpolasi Bicubic
 
                 break;
-            case 6:
-
+            case 6: // Regresi
+            	inputFileConsole();
+                input = select(1, 2);
+                switch (input) {
+                case 1:
+                    m.inputFileMatrix();
+                    break;
+                case 2:
+                    m = Regression.regressionInput();
+                    break;
+                default:
+                    break;
+                }
                 break;
             case 7:
 
@@ -188,8 +199,19 @@ public class Menu extends Utils{
             case 5: // Interpolasi Bicubic
 
                 break;
-            case 6:
-
+            case 6: // Regresi
+            	outputFileConsole();
+                output = select(1, 2);
+                switch (output) {
+                    case 1:
+                        Regression.regFile(m);
+                        break;
+                    case 2:
+                        Regression.regConsole(m);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 7:
 
