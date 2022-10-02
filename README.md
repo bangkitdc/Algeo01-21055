@@ -45,7 +45,7 @@ Windows :
 4. `test` folder is used to store input and output `.txt`/ `.png` / `img file`
 5. Enjoy (＾▽＾)
 
-Linux/MacOS: Please run manually 乁₍ッ₎ㄏ
+Linux/MacOS: Please run manually （>﹏<）
 
 ## Note
 Make sure you inputed the matrices right, because we use buffered reader so the number of element in the row or column must be precise.
