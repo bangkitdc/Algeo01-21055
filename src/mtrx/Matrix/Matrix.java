@@ -107,7 +107,6 @@ public class Matrix{
 
     public void input4x4Matrix() throws IOException {
         /* KAMUS LOKAL */
-        int n;
 
         /* ALGORITMA */
         Utils.println("");
@@ -118,19 +117,19 @@ public class Matrix{
         this.createMatrix();
     }
     /* --------------------------- File Input ------------------------- */
-    public void inputFileMatrix() throws IOException {
+    public void inputFileMatrix(String relativePath) throws IOException {
         /* Include Squared Matrix */
-        Utils.println("");
-        Utils.println("============ Pilih File ===========");
+        // Utils.println("");
+        // Utils.println("============ Pilih File ===========");
 
-        IO.outputListDir();
+        // IO.outputListDir("../test/txt");
 
-        File[] listFiles = IO.getListDir();
-        Utils.println("Masukkan pilihan: ");
-        int input = Utils.select(1, listFiles.length);
+        // File[] listFiles = IO.getListDir("../test/txt");
+        // Utils.println("Masukkan pilihan: ");
+        // int input = Utils.select(1, listFiles.length);
 
         Matrix mRes = new Matrix();
-        mRes = IO.readMatrix(listFiles[input - 1].getName());
+        mRes = IO.readMatrix(IO.getFile(relativePath, ".txt").getName(), relativePath);
         this.setMatrix(mRes.getRow(), mRes.getCol());
         this.copyELMT(mRes);
     }

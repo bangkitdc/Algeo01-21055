@@ -1,4 +1,5 @@
 package mtrx.Methods;
+import mtrx.Matrix.IO;
 import mtrx.Matrix.Matrix;
 import mtrx.Utility.*;
 import java.io.*;
@@ -69,26 +70,14 @@ public class Interpolation {
             return points.getELMT(row, 1);
         }
 
-        public void InputNewProblem(int inputMethod) throws IOException {
+        public void inputNewProblem(String relativePath) throws IOException {
 
-            switch (inputMethod) {
-                case 1:
-                 
-                    break;
-                case 2:
-                    InputNewProblem();
-                    break;
-                default:
-                    break;
-            }
+            inputProblemFile(relativePath);
 
             solve();
-
-            displayInterpolation();
-            
         }
 
-        public void InputNewProblem() throws IOException {
+        public void inputNewProblem() throws IOException {
 
             Utils.println("Masukan derajat polinomial interpolasi : ");
             n = Utils.inputInt();
@@ -96,10 +85,18 @@ public class Interpolation {
             points = new Matrix(n+1, 2);
             m = new Matrix(n+1, n+2);
             problem.inputPoints();
+
+            solve();
         }
 
-        public void InputAbsis() throws IOException {
-            
+        public void inputProblemFile(String relativePath) throws IOException {
+            Matrix problemMat = new Matrix();
+
+            problemMat.inputFileMatrix(relativePath);
+
+            n = (int) problemMat.getELMT(0, 0);
+            m = new Matrix(n+1, n+2);
+            points = problemMat.getSubMatrix(1, problemMat.getLastRow(), 0, 1);
         }
 
         public Matrix getResult()
@@ -125,7 +122,7 @@ public class Interpolation {
             String input;
             BufferedReader bufferedReader = new BufferedReader(Utils.streamReader);
 
-            displayPolinom(Interpolation.problem.getResult());
+            Utils.println(getPolinom(Interpolation.problem.getResult()));
 
             do {
 
@@ -151,20 +148,55 @@ public class Interpolation {
 
                     else {
                         Utils.print("f(" +input + ") = ");
-                        Utils.println(Utils.result(Interpolation.problem.interpolate(x)));
+                        Utils.println(Utils.doubleToString(Interpolation.problem.interpolate(x)));
                     }
                 }
 
             } while (Utils.isDouble(input));
 
-            Utils.println("Operasi interpolasi selesai :)");
+            Utils.println("Operasi interpolasi selesai :)\n");
         }
 
-        public void createOutputFile() throws  IOException {
+        public void createOutputFile(String relativePath) throws  IOException {
+            String defaultExtension = ".txt";
+            String res = getPolinom(result) + "\n";
+            BufferedReader bufferedReader = new BufferedReader(Utils.streamReader);
+            String input = new String();
 
+            do {
+
+                Utils.println("Masukkan nilai x [" 
+                    + Utils.doubleToString(minBound, 4) 
+                    + ", " 
+                    + Utils.doubleToString(maxBound, 4)
+                    + "] (inklusif) untuk interpolasi.");
+
+                Utils.println("(input bukan bilangan akan memberhentikan proses ini)");
+                Utils.print("> ");
+        
+                input = bufferedReader.readLine();
+                Double x;
+
+                if (Utils.isDouble(input))
+                {
+                    x = Double.parseDouble(input);
+
+                    if (x < minBound || x > maxBound)
+                    {
+                        Utils.println("Mohon masukkan input x sesuai rentang interpolasi.");
+                    }
+
+                    else {
+                        res += "f(" +input + ") = " + Utils.doubleToString(Interpolation.problem.interpolate(x), 8) + "\n";
+                    }
+                }
+
+            } while (Utils.isDouble(input));
+
+            IO.writeFileString(res, IO.inputNewFileName(relativePath, defaultExtension), relativePath);
         }
 
-        public void displayPolinom(Matrix result) throws  IOException {
+        public String getPolinom(Matrix result) throws IOException {
 
             // PREKONDISI : result tidak kosong
             // KAMUS LOKAL
@@ -173,20 +205,59 @@ public class Interpolation {
     
             polinom = "f(x) = ";
             
-            for (int i = result.getLastRow(); i > 0; i--) {
+            for (int i = result.getLastRow(); i >= 0; i--) {
                 
-                polinom += result.getELMT(i,0) == 0? 
-                    "" : Utils.doubleToString(result.getELMT(i,0), 4) + "x" + (i > 1? (Integer.toString(i)) + " ": " ");
-    
-                if(result.getELMT(i, 0) != 0)
+                double res = result.getELMT(i,0);
+                String coef = "";
+
+                if (Math.abs(res) - 1 > 1e-9)
                 {
-                    polinom += ((result.getELMT(i - 1,0) < 0) || (i == 1 && result.getELMT(0, 0) == 0)) ? "" : "+ ";
+                    // jika res mendekati 0
+                    if (Math.abs(res) < 1e-9)
+                    {
+                        coef = "";
+                    }
+
+                    else {
+                        coef = Utils.doubleToString(Math.abs(res), 4);
+
+                        if (res < 0)
+                        {
+                            coef = "- " + coef;
+                        }
+
+                        else if (i < result.getLastRow()) {
+                            coef = "+ " + coef;
+                        }
+                    }
+                }
+
+                else {
+
+                    // res mendekati -1
+                    if (res < 0)
+                    {
+                        coef = "- ";
+                    }
+                    // else res mendekati 1
+                    else if (i == 0)
+                    {
+                        coef = "+ 1";
+                    }
+                }
+
+                if (i > 0)
+                {
+                    polinom += result.getELMT(i,0) == 0? 
+                    "" : coef + "x" + (i > 1? (Integer.toString(i)) + " ": " ");
+                }
+
+                else {
+                    polinom += coef;
                 }
             }
-    
-            polinom += result.getELMT(0,0) == 0? "" : Utils.doubleToString(result.getELMT(0,0), 4);
 
-            Utils.println(polinom);
+            return polinom;
         }
 
     }

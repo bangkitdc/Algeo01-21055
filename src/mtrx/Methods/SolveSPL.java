@@ -147,7 +147,7 @@ public class SolveSPL {
         		// apakah persamaan sudah terisi
         		
         		if (cons != 0) {
-        			solution += " " + Utils.result(cons);
+        			solution += " " + Utils.doubleToString(cons);
         			//System.out.printf(" " + Determinan.result(cons));
         			isNull = false;
         		}
@@ -169,7 +169,7 @@ public class SolveSPL {
         	    			solution += String.format(" t%d", freePosition[k]);
         	    			isNull = false;
         	    		} else if (coef != 0) {
-        	    			solution += String.format(" " + Utils.result(Math.abs(coef)) + "t%d", freePosition[k]);
+        	    			solution += String.format(" " + Utils.doubleToString(Math.abs(coef)) + "t%d", freePosition[k]);
         	    			isNull = false;
         	    		}
         		}
@@ -220,7 +220,7 @@ public class SolveSPL {
     	
     		solution += "Solusi:\n";
     		for (int i=0; i<m.getRow(); i++) {
-    			solution += String.format("x%d = %s\n", i+1, Utils.result(m.getELMT(i,0)));
+    			solution += String.format("x%d = %s\n", i+1, Utils.doubleToString(m.getELMT(i,0)));
     		}
     		return solution;
 	}
@@ -270,8 +270,8 @@ public class SolveSPL {
 	}
 
 	/* File */
-	public static void splFile(Matrix m) throws IOException{
-		String outputFile = Menu.outputFile();
+	public static void splFile(Matrix m, String relativePath) throws IOException{
+		String outputFile = IO.inputNewFileName(relativePath, ".txt");
 		Utils.println("");
 		Utils.println("=========== Pilih Metode ==========");
 		Utils.println("[1] Metode Eliminasi Gauss");
@@ -284,21 +284,21 @@ public class SolveSPL {
 		switch (input) {
 			case 1: // Gauss
 				gauss(m);
-	    		IO.writeFileString(outputFile, gaussOutputSolution(m));
+	    		IO.writeFileString(gaussOutputSolution(m), outputFile, relativePath);
 				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			case 2: // Gauss-Jordan
 				gaussJordan(m);
-	    		IO.writeFileString(outputFile, gaussJordanOutputSolution(m));
+	    		IO.writeFileString(gaussJordanOutputSolution(m), outputFile, relativePath);
 				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			case 3: // Inverse
 				m = inverseSolution(m);
-	    		IO.writeFileString(outputFile, inverseOutputSolution(m));
+	    		IO.writeFileString(inverseOutputSolution(m), outputFile, relativePath);
 				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			case 4: // Cramer
-				Cramer.fileCramer(m, outputFile);
+				Cramer.fileCramer(m, outputFile, relativePath);
 				Utils.println("\nBerhasil menuliskan file :)");
 				break;
 			default:

@@ -74,13 +74,13 @@ public class Determinan {
         Utils.println("");
 
         det = cofactorDet(m);
-        Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + Utils.result(det));
+        Utils.println("Dengan ekspansi baris pertama, Determinan matrix tersebut adalah " + Utils.doubleToString(det));
     }
 
     /* File */
-    public static void fileCofactorDet(Matrix m, String fileName) {
+    public static void fileCofactorDet(Matrix m, String fileName, String relativePath) {
         /* ALGORITMA - Output Purpose */
-        IO.writeFileString(fileName, "Determinan Matrix: " + Utils.result(cofactorDet(m)));
+        IO.writeFileString("Determinan Matrix: " + Utils.doubleToString(cofactorDet(m)), fileName, relativePath);
     }
 
     /* ------------------------- Row Reduction ------------------------ */
@@ -132,13 +132,13 @@ public class Determinan {
 
         det = res.det;
         Utils.println("SwapRow count: " + res.k + ", maka perkalian diagonal dikali " + (int) Math.pow(-1, res.k));
-        Utils.println("Maka, determinan matrix tersebut adalah " + Utils.result(det));
+        Utils.println("Maka, determinan matrix tersebut adalah " + Utils.doubleToString(det));
     }
 
     /* File */
-    public static void fileRowReductionDet(Matrix m, String fileName) {
+    public static void fileRowReductionDet(Matrix m, String fileName, String relativePath) {
         /* ALGORITMA - Output Purpose */
-        IO.writeFileString(fileName, "Determinan Matrix: " + Utils.result(rowReductionDet(m).det));
+        IO.writeFileString("Determinan Matrix: " + Utils.doubleToString(rowReductionDet(m).det), fileName, relativePath);
     }
 
     /* -------------------------- Input ------------------------- */
@@ -164,8 +164,8 @@ public class Determinan {
     }
 
     /* File */
-    public static void detFile(Matrix m) throws IOException {
-        String outputFile = Menu.outputFile();
+    public static void detFile(Matrix m, String relativePath) throws IOException {
+        String outputFile = IO.inputNewFileName(relativePath, ".txt");
         Utils.println("");
         Utils.println("=========== Pilih Metode ==========");
         Utils.println("[1] Metode Ekspansi Kofaktor");
@@ -175,11 +175,11 @@ public class Determinan {
         int input = Utils.select(1, 2);
         switch (input) {
             case 1:
-                fileCofactorDet(m, outputFile);
+                fileCofactorDet(m, outputFile, relativePath);
                 Utils.println("\nBerhasil menuliskan file :)");
                 break;
             case 2:
-                fileRowReductionDet(m, outputFile);
+                fileRowReductionDet(m, outputFile, relativePath);
                 Utils.println("\nBerhasil menuliskan file :)");
                 break;
             default:

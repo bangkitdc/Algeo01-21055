@@ -41,6 +41,26 @@ public class Menu extends Utils{
 
         int menu = select(1, 8);
         int input, output;
+
+        String[] inputRelativePaths = new String[] {
+            "../test/txt/inputs/SPL/",
+            "../test/txt/inputs/determinan/",
+            "../test/txt/inputs/inverse/",
+            "../test/txt/inputs/polinom/",
+            "../test/txt/inputs/bikubik/",
+            "../test/txt/inputs/regresi/",
+            "../test/img/",
+        };
+
+        String[] outputRelativePaths = new String[] {
+            "../test/txt/outputs/SPL/",
+            "../test/txt/outputs/determinan/",
+            "../test/txt/outputs/inverse/",
+            "../test/txt/outputs/polinom/",
+            "../test/txt/outputs/bikubik/",
+            "../test/txt/outputs/regresi/",
+            "../test/img/",
+        };
         
         /* Input */
         switch (menu) {
@@ -49,7 +69,7 @@ public class Menu extends Utils{
                 input = select(1, 2);
                 switch (input) {
                     case 1:
-                        m.inputFileMatrix();
+                        m.inputFileMatrix(inputRelativePaths[menu - 1]);
                         break;
                     case 2:
                         m.inputMatrix();
@@ -63,7 +83,7 @@ public class Menu extends Utils{
                 input = select(1, 2);
                 switch (input) {
                     case 1:
-                        m.inputFileMatrix();
+                        m.inputFileMatrix(inputRelativePaths[menu - 1]);
                         break;
                     case 2:
                         m.inputSquaredMatrix();
@@ -73,12 +93,11 @@ public class Menu extends Utils{
                 }
                 break;
             case 3: // Inverse
-                
                 inputFileConsole();
                 input = select(1, 2);
                 switch (input) {
                     case (1):
-                        m.inputFileMatrix();
+                        m.inputFileMatrix(inputRelativePaths[menu - 1]);
                         break;
                     case 2:
                         m.inputSquaredMatrix();
@@ -94,10 +113,10 @@ public class Menu extends Utils{
                 input = select(1, 2);
                 switch (input) {
                     case (1):
-                        Interpolation.problem.InputNewProblem(input);
+                        Interpolation.problem.inputNewProblem(inputRelativePaths[menu - 1]);
                         break;
                     case 2:
-                        Interpolation.problem.InputNewProblem(input);
+                        Interpolation.problem.inputNewProblem();
                         break;
                     default:
                         break;
@@ -109,7 +128,7 @@ public class Menu extends Utils{
                 input = select(1, 2);
                 switch (input) {
                     case 1:
-                        m.inputFileMatrix();
+                        m.inputFileMatrix(inputRelativePaths[menu - 1]);
                         break;
                     case 2:
                         m.input4x4Matrix();
@@ -123,7 +142,7 @@ public class Menu extends Utils{
                 input = select(1, 2);
                 switch (input) {
                 case 1:
-                    m.inputFileMatrix();
+                    m.inputFileMatrix(inputRelativePaths[menu - 1]);
                     break;
                 case 2:
                     m = Regression.regressionInput();
@@ -133,7 +152,7 @@ public class Menu extends Utils{
                 }
                 break;
             case 7: // Image Resizer
-                ImageResize.inputImage();
+                ImageResize.inputImage(inputRelativePaths[menu - 1]);
                 break;
             case 8:
                 exit();
@@ -149,7 +168,7 @@ public class Menu extends Utils{
                 output = select(1, 2);
                 switch (output) {
                     case 1:
-                        SolveSPL.splFile(m);
+                        SolveSPL.splFile(m, outputRelativePaths[menu - 1]);
                         break;
                     case 2:
                         SolveSPL.splConsole(m);
@@ -164,7 +183,7 @@ public class Menu extends Utils{
                 output = select(1, 2);
                 switch (output) {
                     case 1:
-                        Determinan.detFile(m);
+                        Determinan.detFile(m, outputRelativePaths[menu - 1]);
                         break;
                     case 2:
                         Determinan.detConsole(m);
@@ -179,10 +198,10 @@ public class Menu extends Utils{
 
                 switch (output) {
                     case 1:
-                        Inverse.outputInverse(m, output);
+                        Inverse.outputInverse(m, outputRelativePaths[menu - 1]);
                         break;
                     case 2:
-                        Inverse.outputInverse(m, output);
+                        Inverse.outputInverse(m);
                         break;
                     default:
                         break;
@@ -190,14 +209,27 @@ public class Menu extends Utils{
 
                 break;
             case 4:
-
+    
+                outputFileConsole();
+                output = select(1, 2);
+                switch (output) {
+                    case 1:
+                        Interpolation.problem.createOutputFile(outputRelativePaths[menu - 1]);
+                        break;
+                    case 2:
+                        Interpolation.problem.displayInterpolation();
+                        break;
+                    default:
+                        break;
+                }
                 break;
+
             case 5: // Interpolasi Bicubic
                 outputFileConsole();
                 output = select(1, 2);
                 switch (output) {
                     case 1:
-                        BicubicInterpolation.bicubicFile(m);
+                        BicubicInterpolation.bicubicFile(m, outputRelativePaths[menu - 1]);
                         break;
                     case 2:
                         BicubicInterpolation.bicubicConsole(m);
@@ -211,7 +243,7 @@ public class Menu extends Utils{
                 output = select(1, 2);
                 switch (output) {
                     case 1:
-                        Regression.regFile(m);
+                        Regression.regFile(m, outputRelativePaths[menu - 1]);
                         break;
                     case 2:
                         Regression.regConsole(m);
@@ -239,23 +271,23 @@ public class Menu extends Utils{
         println("Masukkan pilihan: ");
     }
 
-    public static String outputFile() {
-        InputStreamReader streamReader = new InputStreamReader(System.in);
-        BufferedReader bufferedReader = new BufferedReader(streamReader);
+    // public static String outputFile() {
+    //     InputStreamReader streamReader = new InputStreamReader(System.in);
+    //     BufferedReader bufferedReader = new BufferedReader(streamReader);
 
-        println("");
-        println("Masukkan name file output: ");
-        print("> ");
+    //     println("");
+    //     println("Masukkan name file output: ");
+    //     print("> ");
 
-        String fileName = new String();
+    //     String fileName = new String();
 
-        try {
-            fileName = bufferedReader.readLine();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return fileName;
-    }
+    //     try {
+    //         fileName = bufferedReader.readLine();
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return fileName;
+    // }
 
     public static void outputFileConsole() {
         println("");
