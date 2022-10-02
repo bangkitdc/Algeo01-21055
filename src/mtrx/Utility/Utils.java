@@ -114,19 +114,37 @@ public class Utils {
     }
 
     /* Formatting Output */
-    public static String result(double det) {
+    public static String result(double val) {
         /* KAMUS LOKAL */
         String s;
 
         /* ALGORITMA */
-        if (det == (int) det) {
-            s = String.valueOf((int) det);
+        if (val == (int) val) {
+            s = String.valueOf((int) val);
         } else {
-            det = new BigDecimal(det).setScale(8, RoundingMode.HALF_UP).doubleValue();
-            if (det == (int) det) { // 2x times to make sure
-                s = String.valueOf((int) det);
+            val = new BigDecimal(val).setScale(8, RoundingMode.HALF_UP).doubleValue();
+            if (val == (int) val) { // 2x times to make sure
+                s = String.valueOf((int) val);
             } else {
-                s = String.valueOf(det);
+                s = String.valueOf(val);
+            }
+        }
+        return s;
+    }
+
+    public static String doubleToString(double val, int limit) {
+        /* KAMUS LOKAL */
+        String s;
+
+        /* ALGORITMA */
+        if (val == (int) val) {
+            s = String.valueOf((int) val);
+        } else {
+            val = new BigDecimal(val).setScale(limit, RoundingMode.HALF_UP).doubleValue();
+            if (val == (int) val) { // 2x times to make sure
+                s = String.valueOf((int) val);
+            } else {
+                s = String.valueOf(val);
             }
         }
         return s;

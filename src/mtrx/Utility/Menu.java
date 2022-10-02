@@ -1,7 +1,6 @@
 package mtrx.Utility;
 
 import java.io.*;
-
 import mtrx.Matrix.*;
 import mtrx.Methods.*;
 
@@ -20,7 +19,7 @@ public class Menu extends Utils{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } while (Y == 'Y');
+        } while (Y == 'Y' || Y == 'y');
         exit();
     }
 
@@ -79,10 +78,10 @@ public class Menu extends Utils{
                 input = select(1, 2);
                 switch (input) {
                     case (1):
-                        m.inputSquaredMatrix(1);
+                        m.inputFileMatrix();
                         break;
                     case 2:
-                        m.inputSquaredMatrix(2);
+                        m.inputSquaredMatrix();
                         break;
                     default:
                         break;
@@ -95,10 +94,10 @@ public class Menu extends Utils{
                 input = select(1, 2);
                 switch (input) {
                     case (1):
-                        
+                        Interpolation.problem.InputNewProblem(input);
                         break;
                     case 2:
-                        Interpolation.problem.InputNewProblem();
+                        Interpolation.problem.InputNewProblem(input);
                         break;
                     default:
                         break;
@@ -111,8 +110,8 @@ public class Menu extends Utils{
             case 6:
 
                 break;
-            case 7:
-
+            case 7: // Image Resizer
+                ImageResize.inputImage();
                 break;
             case 8:
                 exit();
@@ -158,10 +157,10 @@ public class Menu extends Utils{
 
                 switch (output) {
                     case 1:
-                    
+                        Inverse.outputInverse(m, output);
                         break;
                     case 2:
-             
+                        Inverse.outputInverse(m, output);
                         break;
                     default:
                         break;
@@ -169,20 +168,6 @@ public class Menu extends Utils{
 
                 break;
             case 4:
-                outputFileConsole();
-                output = select(1, 2);
-
-                switch (output) {
-                    case 1:
-                    
-                        break;
-                    case 2:
-                        Interpolation.problem.displayInterpolation();
-                        break;
-
-                    default:
-                        break;
-                }
 
                 break;
             case 5: // Interpolasi Bicubic
@@ -192,7 +177,7 @@ public class Menu extends Utils{
 
                 break;
             case 7:
-
+                
                 break;
             case 8:
                 exit();
