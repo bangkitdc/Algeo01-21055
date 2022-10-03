@@ -85,6 +85,14 @@ public class Matrix{
         n = Utils.inputInt();
         Utils.println("");
 
+        inputMatrix(m, n);
+    }
+
+    public void inputMatrix(int m, int n) throws IOException {
+        /* KAMUS LOKAL */
+       
+        /* ALGORITMA */
+
         this.setMatrix(m, n);
         Utils.println("Silahkan masukkan setiap elemen matrix: ");
         this.createMatrix();
@@ -119,14 +127,6 @@ public class Matrix{
     /* --------------------------- File Input ------------------------- */
     public void inputFileMatrix(String relativePath) throws IOException {
         /* Include Squared Matrix */
-        // Utils.println("");
-        // Utils.println("============ Pilih File ===========");
-
-        // IO.outputListDir("../test/txt");
-
-        // File[] listFiles = IO.getListDir("../test/txt");
-        // Utils.println("Masukkan pilihan: ");
-        // int input = Utils.select(1, listFiles.length);
 
         Matrix mRes = new Matrix();
         mRes = IO.readMatrix(IO.getFile(relativePath, ".txt").getName(), relativePath);

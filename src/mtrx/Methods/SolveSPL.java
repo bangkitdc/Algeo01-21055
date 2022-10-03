@@ -229,13 +229,9 @@ public class SolveSPL {
 	/* -------------------------- Input ------------------------- */
 	/* Console */
 	public static void splConsole(Matrix m) throws IOException{
-		Utils.println("");
-		Utils.println("=========== Pilih Metode ==========");
-		Utils.println("[1] Metode Eliminasi Gauss");
-		Utils.println("[2] Metode Eliminasi Gauss-Jordan");
-		Utils.println("[3] Metode Matrix Balikan");
-		Utils.println("[4] Kaidah Cramer");
-		Utils.println("Masukkan pilihan: ");
+		Menu.showChoice("Metode", 
+			new String[]{"Metode Eliminasi Gauss", "Metode Eliminasi Gauss-Jordan", "Metode Matrix Balikan", "Kaidah Cramer"},
+			 4);
 
 		int input = Utils.select(1, 4);
 		switch (input) {
@@ -272,13 +268,10 @@ public class SolveSPL {
 	/* File */
 	public static void splFile(Matrix m, String relativePath) throws IOException{
 		String outputFile = IO.inputNewFileName(relativePath, ".txt");
-		Utils.println("");
-		Utils.println("=========== Pilih Metode ==========");
-		Utils.println("[1] Metode Eliminasi Gauss");
-		Utils.println("[2] Metode Eliminasi Gauss-Jordan");
-		Utils.println("[3] Metode Matrix Balikan");
-		Utils.println("[4] Kaidah Cramer");
-		Utils.println("Masukkan pilihan: ");
+
+		Menu.showChoice("Metode", 
+			new String[]{"Metode Eliminasi Gauss", "Metode Eliminasi Gauss-Jordan", "Metode Matrix Balikan", "Kaidah Cramer"},
+			 4);
 
 		int input = Utils.select(1, 4);
 		switch (input) {
@@ -304,5 +297,34 @@ public class SolveSPL {
 			default:
 				break;
 		}
+	}
+
+	public static void inputConsole(Matrix m) throws IOException
+	{
+		Matrix A, b, bt;
+
+		A = new Matrix();
+		b = new Matrix();
+
+		Utils.println("======== Input data sistem persamaan linear Ax = b ========");
+		Utils.println("");
+		Utils.println("Masukkan data matriks A : ");
+
+		A.inputMatrix();
+		
+		Utils.println("");
+		Utils.println("Masukkan data matriks b : ");
+		Utils.println("(Input dalam satu baris. Contoh = 1 2 3 4 )");
+		Utils.println("");
+
+		b.inputMatrix(1, A.getRow());
+		bt = b.transpose();
+
+		m.setMatrix(A.getRow(), A.getCol() + 1);
+		m.copyToSubMatrix(A, 0, A.getLastRow(), 0, A.getLastCol());
+		m.copyToSubMatrix(bt, 0, bt.getLastRow(), A.getLastCol() + 1, A.getLastCol() + 1);
+
+
+
 	}
 }

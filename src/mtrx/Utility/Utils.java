@@ -113,25 +113,6 @@ public class Utils {
         }
     }
 
-    /* Formatting Output */
-    // public static String result(double val) {
-    //     /* KAMUS LOKAL */
-    //     String s;
-
-    //     /* ALGORITMA */
-    //     if (val == (int) val) {
-    //         s = String.valueOf((int) val);
-    //     } else {
-    //         val = new BigDecimal(val).setScale(8, RoundingMode.HALF_UP).doubleValue();
-    //         if (val == (int) val) { // 2x times to make sure
-    //             s = String.valueOf((int) val);
-    //         } else {
-    //             s = String.valueOf(val);
-    //         }
-    //     }
-    //     return s;
-    // }
-
     public static String doubleToString(double val) {
         /* KAMUS LOKAL */
    

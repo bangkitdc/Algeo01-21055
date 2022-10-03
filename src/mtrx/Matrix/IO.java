@@ -85,8 +85,6 @@ public class IO {
         /* ALGORITMA */
         try {
 
-        // file = new File(System.getProperty("user.dir") + "/src/mtrx/test/" + outputName);
-
             FileReader reader = new FileReader(relativePath + fileName);
 
             BufferedReader bufferReader = new BufferedReader(reader);
@@ -166,6 +164,7 @@ public class IO {
         do
         {
             Utils.println("Masukkan nama file yang ingin diproses : ");
+            Utils.print("> ");
             try {
                 fileName = readInput.readLine();
             } catch (Exception e) {
@@ -255,6 +254,7 @@ public class IO {
         do
         {
             Utils.println("Masukkan nama file keluaran : ");
+            Utils.print("> ");
             try {
                 outputName = readInput.readLine();
             } catch (Exception e) {
@@ -269,6 +269,7 @@ public class IO {
             {
                 Utils.println(newName + " sudah ada pada folder tujuan. Apakah Anda ingin mengganti file tersebut?");
                 Utils.println("(0 : tidak, 1 : ya)");
+                Utils.println("");
 
                 int selectInput = Utils.select(0, 1);
                 

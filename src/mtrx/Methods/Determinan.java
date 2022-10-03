@@ -145,10 +145,9 @@ public class Determinan {
     /* Console */
     public static void detConsole(Matrix m) throws IOException {
         Utils.println("");
-        Utils.println("=========== Pilih Metode ==========");
-        Utils.println("[1] Metode Ekspansi Kofaktor");
-        Utils.println("[2] Metode Reduksi Baris");
-        Utils.println("Masukkan pilihan: ");
+        Menu.showChoice("Metode", 
+			new String[]{"Metode Ekspansi Kofaktor", "Metode Reduksi Baris"},
+			 2);
 
         int input = Utils.select(1, 2);
         switch (input) {
@@ -167,10 +166,10 @@ public class Determinan {
     public static void detFile(Matrix m, String relativePath) throws IOException {
         String outputFile = IO.inputNewFileName(relativePath, ".txt");
         Utils.println("");
-        Utils.println("=========== Pilih Metode ==========");
-        Utils.println("[1] Metode Ekspansi Kofaktor");
-        Utils.println("[2] Metode Reduksi Baris");
-        Utils.println("Masukkan pilihan: ");
+
+        Menu.showChoice("Metode", 
+			new String[]{"Metode Ekspansi Kofaktor", "Metode Reduksi Baris"},
+			 2);
 
         int input = Utils.select(1, 2);
         switch (input) {

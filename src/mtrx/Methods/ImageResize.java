@@ -3,7 +3,10 @@ package mtrx.Methods;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
 import mtrx.Matrix.*;
+import mtrx.Utility.Utils;
+
 import java.io.*;
 
 public class ImageResize {
@@ -226,7 +229,9 @@ public class ImageResize {
     public static void processImage(File file, String outputName, String relativePath) throws IOException {
         // Reading the image
     
-        System.out.println("Please Wait...");
+        Utils.println("======= PROCESSING IMAGE =======");
+        Utils.println("Please Wait...");
+        Utils.println("");
 
         BufferedImage img = ImageIO.read(file);
 
@@ -294,9 +299,9 @@ public class ImageResize {
         file = new File(relativePath + outputName);
         ImageIO.write(img, "png", file);
 
-        System.out.println("Done...");
-
-        System.out.println("File output disimpin di path : " + file.getCanonicalPath());
+        Utils.println("Done...");
+        Utils.println("File output disimpin di path : " + file.getCanonicalPath());
+        Utils.println("");
     }
 
     public static void inputImage(String relativePath) throws IOException {

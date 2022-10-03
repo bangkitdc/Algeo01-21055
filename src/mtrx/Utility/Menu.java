@@ -72,7 +72,7 @@ public class Menu extends Utils{
                         m.inputFileMatrix(inputRelativePaths[menu - 1]);
                         break;
                     case 2:
-                        m.inputMatrix();
+                        SolveSPL.inputConsole(m);
                         break;
                     default:
                         break;
@@ -271,24 +271,6 @@ public class Menu extends Utils{
         println("Masukkan pilihan: ");
     }
 
-    // public static String outputFile() {
-    //     InputStreamReader streamReader = new InputStreamReader(System.in);
-    //     BufferedReader bufferedReader = new BufferedReader(streamReader);
-
-    //     println("");
-    //     println("Masukkan name file output: ");
-    //     print("> ");
-
-    //     String fileName = new String();
-
-    //     try {
-    //         fileName = bufferedReader.readLine();
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return fileName;
-    // }
-
     public static void outputFileConsole() {
         println("");
         println("======= Pilih Jenis Output ========");
@@ -299,7 +281,7 @@ public class Menu extends Utils{
 
     public static void showChoice(String title, String[] methods, int length) {
         println("");
-        println("====== Pilih Jenis" + title + " ======");
+        println("====== Pilih Jenis " + title + " ======");
         
         for (int i = 0; i < length; i++)
         {
