@@ -1,8 +1,0 @@
-Persamaan regresi yang terbentuk:
-f(x) = -3.50777814 - 0.00262499x1 + 7.9894E-4x2 + 0.15415503x3 
-
-Maka untuk input:
-x1 = 50
-x2 = 76
-x3 = 29.3
-Didapatkan f(x) = 0.93843423
