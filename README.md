@@ -17,9 +17,8 @@ Tugas Besar 1 Aljabar Linear dan Geometri IF21 is a project to build matrice cal
     - Reduksi Baris
 3. Matriks Balikan (Inverse)
     - Eliminasi Gauss-Jordan
-    - etc.
+    - Adjoint
 4. Interpolasi Polinom
-    - etc.
 5. Interpolasi Bicubic
 6. Regresi Linear Berganda
 7. Image Resizer
