@@ -142,14 +142,30 @@ public class Interpolation {
                 Utils.println("");
                 if (Utils.isDouble(input))
                 {
+                    boolean isValid = false;
                     x = Double.parseDouble(input);
 
                     if (x < minBound || x > maxBound)
                     {
-                        Utils.println("Mohon masukkan input x sesuai rentang interpolasi.");
+                        Utils.println("Nilai x berada di luar rentang interpolasi. Apakah Anda ingin membatalkan input x ini?");
+                        
+                        Utils.println("(0 : batalkan, 1 : lanjutkan)");
+                        Utils.println("");
+
+                        int verif = Utils.select(0, 1);
+
+                        if (verif == 1)
+                        {
+                            isValid = true;
+                        }
+
                     }
 
                     else {
+                        isValid = true;
+                    }
+
+                    if (isValid) {
                         Utils.print("f(" +input + ") = ");
                         Utils.println(Utils.doubleToString(Interpolation.problem.interpolate(x)));
                     }
@@ -184,14 +200,30 @@ public class Interpolation {
 
                 if (Utils.isDouble(input))
                 {
+                    boolean isValid = false;
                     x = Double.parseDouble(input);
 
                     if (x < minBound || x > maxBound)
                     {
-                        Utils.println("Mohon masukkan input x sesuai rentang interpolasi.");
+                        Utils.println("Nilai x berada di luar rentang interpolasi. Apakah Anda ingin membatalkan input x ini?");
+                        
+                        Utils.println("(0 : batalkan, 1 : lanjutkan)");
+                        Utils.println("");
+
+                        int verif = Utils.select(0, 1);
+
+                        if (verif == 1)
+                        {
+                            isValid = true;
+                        }
+
                     }
 
                     else {
+                        isValid = true;
+                    }
+
+                    if (isValid) {
                         res += "f(" +input + ") = " + Utils.doubleToString(Interpolation.problem.interpolate(x), 8) + "\n";
                     }
                 }
