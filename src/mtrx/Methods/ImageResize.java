@@ -14,7 +14,6 @@ public class ImageResize {
     final static double oneThird = ((double) 1) / ((double) 3);
 
     public static Matrix DoubleScale(Matrix m){
-        // PREKONDISI : jumlah elemen matriks >= 16
         // KAMUS LOKAL
 
         Matrix mRes, bicubicInterpolationRes;

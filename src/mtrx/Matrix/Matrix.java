@@ -4,8 +4,6 @@ import java.io.*;
 import java.math.*;
 
 public class Matrix{
-    public static final int ROW_CAP = 100;
-    public static final int COL_CAP = 100;
     private double[][] mem;
     private int ROW_EFF;
     private int COL_EFF;

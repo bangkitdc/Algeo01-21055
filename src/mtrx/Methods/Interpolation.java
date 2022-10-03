@@ -122,10 +122,12 @@ public class Interpolation {
             String input;
             BufferedReader bufferedReader = new BufferedReader(Utils.streamReader);
 
+            Utils.println("Solusi polinomial : ");
             Utils.println(getPolinom(Interpolation.problem.getResult()));
 
             do {
 
+                Utils.println("");
                 Utils.println("Masukkan nilai x [" 
                     + Utils.doubleToString(minBound, 4) 
                     + ", " 
@@ -137,16 +139,33 @@ public class Interpolation {
         
                 input = bufferedReader.readLine();
 
+                Utils.println("");
                 if (Utils.isDouble(input))
                 {
+                    boolean isValid = false;
                     x = Double.parseDouble(input);
 
                     if (x < minBound || x > maxBound)
                     {
-                        Utils.println("Mohon masukkan input x sesuai rentang interpolasi.");
+                        Utils.println("Nilai x berada di luar rentang interpolasi. Apakah Anda ingin membatalkan input x ini?");
+                        
+                        Utils.println("(0 : batalkan, 1 : lanjutkan)");
+                        Utils.println("");
+
+                        int verif = Utils.select(0, 1);
+
+                        if (verif == 1)
+                        {
+                            isValid = true;
+                        }
+
                     }
 
                     else {
+                        isValid = true;
+                    }
+
+                    if (isValid) {
                         Utils.print("f(" +input + ") = ");
                         Utils.println(Utils.doubleToString(Interpolation.problem.interpolate(x)));
                     }
@@ -164,7 +183,7 @@ public class Interpolation {
             String input = new String();
 
             do {
-
+                Utils.println("");
                 Utils.println("Masukkan nilai x [" 
                     + Utils.doubleToString(minBound, 4) 
                     + ", " 
@@ -177,16 +196,34 @@ public class Interpolation {
                 input = bufferedReader.readLine();
                 Double x;
 
+                Utils.println("");
+
                 if (Utils.isDouble(input))
                 {
+                    boolean isValid = false;
                     x = Double.parseDouble(input);
 
                     if (x < minBound || x > maxBound)
                     {
-                        Utils.println("Mohon masukkan input x sesuai rentang interpolasi.");
+                        Utils.println("Nilai x berada di luar rentang interpolasi. Apakah Anda ingin membatalkan input x ini?");
+                        
+                        Utils.println("(0 : batalkan, 1 : lanjutkan)");
+                        Utils.println("");
+
+                        int verif = Utils.select(0, 1);
+
+                        if (verif == 1)
+                        {
+                            isValid = true;
+                        }
+
                     }
 
                     else {
+                        isValid = true;
+                    }
+
+                    if (isValid) {
                         res += "f(" +input + ") = " + Utils.doubleToString(Interpolation.problem.interpolate(x), 8) + "\n";
                     }
                 }
@@ -201,7 +238,6 @@ public class Interpolation {
             // PREKONDISI : result tidak kosong
             // KAMUS LOKAL
             String polinom;
-            Utils.println("Solusi polinomial : ");
     
             polinom = "f(x) = ";
             
@@ -210,7 +246,7 @@ public class Interpolation {
                 double res = result.getELMT(i,0);
                 String coef = "";
 
-                if (Math.abs(res) - 1 > 1e-9)
+                if (Math.abs(Math.abs(res) - 1) > 1e-9)
                 {
                     // jika res mendekati 0
                     if (Math.abs(res) < 1e-9)
@@ -238,6 +274,11 @@ public class Interpolation {
                     if (res < 0)
                     {
                         coef = "- ";
+
+                        if (i == 0)
+                        {
+                            coef += "1";
+                        }
                     }
                     // else res mendekati 1
                     else if (i == 0)

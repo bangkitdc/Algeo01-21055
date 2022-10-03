@@ -1,0 +1,7 @@
+Solusi SPL:
+x1 = 3 + t2
+x2 = 2t2
+x3 = t1
+x4 = -1 + t2
+x5 = t2
+Dengan t1 dan t2 merupakan variabel bebas.
