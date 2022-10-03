@@ -39,7 +39,7 @@ public class Inverse {
 
     public static Matrix getInverse (Matrix m, int method) {
 
-        // method == 0 menandakan getInverse akan menggunakan methode OBE, sedangkan nilai method lainnya menandakan
+        // method == 1 menandakan getInverse akan menggunakan methode OBE, sedangkan nilai method == 2 menandakan
         // getInverse menggunakan metode matriks adjoin
 
         // KAMUS LOKAL
