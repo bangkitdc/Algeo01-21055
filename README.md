@@ -47,6 +47,6 @@ Windows :
 Linux/MacOS: Please run manually （>﹏<）
 
 ## Note
-Make sure you inputed the matrices right, because we use buffered reader so the number of element in the row or column must be precise.
+Make sure you inputed the matrices right, the number of element in the row or column must be precise. Input can be integer, double, or fraction. If you want to test your `.txt` file or your image `img file`, you can put your file in `test/img` for image file or `test/txt` for text file.
 
 ## Thank You (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
