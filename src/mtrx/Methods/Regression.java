@@ -6,6 +6,7 @@ import java.lang.Math;
 
 public class Regression {
 
+
 	public static Matrix regressionInput() throws IOException {
 		// I.S. -
 		// F.S. return matrix berisi input untuk regresi
@@ -17,7 +18,7 @@ public class Regression {
 		int k = Utils.inputInt();
 		Utils.println("");
 
-		Matrix m = new Matrix(k, n+1);
+		Matrix m = new Matrix(k+1, n+1);
 		
 		// input nilai x dan y setiap persamaan
 		for (int i=0; i<k; i++) {
@@ -30,9 +31,17 @@ public class Regression {
 			m.setELMT(i, n, Utils.inputDouble());
 		}
 		
-		Matrix.displayMatrix(m);
+		
+		// input nilai x yang akan ditaksir
+		Utils.println("\nMasukkan nilai-nilai x yang akan ditaksir nilai fungsinya.");
+		for (int i=0; i<m.getCol()-1; i++) {
+			Utils.printf("Masukkan nilai variabel x%d\n", i+1);
+			m.setELMT(k, i, Utils.inputDouble());
+		}
+		
 		return m;
 	}
+	
 	
 	public static Matrix regressionMatrix(Matrix mIn) {
 		// I.S. matrix berisi input regresi
@@ -41,10 +50,10 @@ public class Regression {
 		Matrix mOut = new Matrix(mIn.getCol(), mIn.getCol()+1);
 		
 		// set m[0][0]
-		mOut.setELMT(0, 0, mIn.getRow());
+		mOut.setELMT(0, 0, mIn.getRow()-1);
 		
 		// set baris paling atas dan kolom paling kiri
-		for (int i=0; i<mIn.getRow(); i++) {
+		for (int i=0; i<mIn.getRow()-1; i++) {
 			for (int j=1; j<=mIn.getCol(); j++) {
 				mOut.setELMT(0, j, mOut.getELMT(0, j) + mIn.getELMT(i, j-1));
 				if (j<mIn.getCol()) {
@@ -56,7 +65,7 @@ public class Regression {
 		// set sisa matrix yg kosong
 		for (int i=1; i<mIn.getCol(); i++) {
 			for (int j=1; j<=mIn.getCol(); j++) {
-				for (int k=0; k<mIn.getRow(); k++) {
+				for (int k=0; k<mIn.getRow()-1; k++) {
 					mOut.setELMT(i, j, mOut.getELMT(i, j) + mIn.getELMT(k, j-1)*mIn.getELMT(k, i-1));
 				}
 			}
@@ -65,6 +74,7 @@ public class Regression {
 		return mOut;
 	}
 	
+
 	public static String regressionFunction(Matrix m, Matrix x) {
 		// I.S. matrix m berisi SPL regresi yg sudah dieliminasi
 		//      matrix x berisi nilai xi yang ingin ditaksir 
@@ -74,19 +84,21 @@ public class Regression {
 		
 		// menghitung hasil fungsi
 		double answer = m.getELMT(0, m.getCol()-1);
-		for (int i=0; i<x.getCol(); i++) {
-			answer += m.getELMT(i+1, m.getCol()-1) * x.getELMT(0, i);
+		for (int i=0; i<x.getCol()-1; i++) {
+			answer += m.getELMT(i+1, m.getCol()-1) * x.getELMT(x.getRow()-1, i);
 		}
+		
+		
 		
 		// output hasil
 		solution += "\nMaka untuk input:\n";
-		for (int i=0; i<x.getCol(); i++) {
-			solution += String.format("x%d = %s\n", i+1, Utils.doubleToString(x.getELMT(0, i)));
+		for (int i=0; i<x.getCol()-1; i++) {
+			solution += String.format("x%d = %s\n", i+1, Utils.doubleToString(x.getELMT(x.getRow()-1, i)));
 		}
 		solution += "Didapatkan f(x) = " + Utils.doubleToString(answer) + "\n";
 		
 		return solution;
-	}
+	}	
 	
 	public static String equationOutput(Matrix m) {
 		// I.S. Matrix m sudah dieliminasi
@@ -138,18 +150,11 @@ public class Regression {
 		return solution;
 	}
 	
+	
 	public static void regConsole(Matrix inputMatrix) throws IOException {
 		// DEKLARASI VARIABEL
 		String solution;
-		
-    	// INPUT NILAI Xi YANG AKAN DITAKSIR HASILNYA
-		Matrix x = new Matrix(1,inputMatrix.getCol()-1);
-		Utils.println("\nMasukkan nilai-nilai x yang akan ditaksir nilai fungsinya.");
-		for (int i=0; i<x.getCol(); i++) {
-			Utils.printf("Masukkan nilai variabel x%d\n", i+1);
-			x.setELMT(0, i, Utils.inputDouble());
-		}
-		
+				
 		// Membentuk Matrix SPL dari input
 		Matrix regM = regressionMatrix(inputMatrix);
 		Utils.println("\nMatriks SPL yang terbentuk:");
@@ -161,8 +166,8 @@ public class Regression {
 		Matrix.displayMatrixAugmented(regM, regM.getLastCol()-1);
 		
 		// Membuat solusi regresi
-		solution = equationOutput(regM);		
-		solution += regressionFunction(regM, x);
+		solution = equationOutput(regM);
+		solution += regressionFunction(regM, inputMatrix);
 		Utils.print("\n" + solution);
 	}
 	
@@ -170,14 +175,6 @@ public class Regression {
 		// DEKLARASI VARIABEL
 		String outputFile = IO.inputNewFileName(relativePath, ".txt");
 		String solution;
-
-    	// INPUT NILAI Xi YANG AKAN DITAKSIR HASILNYA
-		Matrix x = new Matrix(1,inputMatrix.getCol()-1);
-		Utils.println("\nMasukkan nilai-nilai x yang akan ditaksir nilai fungsinya.");
-		for (int i=0; i<x.getCol(); i++) {
-			Utils.printf("Masukkan nilai variabel x%d\n", i+1);
-			x.setELMT(0, i, Utils.inputDouble());
-		}
 		
 		// Membentuk Matrix SPL dari input
 		Matrix regM = regressionMatrix(inputMatrix);
@@ -187,7 +184,7 @@ public class Regression {
 		
 		// Membuat solusi regresi
 		solution = equationOutput(regM);		
-		solution += regressionFunction(regM, x);
+		solution += regressionFunction(regM, inputMatrix);
 		IO.writeFileString(solution, outputFile, relativePath);
 		Utils.println("Berhasil menuliskan file :)");
 	}    
