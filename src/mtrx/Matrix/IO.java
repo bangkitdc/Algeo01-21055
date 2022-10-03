@@ -171,12 +171,15 @@ public class IO {
                 e.printStackTrace();
             }
 
+            Utils.print("");
             file = new File(relativePath + fileName);
 
             if (!(file.exists() && !file.isDirectory()))
             {
                 Utils.println("File yang ingin diproses tidak ada. Mohon masukkan nama file yang benar.");
             }
+
+            Utils.print("");
         }
 
         while(!(file.exists() && !file.isDirectory()));
@@ -267,6 +270,7 @@ public class IO {
 
             if ((outFile.exists() && !outFile.isDirectory()))
             {
+                Utils.print("");
                 Utils.println(newName + " sudah ada pada folder tujuan. Apakah Anda ingin mengganti file tersebut?");
                 Utils.println("(0 : tidak, 1 : ya)");
                 Utils.println("");

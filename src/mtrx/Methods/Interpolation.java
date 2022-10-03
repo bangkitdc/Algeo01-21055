@@ -122,10 +122,12 @@ public class Interpolation {
             String input;
             BufferedReader bufferedReader = new BufferedReader(Utils.streamReader);
 
+            Utils.println("Solusi polinomial : ");
             Utils.println(getPolinom(Interpolation.problem.getResult()));
 
             do {
 
+                Utils.println("");
                 Utils.println("Masukkan nilai x [" 
                     + Utils.doubleToString(minBound, 4) 
                     + ", " 
@@ -137,6 +139,7 @@ public class Interpolation {
         
                 input = bufferedReader.readLine();
 
+                Utils.println("");
                 if (Utils.isDouble(input))
                 {
                     x = Double.parseDouble(input);
@@ -164,7 +167,7 @@ public class Interpolation {
             String input = new String();
 
             do {
-
+                Utils.println("");
                 Utils.println("Masukkan nilai x [" 
                     + Utils.doubleToString(minBound, 4) 
                     + ", " 
@@ -176,6 +179,8 @@ public class Interpolation {
         
                 input = bufferedReader.readLine();
                 Double x;
+
+                Utils.println("");
 
                 if (Utils.isDouble(input))
                 {
@@ -201,7 +206,6 @@ public class Interpolation {
             // PREKONDISI : result tidak kosong
             // KAMUS LOKAL
             String polinom;
-            Utils.println("Solusi polinomial : ");
     
             polinom = "f(x) = ";
             
@@ -210,7 +214,7 @@ public class Interpolation {
                 double res = result.getELMT(i,0);
                 String coef = "";
 
-                if (Math.abs(res) - 1 > 1e-9)
+                if (Math.abs(Math.abs(res) - 1) > 1e-9)
                 {
                     // jika res mendekati 0
                     if (Math.abs(res) < 1e-9)
@@ -238,6 +242,11 @@ public class Interpolation {
                     if (res < 0)
                     {
                         coef = "- ";
+
+                        if (i == 0)
+                        {
+                            coef += "1";
+                        }
                     }
                     // else res mendekati 1
                     else if (i == 0)
